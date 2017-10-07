@@ -139,18 +139,24 @@ class Application_Model_Authen {
   private function authenGoogle($accessToken) {
     require_once APPLICATION_PATH.'/../library/Google/vendor/autoload.php';
     
+    $config = Zend_Registry::get('configs')->google->json;
+    // pr($config);
     $client = new Google_Client();
-    $config = Zend_Registry::get('configs')->google->json->toArray();
-    pr($config);
-    $client->setAuthConfig(json_encode($config));
+    $client->setClientId($config->web->client_id);
+    $client->setClientSecret($config->web->client_secret);
+    $client->setDeveloperKey('AIzaSyBVeWQlpgrEUI1h5fUDYJLj9JlbU6UGmHE');
     $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);
+    $client->setAccessToken($accessToken);
 
-    if (isset($me['id'])) {
-      // pr($me);
+    $oauth2 = new \Google_Service_Oauth2($client);
+    $userInfo = $oauth2->userinfo->get();
+    
+    if ($userInfo) {
+      // pr($userInfo);
       $data = array(
-        'user_name'           => $me['email'],
-        'user_password'       => md5($me['id'].Zend_Registry::get('configs')->AUTH_USER_SALT),
-        'user_display_name'   => $me['name'],
+        'user_name'           => $userInfo['email'],
+        'user_password'       => md5($userInfo['id'].Zend_Registry::get('configs')->AUTH_USER_SALT),
+        'user_display_name'   => $userInfo['name'],
         'user_type_login'     => self::TYPE_REGISTER_SOCIAL,
       );
       $modelUser = new Application_Model_User($data);
