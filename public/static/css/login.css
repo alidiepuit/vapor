@@ -1,0 +1,216 @@
+.main-body-container .btn,
+.main-body-container .gmail-share-btn,
+.main-body-container .btn-100,
+.main-body-container .btn-stacked,
+.main-body-container .btn-half-pad,
+.main-body-container .btn-continue,
+.main-body-container .btn-padded,
+.main-body-container .big-button,
+.main-body-container .btn-full,
+.main-body-container .btn-tiny,
+.main-body-container .btn-small,
+.main-body-container .btn-remove-coupon,
+.main-body-container .btn-small-longer,
+.main-body-container .btn-fluid,
+.main-body-container .btn-round-white,
+.main-body-container #storage-banner .storage-small-button,
+.main-body-container .careers .tech-happening .tech-happening-btn,
+.main-body-container .press-button, .pro-btn,
+.main-body-container .zipcheck-form-line button,
+.main-body-container a.btn-o,
+.main-body-container .feedback-submit-btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    outline: none;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: all background-color 0.1s ease-in-out;
+}
+.login-background {
+    min-height: 48em;
+    width: 800px;
+}
+.row {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 0;
+    max-width: 960px;
+}
+.main-body-container * {
+    font-family: "Circular","Helvetica",sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.61em;
+}
+.main-body-container .login-block, .main-body-container .zipcheck-block {
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    width: 91.66667%;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    background-color: white;
+    max-width: 38em;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3em;
+    padding-bottom: 4em;
+    margin-top: 2em;
+    padding-top: 3em;
+}
+.form-fields-wrapper {
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
+    width: 83.33333%;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    float: none;
+    padding-right: 0;
+    padding-left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 16em;
+    padding-top: 1.2em;
+}
+.pad-top {
+    padding-top: 1em;
+}
+.form-label {
+    font-size: 0.8em;
+    padding-bottom: 0.5em;
+}
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"], textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    outline: none;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    width: 100%;
+    border: 1px solid #babbbd;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 0.75em;
+    padding-right: 0.75em;
+    margin-bottom: 0.2em;
+    font-size: 0.8em;
+}
+.login-block h1, .zipcheck-block h1 {
+    font-weight: normal;
+}
+.center {
+    text-align: center;
+}
+.alt-link {
+    color: #999;
+}
+.big-button, .btn-full {
+    display: inline-block;
+    width: 100%;
+    max-width: 13.5em;
+    padding: 0.3em 0;
+    font-size: 1.125em;
+}
+.btn-full {
+    max-width: 100%;
+}
+.btn-primary, .referral-top-input .single-email-share-field button, .referral-top-input .home-zip-input button, .home-zip-input button {
+    background-color: #8cc63f;
+    border: 1px solid #8cc63f;
+    color: #fff;
+}
+.pad-top2 {
+    padding-top: 2em;
+}
+
+.or-line {
+    margin-left: -0.9375em;
+    margin-right: -0.9375em;
+    height: 1px;
+    background-color: #CCCCCC;
+    text-align: center;
+}
+.or-text {
+    font-size: 1em;
+    background-color: white;
+    color: black;
+    position: relative;
+    top: -0.7em;
+    padding-right: 20px;
+    padding-left: 20px;
+}
+.smaller {
+    font-size: 0.9em;
+    line-height: 1.3;
+}
+.even-smaller {
+    font-size: 0.78em;
+}
+.push-top {
+    margin-top: 1em;
+}
+.btn-default {
+    padding: .6em .95em;
+    border-radius: 4px;
+    font-size: .95em;
+}
+.btn-facebook {
+    background-color: #3b5998;
+    border: 1px solid #3b5998;
+    color: #fff;
+}
+.btn-facebook a:visited {
+    color: #0bb8e3;
+    text-decoration: none;
+}
+.btn-google {
+    background-color: #DE5E55;
+    border: 1px solid #DE5E55;
+    color: #fff;
+}
+.btn-google a:visited {
+    color: #DE5E55;
+    text-decoration: none;
+}
+.btn-register {
+    background-color: #8cc63f;
+    border: 1px solid #8cc63f;
+    color: #fff;
+}
+a.no-decoration {
+    text-decoration: none;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.form-fields-wrapper a {
+    display: block;
+}
+.main-body-container a {
+    text-decoration: none;
+}
+.page-container.components.login {
+    background-color: #f4f0f0;
+}
+.gs-form p.error {
+    text-align: center;
+}

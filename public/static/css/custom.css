@@ -1,0 +1,66 @@
+.site-header .switch {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 40px;
+}
+
+.site-header .switch input {display:none;}
+
+.site-header .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0px;
+  right: 0px;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.site-header .slider:before {
+  position: absolute;
+  content: "";
+  left: 3px;
+  bottom: 3px;
+  background-color: #FCFCFC;
+  -webkit-transition: .4s;
+  transition: .4s;
+  content: "Tham Gia";
+  text-align: -webkit-center;
+  text-align: center;    
+  padding: 6px;
+  width: 90px;
+  font-size: 14px;
+}
+
+input:checked + .slider {
+  background-color: #FCFC00;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #FCFC00;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+  content: "Tham Gia";
+  text-align: center;    
+  text-align: -webkit-center;
+  text-align: center;  
+  padding: 6px;
+  width: 90px;
+  font-size: 14px;
+}
+
+/* Rounded sliders */
+.site-header .slider.round {
+  border-radius: 5px;
+}
+
+.site-header .slider.round:before {
+  border-radius: 5px;
+}

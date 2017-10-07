@@ -1,0 +1,36 @@
+<header class="site-header" ng-class="{'nav-open': siteNav}">
+  <div class="header-container">
+    <a href="/" class="logo-link">
+      <img src="<?php echo $this->baseUrl("static/images/logo-vapor.png");?>" alt="VAPOR" class="gs-logo-wordmark">
+    </a>
+    <nav class="site-nav">
+      <ul>
+        <li>
+          <a href="/services">giới thiệu</a>
+        </li>
+        <li>
+          <a href="#component-services">dịch vụ</a>
+        </li>
+        <li>
+          <a href="/inspiration">trợ giúp</a>
+        </li>
+        <?php $user = $this->authen();
+              if($user) { ?>
+              <li class="sign-in" style="margin-left: auto;">
+                <a href="/authenticate/login">welcome, <?= $user->getUserDisplayName()?></a>
+              </li>
+              <?php } else {?>
+              <li class="sign-in" style="margin-left: auto;">
+                <a href="/authenticate/login">đăng nhập</a>
+              </li>
+              <?php }?>
+              <li class="book-now" style="margin-left: inherit!important;">
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </li>
+      </ul>
+    </nav>
+  </div>
+</header>

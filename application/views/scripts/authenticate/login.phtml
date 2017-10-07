@@ -1,0 +1,50 @@
+<div class="page-container components login">
+   <?php //pr($this->form->getElements()['user_name']->getName())?>
+<section class="component-how-it-works">
+   <div class="grid-container">
+      <div class="main-body-container">
+         <div class="login-background">
+            <div class="row">
+               <form accept-charset="UTF-8" action="/authenticate/login" class="gs-form simple_form analytics-event" data-event-name="regular email log in attempt" id="form-login" method="post">
+                  <div style="margin:0;padding:0;display:inline">
+                     <input name="type" type="hidden" value="email">
+                     <input name="<?= $this->form->getElements()['csrf']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf']->getValue()?>">
+                  </div>
+                  <div class="login-block">
+                     <h2 alt="Login to Vapor" class="larger center">Login to Vapor</h2>
+                     <div class="error"><?= $this->error ? '<p class="error">'.$this->error.'</p>' : "" ?></div>
+                     <div class="form-fields-wrapper">
+                        <div class="pad-top">
+                           <div class="form-label">Email</div>
+                           <div class="form-line">
+                              <div class="input email required user_session_email">
+                                <input class="string email required inspectletIgnore" id="user_session_email" name="<?=$this->form->getElements()['user_name']->getName()?>" required="required" size="50" type="email">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="pad-top">
+                           <div class="form-label">
+                              Password
+                           </div>
+                           <div class="form-line">
+                              <div class="input password required user_session_password">
+                                <input class="password required" id="user_session_password" name="<?= $this->form->getElements()['user_password']->getName()?>" required="required" size="50" type="password">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="even-smaller center" style="text-transform: ">Don't have an account? <a href="/authenticate/register" class="alt-link"> Register</a></div>
+                     <div class="form-fields-wrapper">
+                        <div class="form-steps-bottom"></div>
+                        <input class="button btn-full push-top btn-primary" name="commit" type="submit" value="Log in">
+                     </div>
+                     
+                     <?php echo $this->partial('partials/login-social.phtml')?>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+</div>
