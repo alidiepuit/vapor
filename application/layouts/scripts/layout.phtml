@@ -13,9 +13,9 @@
   <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/glamsquad.css");?>">
   <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/home.css");?>">
   <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/popup.css")?>">
-  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/custom.css")?>">
   <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/font-awesome.min.css")?>">
   <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/flexslider.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/custom.css")?>">
 
   <title>Vapor</title>
   
@@ -76,56 +76,7 @@
   </div>
 </section>
 
-<section class="component-news">
-  <div class="grid-container">
-    <div class="grid">
-      <div class="cell">
-        <h2 class="news-headline">Cảm nhận của khách hàng</h2>
-        <ul class="news-items">
-                        <li>
-                <a href="/book/" class="news-link">
-                  <picture>
-                    <source media="(min-width: 768px)" srcset="https://www.glamsquad.com/wp-content/uploads/2017/06/Glamsquad_Desktop_WhatsNew_385x256@2x-385x256.jpg 1x,
-                              https://www.glamsquad.com/wp-content/uploads/2017/06/Glamsquad_Desktop_WhatsNew_385x256@2x.jpg 2x">
-                    <source srcset="https://www.glamsquad.com/wp-content/uploads/2017/09/Glamsquad_Mobile_WhatsNew_335x225@2x-335x225.jpg 1x,
-                              https://www.glamsquad.com/wp-content/uploads/2017/09/Glamsquad_Mobile_WhatsNew_335x225@2x.jpg 2x">
-                    <img src="https://www.glamsquad.com/wp-content/uploads/2017/06/Glamsquad_Desktop_WhatsNew_385x256@2x.jpg" alt="" class="news-image">
-                  </picture>
-                </a>
-                <p class="news-subheadline"></p>
-                <p class="news-description"></p>
-              </li>
-                        <li>
-                <a href="/book/" class="news-link">
-                  <picture>
-                    <source media="(min-width: 768px)" srcset="https://www.glamsquad.com/wp-content/uploads/2017/06/Hallwoeen_770x512-385x256.jpg 1x,
-                              https://www.glamsquad.com/wp-content/uploads/2017/06/Hallwoeen_770x512.jpg 2x">
-                    <source srcset="https://www.glamsquad.com/wp-content/uploads/2017/06/Hallwoeen_670x450-335x225.jpg 1x,
-                              https://www.glamsquad.com/wp-content/uploads/2017/06/Hallwoeen_670x450.jpg 2x">
-                    <img src="https://www.glamsquad.com/wp-content/uploads/2017/06/Hallwoeen_770x512.jpg" alt="" class="news-image">
-                  </picture>
-                </a>
-                <p class="news-subheadline"></p>
-                <p class="news-description"></p>
-              </li>
-                        <li>
-                <a href="https://www.coverfx.com/pages/glamsquad" class="news-link">
-                  <picture>
-                    <source media="(min-width: 768px)" srcset="https://www.glamsquad.com/wp-content/uploads/2017/06/CoverFX_770x512-1-385x256.jpg 1x,
-                              https://www.glamsquad.com/wp-content/uploads/2017/06/CoverFX_770x512-1.jpg 2x">
-                    <source srcset="https://www.glamsquad.com/wp-content/uploads/2017/06/CoverFX_670x450-335x225.jpg 1x,
-                              https://www.glamsquad.com/wp-content/uploads/2017/06/CoverFX_670x450.jpg 2x">
-                    <img src="https://www.glamsquad.com/wp-content/uploads/2017/06/CoverFX_770x512-1.jpg" alt="" class="news-image">
-                  </picture>
-                </a>
-                <p class="news-subheadline"></p>
-                <p class="news-description"></p>
-              </li>
-                  </ul>
-      </div>
-    </div>
-  </div>
-</section>
+<?php echo $this->partial('partials/section-customer.phtml')?>
 
     </div>
   </main>

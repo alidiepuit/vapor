@@ -36,13 +36,13 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
         }
     }
  
-    public function getServices()
+    public function getPostByType($type)
     {
         try {
             $select = $this->getDbTable()->select()
                     ->from('frontend_post')
                     ->order('post_update_time DESC')
-                    ->where('post_type = ?', Application_Model_Post::POST_TYPE_SERVICE);
+                    ->where('post_type = ?', (int)$type);
 
             $services = $this->getDbTable()->fetchAll($select);
             $services = $services->toArray();

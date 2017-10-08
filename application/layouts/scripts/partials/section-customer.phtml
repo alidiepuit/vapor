@@ -1,0 +1,24 @@
+<?php $helper = new Helpers_View_Post();?>
+<?php $listServices = $helper->customer();?>
+<section class="component-news">
+  <div class="grid-container">
+    <div class="grid">
+      <div class="cell">
+        <h2 class="news-headline">Cảm nhận của khách hàng</h2>
+        <div class="flexslider">
+          <ul class="slides">
+            <?php foreach ($listServices as $value) {?>
+            <li>
+              <a href="javascript:void(0)" class="news-link">
+                <img src="<?php echo $this->baseUrl($value->getPostImage());?>" alt="" class="news-image">
+              </a>
+              <p class="news-subheadline"><?=$value->getPostTitle()?></p>
+              <p class="news-description"><?=$value->getPostContent()?></p>
+            </li>
+            <?php }?>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
