@@ -2546,7 +2546,6 @@ screen and (min-width: 64em) {
     text-transform: uppercase
 }
 .site-footer .app-promo h4 {
-    font-family: Freight, Georgia, Cambria, "Times New Roman", Times, serif;
     font-weight: 400;
     color: #37173d;
     font-size: 1.5rem;
