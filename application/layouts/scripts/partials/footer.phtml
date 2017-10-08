@@ -19,57 +19,8 @@
       </div>
       <div class="links cell">
         <section class="site-links">
-          <div>
-            <h6>Services</h6>
-            <ul>
-              <li>
-                <a href="/services">Services Menu</a>
-              </li>
-              <li>
-                <a href="/packages">Packages</a>
-              </li>
-              <li>
-                <a href="/gift-card">E-Gift Card</a>
-              </li>
-              <li>
-                <a href="/lp/weddings">Weddings</a>
-              </li>
-              <li>
-                <a href="/inspiration">Inspiration</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h6>Support</h6>
-            <ul>
-              <li>
-                <a href="/faq">FAQ</a>
-              </li>
-              <li>
-                <a href="/terms">Terms</a>
-              </li>
-              <li>
-                <a href="/privacypolicy">Privacy</a>
-              </li>
-              <li>
-                <a href="/contact">Contact Us</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h6>About</h6>
-            <ul>
-              <li>
-                <a href="http://blog.glamsquad.com/" target="_blank">Blog</a>
-              </li>
-              <li>
-                <a href="/jobs">Careers</a>
-              </li>
-              <li>
-                <a href="https://glamsquadcreative.typeform.com/to/UX4NKs">Become A Beauty Pro</a>
-              </li>
-            </ul>
-          </div>
+          <?php $helper = new Helpers_View_Menu();?>
+          <?= $helper->bottomMenu() ?>
           <div class="mobile-app">
             <h6>Mobile App</h6>
             <a href="https://itunes.apple.com/us/app/glamsquad/id766676007?mt=8&amp;uo=4" class="app-store-link">

@@ -5,15 +5,8 @@
     </a>
     <nav class="site-nav">
       <ul>
-        <li>
-          <a href="/services">giới thiệu</a>
-        </li>
-        <li>
-          <a href="#component-services">dịch vụ</a>
-        </li>
-        <li>
-          <a href="/inspiration">trợ giúp</a>
-        </li>
+        <?php $helper = new Helpers_View_Menu();?>
+        <?= $helper->topMenu() ?>
         <?php $user = $this->authen();
               if($user) { ?>
               <li class="sign-in" style="margin-left: auto;">

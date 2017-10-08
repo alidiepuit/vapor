@@ -80,7 +80,14 @@ jQuery(document).ready(function( $ ) {
         });
     })
 
+    $('.services-grid>li').on('click', function() {
+        $('#service-content').find('.modal-body').html($(this).find('.content').html());
+        $('#service-content').find('.modal-title').html($(this).find('.service-name').html());
+    });
 
+    $('#service-content').on('shown.bs.modal', function() {
+        $('#service-content').focus()
+    });
     
 });
 

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/popup.css")?>">
   <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/custom.css")?>">
   <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/font-awesome.min.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/flexslider.css")?>">
 
   <title>Vapor</title>
   
@@ -24,7 +25,7 @@
   <?= $this->partial('partials/social.phtml');?>
   <div class="site-container">
     <?php echo $this->partial('partials/topmenu.phtml')?>
-    
+
     <main class="site-main">
       <div class="page-container components">
 
@@ -41,64 +42,9 @@
         </div>
       </section>
 
-<section class="component-services" id="component-services">
-  <div class="grid-container">
-    <div class="grid">
-      <div class="cell">
-        <h1 class="comp-subhead">Our Services</h1>
-        
-        <ul class="services-grid">
-          <li data-toggle="modal" data-target="#service-content">
-            <a href="javascript:void(0)">
-              <picture>
-                <img src="<?php echo $this->baseUrl("static/images/service-1.png");?>" alt="Hair">
-              </picture>
-            </a>
-            <div class="service-container">
-              <h4 class="service-name">Vệ sinh - Bảo Dưỡng</h4>
-            </div>
-          </li>
-          <li data-toggle="modal" data-target="#service-content">
-            <a href="javascript:void(0)">
-              <picture>
-                <img src="<?php echo $this->baseUrl("static/images/service-1.png");?>" alt="Hair">
-              </picture>
-            </a>
-            <div class="service-container">
-              <h4 class="service-name">di dời máy lạnh</h4>
-            </div>
-          </li>
-          <li data-toggle="modal" data-target="#service-content">
-            <a href="javascript:void(0)">
-              <picture>
-                <img src="<?php echo $this->baseUrl("static/images/service-1.png");?>" alt="Hair">
-              </picture>
-            </a>
-            <div class="service-container">
-              <h4 class="service-name">lắp đặt máy lạnh</h4>
-            </div>
-          </li>
-          <li data-toggle="modal" data-target="#service-content">
-            <a href="javascript:void(0)">
-              <picture>
-                <img src="<?php echo $this->baseUrl("static/images/service-1.png");?>" alt="Hair">
-              </picture>
-            </a>
-            <div class="service-container">
-              <h4 class="service-name">sửa chữa khẩn cấp</h4>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  
-</section>
+      <?php echo $this->partial('partials/section-services.phtml')?>
 
-
-
-      
-      <section class="component-how-it-works">
+<section class="component-how-it-works">
   <div class="grid-container">
     <div class="grid">
       <div class="cell">
@@ -130,11 +76,7 @@
   </div>
 </section>
 
-
-
-
-
-      <section class="component-news">
+<section class="component-news">
   <div class="grid-container">
     <div class="grid">
       <div class="cell">
@@ -185,12 +127,11 @@
   </div>
 </section>
 
-      </div>
-    </main>
-    
-    <?php echo $this->partial('partials/footer.phtml')?>
-  </div>
-  <?php echo $this->partial('partials/service-content.phtml')?>
+    </div>
+  </main>
+  
+  <?php echo $this->partial('partials/footer.phtml')?>
+</div>
 
   <?= $this->partial("partials/js.phtml")?>
 </body></html>

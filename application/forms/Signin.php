@@ -13,7 +13,7 @@ class Application_Form_Signin extends Zend_Form
         $this->addElement('text', 'user_name', array(
             'label'      => 'email',
             'required'   => true,
-            'filters'    => array('StringTrim'),
+            'filters'    => array('StringTrim', 'StripTags'),
             'validators' => array(
                 'EmailAddress',
             )
@@ -23,6 +23,7 @@ class Application_Form_Signin extends Zend_Form
         $this->addElement('text', 'user_password', array(
             'label'      => 'password',
             'required'   => true,
+            'filters'    => array('StringTrim', 'StripTags'),
         ));
 
         // Add some CSRF protection

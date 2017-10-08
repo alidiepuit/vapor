@@ -1,0 +1,43 @@
+<?php $helper = new Helpers_View_Post();?>
+<?php $listServices = $helper->services();?>
+<section class="component-services" id="component-services">
+  <div class="grid-container">
+    <div class="grid">
+      <div class="cell">
+        <h1 class="comp-subhead">Our Services</h1>
+        
+        <ul class="services-grid">
+          <?php foreach ($listServices as $value) {?>
+          <li data-toggle="modal" data-target="#service-content">
+            <a href="javascript:void(0)">
+              <picture>
+                <img src="<?php echo $this->baseUrl($value->getPostImage());?>" alt="Hair">
+              </picture>
+            </a>
+            <div class="service-container">
+              <h4 class="service-name"><?= $value->getPostTitle()?></h4>
+            </div>
+            <div class="content" style="display: none"><?= $value->getPostContent()?></div>
+          </li>
+          <?php }?>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" role="dialog" id="service-content" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel"></h4>
+        </div>
+        <div class="modal-body"></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" style="margin-left: 40px">Đặt ngay dịch vụ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

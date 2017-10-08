@@ -13,7 +13,7 @@ class Application_Form_Register extends Zend_Form
         $this->addElement('text', 'user_name', array(
             'label'      => 'email',
             'required'   => true,
-            'filters'    => array('StringTrim'),
+            'filters'    => array('StringTrim', 'StripTags'),
             'validators' => array(
                 'EmailAddress',
             )
@@ -23,6 +23,7 @@ class Application_Form_Register extends Zend_Form
         $this->addElement('text', 'user_password', array(
             'label'      => 'password',
             'required'   => true,
+            'filters'    => array('StringTrim', 'StripTags'),
         ));
 
         // Add an repeat password element
@@ -37,12 +38,14 @@ class Application_Form_Register extends Zend_Form
         $this->addElement('text', 'user_display_name', array(
             'label'      => 'display name',
             'required'   => true,
+            'filters'    => array('StringTrim', 'StripTags'),
         ));
 
         // Add an repeat password element
         $this->addElement('text', 'user_phone', array(
             'label'      => 'phone',
             'required'   => true,
+            'filters'    => array('StringTrim', 'StripTags'),
         ));
 
         // Add some CSRF protection

@@ -38,9 +38,11 @@ class AuthenticateController extends Zend_Controller_Action
                     if ($form->isValid($data)) {
                         $username = $form->getValue('user_name', '');
                         $password = $form->getValue('user_password', '');
+                        // pr($username . " " . $password);
                         $isValid = Application_Model_Authen::getInstance()->authenticate($username, $password);
                     } else {
                         $error = $form->getMessages();
+                        // pr($error);
                         if (isset($error['user_password'])) {
                             $this->view->error = Exception_Authen::EXCEPTION_AUTHEN_NOT_MATCH_PASSWORD['message'];
                         }
@@ -77,7 +79,7 @@ class AuthenticateController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())) {
                 $modelUser = new Application_Model_User($request->getPost());
                 try {
-                    $modelUser.setUserLoginType(Application_Model_Authen::TYPE_REGISTER_EMAIL);
+                    $modelUser.setUserTypeLogin(Application_Model_Authen::TYPE_REGISTER_EMAIL);
 
                     //md5(password.SALT)
                     $password = md5($modelUser->getUserPassword().Zend_Registry::get('configs')->AUTH_USER_SALT);
