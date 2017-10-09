@@ -3,7 +3,7 @@ class Application_Model_User
 {
     protected $_phone;
     protected $_createdAt;
-    protected $_signinLast;
+    protected $_updatedAt;
     protected $_username;
     protected $_displayName;
     protected $_address;
@@ -80,35 +80,35 @@ class Application_Model_User
         return $this->_username;
     }
  
-    public function setUserCreatedAt($ts)
+    public function setCreatedAt($ts)
     {
-        $this->_createdAt = $ts;
+        $this->_createdAt = date("Y-m-d H:i:s", (int)$ts);
         return $this;
     }
  
-    public function getUserCreatedAt()
+    public function getCreatedAt()
     {
-        return $this->_createdAt;
+        return !$this->_createdAt ? date("Y-m-d H:i:s", time()) : $this->_createdAt;
     }
  
-    public function setUserSigninLast($ts)
+    public function setUpdatedAt($ts)
     {
-        $this->_signinLast = $ts;
+        $this->_updatedAt = date("Y-m-d H:i:s", (int)$ts);
         return $this;
     }
  
-    public function getUserSigninLast()
+    public function getUpdatedAt()
     {
-        return $this->_signinLast;
+        return !$this->_updatedAt ? date("Y-m-d H:i:s", time()) : $this->_updatedAt;
     }
  
-    public function setUserId($id)
+    public function setId($id)
     {
         $this->_id = (int) $id;
         return $this;
     }
  
-    public function getUserId()
+    public function getId()
     {
         return $this->_id;
     }

@@ -3,7 +3,7 @@
 class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 {
     /** Table name */
-    protected $_name    = 'frontend_user';
+    protected $_name    = 'frontend_users';
 
     
 }

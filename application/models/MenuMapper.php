@@ -18,7 +18,7 @@ class Application_Model_MenuMapper extends Application_Model_BaseModel_BaseMappe
     public function save(Application_Model_Menu $obj)
     {
         $data = array(
-            'menu_id'               => $obj->getMenuId(),
+            'id'               => $obj->getMenuId(),
             'menu_position'         => $obj->getMenuPosition(),
             'menu_parent_id'        => $obj->getMenuParentId(),
             'menu_title'            => $obj->getMenuTitle(),
@@ -27,10 +27,10 @@ class Application_Model_MenuMapper extends Application_Model_BaseModel_BaseMappe
         );
  
         if (null === ($id = $obj->getMenuId())) {
-            unset($data['menu_id']);
+            unset($data['id']);
             $this->getDbTable()->insert($data);
         } else {
-            $this->getDbTable()->update($data, array('menu_id = ?' => $id));
+            $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
  
@@ -38,24 +38,24 @@ class Application_Model_MenuMapper extends Application_Model_BaseModel_BaseMappe
     {
         try {
             $select = $this->getDbTable()->select()
-                ->from(array('parent' => 'frontend_menu'), array(
-                    'parent_id'         => 'parent.menu_id',
+                ->from(array('parent' => 'frontend_menu_items'), array(
+                    'parent_id'         => 'parent.id',
                     'parent_title'      => 'parent.menu_title',
                     'parent_link'       => 'parent.menu_link',
                     'parent_action'     => 'parent.menu_action',
-                    'child_id'          => 'child.menu_id',
+                    'child_id'          => 'child.id',
                     'child_title'       => 'child.menu_title',
                     'child_link'        => 'child.menu_link',
                     'child_action'      => 'child.menu_action',
                 ))
                 ->joinLeft(
-                        array('child' => 'frontend_menu'),
-                        'child.menu_parent_id = parent.menu_id',
+                        array('child' => 'frontend_menu_items'),
+                        'child.menu_parent_id = parent.id',
                         array()
                     )
                 ->order('parent_id ASC')
-                ->where('parent.menu_position = ? AND parent.menu_parent_id = 0', (int)$position);
-
+                ->where('parent.menu_position = ? AND parent.menu_parent_id = parent.id', (int)$position);
+            // echo $select;die;
             $result = $this->getDbTable()->fetchAll($select);
             // pr($result);
             
@@ -71,7 +71,7 @@ class Application_Model_MenuMapper extends Application_Model_BaseModel_BaseMappe
                         'child' => array(),
                     );
                 }
-                if ($row['child_id']) {
+                if ($row['child_id'] != $row['parent_id']) {
                     $data[$row['parent_id']]['child'][] = new Application_Model_Menu(array(
                             'menu_title'       => $row['child_title'],
                             'menu_link'        => $row['child_link'],

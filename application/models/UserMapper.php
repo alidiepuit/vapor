@@ -37,23 +37,25 @@ class Application_Model_UserMapper
     public function save(Application_Model_User $user)
     {
         $data = array(
-            'user_id'           => $user->getUserId(),
+            'id'                => $user->getId(),
             'user_name'         => $user->getUserName(),
             'user_password'     => $user->getUserPassword(),
             'user_type_login'   => $user->getUserTypeLogin(),
             'user_phone'        => $user->getUserPhone(),
             'user_address'      => $user->getUserAddress(),
-            'user_created_at'   => $user->getUserCreatedAt(),
             'user_display_name' => $user->getUserDisplayName(),
-            'user_signin_last'  => time(),
         );
  
-        if (null === ($id = $user->getUserId())) {
-            unset($data['user_id']);
-            $data['user_created_at'] = time();
+        $user->setUpdatedAt(time());
+        $data['updated_at'] = $user->getUpdatedAt();
+
+        if (null === ($id = $user->getId())) {
+            unset($data['id']);
+            $user->setCreatedAt(time());
+            $data['created_at'] = $user->getCreatedAt();
             $this->getDbTable()->insert($data);
         } else {
-            $this->getDbTable()->update($data, array('user_id = ?' => $id));
+            $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
  

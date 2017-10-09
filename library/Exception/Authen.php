@@ -7,6 +7,7 @@ class Exception_Authen extends Exception
     const EXCEPTION_AUTHEN_USERNAME = array('code' => 102, 'message' => 'Email is not valid.');
     const EXCEPTION_AUTHEN_PASSWORD = array('code' => 103, 'message' => 'Password is not valid.');
     const EXCEPTION_AUTHEN_EMAIL_SOCIAL = array('code' => 104, 'message' => 'This email is used by authenticating social.');
+    const EXCEPTION_AUTHEN_WRONG_EMAIL_PASSWORD = array('code' => 105, 'message' => 'Email or password is wrong.');
 
     // Redefine the exception so message isn't optional
     public function __construct($exception = EXCEPTION_AUTHEN_UNKNOWN, Exception $previous = null) {

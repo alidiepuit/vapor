@@ -40,6 +40,7 @@ class AuthenticateController extends Zend_Controller_Action
                         $password = $form->getValue('user_password', '');
                         // pr($username . " " . $password);
                         $isValid = Application_Model_Authen::getInstance()->authenticate($username, $password);
+                        $this->view->error = $isValid ? "" : Exception_Authen::EXCEPTION_AUTHEN_WRONG_EMAIL_PASSWORD['message'];
                     } else {
                         $error = $form->getMessages();
                         // pr($error);
@@ -51,6 +52,7 @@ class AuthenticateController extends Zend_Controller_Action
             }
         }
         catch (Exception $e) {
+            // pr($e);
             $this->view->error = $e->getMessage();
             $form->populate($data);
         }
@@ -66,6 +68,8 @@ class AuthenticateController extends Zend_Controller_Action
             $this->_redirect('/');
             return;
         }
+
+
         $form->getElements()['csrf']->initCsrfToken();
         $this->view->form = $form;
     }
@@ -79,7 +83,7 @@ class AuthenticateController extends Zend_Controller_Action
             if ($form->isValid($request->getPost())) {
                 $modelUser = new Application_Model_User($request->getPost());
                 try {
-                    $modelUser.setUserTypeLogin(Application_Model_Authen::TYPE_REGISTER_EMAIL);
+                    $modelUser->setUserTypeLogin(Application_Model_Authen::TYPE_REGISTER_EMAIL);
 
                     //md5(password.SALT)
                     $password = md5($modelUser->getUserPassword().Zend_Registry::get('configs')->AUTH_USER_SALT);

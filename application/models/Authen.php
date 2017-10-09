@@ -1,7 +1,7 @@
 <?php
 class Application_Model_Authen {
-  const TYPE_REGISTER_EMAIL = 0;
-  const TYPE_REGISTER_SOCIAL = 1;
+  const TYPE_REGISTER_EMAIL = 1;
+  const TYPE_REGISTER_SOCIAL = 2;
 
   private static $_sharedInstance = Null;
 
@@ -14,7 +14,7 @@ class Application_Model_Authen {
 
     $this->_authAdapter = new Zend_Auth_Adapter_DbTable(
         $this->dbAdapter,
-        'frontend_user',
+        'frontend_users',
         'user_name',
         'user_password',
         'MD5(CONCAT(?, "'.Zend_Registry::get('configs')->AUTH_USER_SALT.'"))'
@@ -47,12 +47,13 @@ class Application_Model_Authen {
 
       // Zend_Auth::getInstance()->clearIdentity();
       $modelUser = new Application_Model_User($object);
-      // pr($modelUser);
 
       $namespace = new Zend_Session_Namespace('Zend_Auth');
       $namespace->user = $modelUser;
 
       $auth->getStorage()->write($modelUser);
+
+      Application_Model_UserMapper::getInstance()->save($modelUser);
       return true;
     }
     return false;
@@ -67,9 +68,16 @@ class Application_Model_Authen {
     $username = $modelUser->getUserName();
     $user = Application_Model_UserMapper::getInstance()->find($username);
 
-    if ($user && $user->getUserTypeLogin() != $typeLogin) {
-      throw new Exception_Authen(Exception_Authen::EXCEPTION_AUTHEN_EXISTED_USER);
-      return false;
+    if ($user) {
+      if ($user->getUserTypeLogin() != $typeLogin) {
+        throw new Exception_Authen(Exception_Authen::EXCEPTION_AUTHEN_EXISTED_USER);
+        return false;
+      }
+
+      if ($user->getUserTypeLogin() == $typeLogin && $user->getUserPassword() != $modelUser->getUserPassword()) {
+        throw new Exception_Authen(Exception_Authen::EXCEPTION_AUTHEN_EXISTED_USER);
+        return false;
+      }
     }
 
     if (!$user) {
@@ -83,6 +91,8 @@ class Application_Model_Authen {
     
     $auth = Zend_Auth::getInstance();
     $auth->getStorage()->write($user);
+
+    Application_Model_UserMapper::getInstance()->save($user);
 
     return true;
   }

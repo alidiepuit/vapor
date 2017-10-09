@@ -1,8 +1,8 @@
 <?php
 class Application_Model_Menu extends Application_Model_BaseModel_BaseModel
 {
-    const MENU_POSITION_TOP = 0;
-    const MENU_POSITION_BOTTOM = 1;
+    const MENU_POSITION_TOP = 1;
+    const MENU_POSITION_BOTTOM = 2;
 
     protected $_menuId;
     protected $_menuPosition;

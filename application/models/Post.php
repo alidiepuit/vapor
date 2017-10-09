@@ -1,10 +1,10 @@
 <?php
 class Application_Model_Post extends Application_Model_BaseModel_BaseModel
 {
-    const POST_TYPE_ARTICLE     = 0;
-    const POST_TYPE_SERVICE     = 1;
-    const POST_TYPE_FEATURE     = 2;
-    const POST_TYPE_CUSTOMER    = 3;
+    const POST_TYPE_ARTICLE     = 1;
+    const POST_TYPE_SERVICE     = 2;
+    const POST_TYPE_FEATURE     = 3;
+    const POST_TYPE_CUSTOMER    = 4;
 
     protected $_postId;
     protected $_postTitle;

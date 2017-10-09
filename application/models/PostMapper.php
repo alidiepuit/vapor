@@ -21,8 +21,8 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
             'post_title'            => $obj->getPostTitle(),
             'post_slug'             => $obj->getPostSlug(),
             'post_content'          => $obj->getPostContent(),
-            'post_create_time'      => $obj->getPostCreateTime(),
-            'post_update_time'      => $obj->getPostUpdateTime(),
+            'created_at'            => $obj->getPostCreateTime(),
+            'updated_at'            => $obj->getPostUpdateTime(),
             'post_create_by'        => $obj->getPostCreateBy(),
             'post_image'            => $obj->getPostImage(),
             'post_type'             => $obj->getPostType(),
@@ -40,8 +40,8 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
     {
         try {
             $select = $this->getDbTable()->select()
-                    ->from('frontend_post')
-                    ->order('post_update_time DESC')
+                    ->from('frontend_posts')
+                    ->order('updated_at DESC')
                     ->where('post_type = ?', (int)$type);
 
             $services = $this->getDbTable()->fetchAll($select);

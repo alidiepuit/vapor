@@ -1,0 +1,10 @@
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/public/
+
+# Rewrites all URLS [Replace "domain" with the actual domain, without the TLD (.com, .net, .biz, etc)]
+RewriteCond %{HTTP_HOST} ^(www\.)?vapor\.
+
+# Rewrite all those to insert /folder
+RewriteRule ^(.*)$ /public/$1 [L]
