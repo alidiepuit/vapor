@@ -45,7 +45,7 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
                     ->where('post_type = ?', (int)$type);
 
             $services = $this->getDbTable()->fetchAll($select);
-            $services = $services->toArray();
+            $services = $services ? $services->toArray() : Null;
             $res = array();
             foreach ($services as $val) {
                 $res[] = new Application_Model_Post($val);
@@ -54,5 +54,22 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
         } catch (Exception $e) {
             pr($e);
         }
+    }
+
+    public function getPostBySlug($slug)
+    {
+        try {
+            $select = $this->getDbTable()->select()
+                    ->from('frontend_posts')
+                    ->where('post_slug LIKE ?', $slug);
+
+            $row = $this->getDbTable()->fetchRow($select);
+            $row = $row ? $row->toArray() : Null;
+            $res = new Application_Model_Post($row);
+            return $res;
+        } catch (Exception $e) {
+            pr($e);
+        }
+        return Null;
     }
 }

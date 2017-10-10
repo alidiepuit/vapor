@@ -6,7 +6,7 @@ class Application_Model_Post extends Application_Model_BaseModel_BaseModel
     const POST_TYPE_FEATURE     = 3;
     const POST_TYPE_CUSTOMER    = 4;
 
-    protected $_postId;
+    protected $_id;
     protected $_postTitle;
     protected $_postSlug;
     protected $_postContent;
@@ -16,15 +16,15 @@ class Application_Model_Post extends Application_Model_BaseModel_BaseModel
     protected $_postImage;
     protected $_postType;
  
-    public function setPostId($text)
+    public function setId($text)
     {
-        $this->_postId = (string) $text;
+        $this->_id = (string) $text;
         return $this;
     }
  
-    public function getPostId()
+    public function getId()
     {
-        return $this->_postId;
+        return $this->_id;
     }
  
     public function setPostTitle($text)

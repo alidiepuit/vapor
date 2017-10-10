@@ -1,28 +1,25 @@
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>ERROR</title>
-</head>
+<section class="component-services" style="background-color: #fff;">
+  <div class="grid-container">
+    <div class="grid">
+      <div class="cell">
+        <?php if (isset($this->exception)): ?>
+        <div style="font-size: 10px;text-align: left;">
+        <h3>Exception information:</h3>
+        <p>
+            <b>Message:</b> <?php echo $this->exception->getMessage() ?>
+        </p>
 
-<body style="background-color: #DAECF0">
+        <h3>Stack trace:</h3>
+        <pre><?php echo $this->exception->getTraceAsString() ?>
+        </pre>
 
-  <img src="/static/images/404.jpg" alt="Page Not Found (404)." style="position: absolute; left: 50%; top: 50%; margin-left: -285px; margin-top: -190px;">
-  <?php if (isset($this->exception)): ?>
-  
-  <h3>Exception information:</h3>
-  <p>
-      <b>Message:</b> <?php echo $this->exception->getMessage() ?>
-  </p>
-
-  <h3>Stack trace:</h3>
-  <pre><?php echo $this->exception->getTraceAsString() ?>
-  </pre>
-
-  <h3>Request Parameters:</h3>
-  <pre><?php echo $this->escape(var_dump($this->request->getParams(), true)) ?>
-  </pre>
-
-  <?php endif ?>
-</body>
-
-</html>
+        <h3>Request Parameters:</h3>
+        <pre><?php echo $this->escape(var_dump($this->request->getParams(), true)) ?>
+        </pre>
+        </div>
+        <?php endif ?>
+        <img src="/static/images/404.gif" alt="Page Not Found (404).">
+      </div>
+    </div>
+  </div>
+</section>

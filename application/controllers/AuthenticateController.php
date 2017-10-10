@@ -9,8 +9,6 @@ class AuthenticateController extends Zend_Controller_Action
         if (isset($namespace->user)) {
             $this->_redirect('/');
         }
-
-        $this->_helper->layout->setLayout('sublayout');
     }
 
     public function indexAction()
