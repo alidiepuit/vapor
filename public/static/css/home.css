@@ -793,7 +793,6 @@ screen and (min-width: 48em) {
 }
 .component-hero {
     margin: 0 auto;
-    max-width: 1000px;
     position: relative;
     text-align: center
 }
