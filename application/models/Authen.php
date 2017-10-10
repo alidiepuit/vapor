@@ -68,18 +68,20 @@ class Application_Model_Authen {
     $username = $modelUser->getUserName();
     $user = Application_Model_UserMapper::getInstance()->find($username);
 
+    //existed email
     if ($user) {
       if ($user->getUserTypeLogin() != $typeLogin) {
         throw new Exception_Authen(Exception_Authen::EXCEPTION_AUTHEN_EXISTED_USER);
         return false;
       }
 
-      if ($user->getUserTypeLogin() == $typeLogin && $user->getUserPassword() != $modelUser->getUserPassword()) {
+      if ($user->getUserPassword() != $modelUser->getUserPassword()) {
         throw new Exception_Authen(Exception_Authen::EXCEPTION_AUTHEN_EXISTED_USER);
         return false;
       }
     }
 
+    //add new user
     if (!$user) {
       Application_Model_UserMapper::getInstance()->save($modelUser);
       $user = $modelUser;
@@ -91,8 +93,6 @@ class Application_Model_Authen {
     
     $auth = Zend_Auth::getInstance();
     $auth->getStorage()->write($user);
-
-    Application_Model_UserMapper::getInstance()->save($user);
 
     return true;
   }
