@@ -72,3 +72,128 @@ input:checked + .slider:before {
   background-color: #FFFF00;
   border: 4px solid #FFFF00;
 }
+/*
+////////////////
+// Participan
+////////////////
+*/
+#form-participan {
+  background: black url(/static/images/background-thamgia.jpg) no-repeat fixed;
+  background-size: cover;
+  height: 1600px;
+  width: 100%;
+}
+.hero-copy.participan {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+  z-index: 2;
+}
+picture.participan {
+  float: left;
+}
+.participan .login-background {
+  width: auto;
+}
+.participan h2 {
+  text-transform: uppercase;
+  font-size: 21px;
+}
+.participan .main-body-container {
+  width: 60%;
+}
+.participan .button {
+  background-color: #e9db04;
+  padding: 15px;    
+  color: black;
+  font-weight: bold;
+}
+.participan .login-block {
+  background-color: rgba(0,0,0,0);
+}
+.participan.background {
+  position: absolute;
+  float: left;
+  border-right: 780px solid transparent;
+  border-top: 2000px solid #ebebeb;
+  z-index: 1;
+}
+.component-hero.participan {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.form-participan input {
+  background-color: #ebebeb;
+  padding: 10px;
+}
+#form-participan h3 {
+  display: none;
+}
+#form-participan .form-label {
+  font-size: 1em;
+}
+#form-participan .content {
+  width: 100%;
+  height: 100%;
+}
+#form-participan .steps, #form-participan .actions {
+  display: none;
+}
+.participation-step2 .form-fields-wrapper {
+  display: inline-flex;
+  width: 50%;
+}
+#form-participan .grid-container, #form-participan .login-background {
+  display: block;
+  width: 100%;
+}
+.participation-step2 .form-fields-wrapper.line {
+  display: block;
+  text-align: left;
+  margin-left: 0;
+  width: 100%;
+  max-width: none;
+}
+.form-fields-wrapper.line .form-label, .form-fields-wrapper.line .form-line {
+  display: inline-flex;
+}
+.participation-step2 .form-fields-wrapper.tuple {
+  width: 30%;
+}
+.participation-step2 .form-fields-wrapper.line .form-label{
+  width: 25%;
+}
+.participation-step2 .form-fields-wrapper.line input {
+  width: 300px;
+}
+.participation-step2 .center {
+  margin-bottom: 40px;
+}
+.form-fields-wrapper.fullline {
+  display: block;
+  max-width: none;
+  margin-left: 0;
+  width: 100%;
+}
+.form-fields-wrapper.fullline .form-label, .form-fields-wrapper.fullline .form-line {
+  display: block;
+}
+.form-fields-wrapper.fullline .option {
+  display: inline-block;
+  width: 40%;
+}
+.form-fields-wrapper.fullline .option .label {
+  display: inline-flex;
+  width: 70%;
+}
+.form-fields-wrapper.fullline .option.fullline {
+  display: block;
+  width: 100%;
+}
+.form-fields-wrapper.fullline .option.fullline .label {
+  width: 90%;
+}
+.form-fields-wrapper.center {
+  display: block;
+}

@@ -89,6 +89,31 @@ jQuery(document).ready(function( $ ) {
         $('#service-content').focus()
     });
 
+    var formStep1 = $("#form-participan").show();
+    $("#form-participan").steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        autoFocus: true,
+    }).validate({
+        rules: {
+            fullname: "required",
+            email: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            fullname: "Please enter your fullname",
+            email: "Please enter a valid email address"
+        }
+    });
+
+    $('#participan-next').on('click', function(event) {
+        if (formStep1.valid()) {
+            $("#form-participan").steps("next");
+        }
+    });
 });
 
 (function() {
