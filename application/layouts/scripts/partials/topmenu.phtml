@@ -10,14 +10,14 @@
         <?php $user = $this->authen();
               if($user) { ?>
               <li class="sign-in" style="margin-left: auto;">
-                <a href="/authenticate/login">welcome, <?= $user->getUserDisplayName()?></a>
+                <a href="/user/<?=$user->getId()?>">welcome, <?= $user->getUserDisplayName()?></a>
               </li>
               <?php } else {?>
               <li class="sign-in" style="margin-left: auto;">
-                <a href="/authenticate/login">đăng nhập</a>
+                <a href="/dang-nhap.html">đăng nhập</a>
               </li>
               <?php }?>
-              <li class="book-now" style="margin-left: inherit!important;">
+              <li id="thamgia" class="book-now" style="margin-left: inherit!important;">
                 <label class="switch">
                   <input type="checkbox">
                   <span class="slider round"></span>

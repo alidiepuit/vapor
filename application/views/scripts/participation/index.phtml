@@ -1,4 +1,13 @@
-
+<?php if ($this->success) {?>
+<section class="component-hero">
+      <div class="hero-copy">
+        <div class="grid-container">
+          <div class="main-body-container">
+            <div class="login-background">
+              <div class="row">
+<h2>Đơn tham gia của bạn đã được ghi nhận vào hệ thống.</h2>
+</div></div></div></div></div></section>
+<?php } else {?>
   <form accept-charset="UTF-8" action="/participation" class="gs-form simple_form analytics-event" id="form-participan" method="post">
     <h3>step 1</h3>
     <section class="component-hero participan">
@@ -10,7 +19,7 @@
               <div class="row">
                 
                   <div style="margin:0;padding:0;display:inline">
-                    <input name="" type="hidden" value="">
+                    <input name="<?= $this->form->getElements()['csrf']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf']->getValue()?>">
                   </div>
                   <div class="login-block">
                     <h2 alt="Login to Vapor" class="larger center">Tham gia cùng vapor</h2>
@@ -19,7 +28,7 @@
                       <div class="pad-top">
                          <div class="form-line">
                             <div class="input email required user_session_email">
-                              <input class="required" id="fullname" name="fullname" type="text" placeholder="Họ và Tên">
+                              <input class="required" id="fullname" name="enroll_fullname" type="text" placeholder="Họ và Tên">
                             </div>
                          </div>
                       </div>
@@ -28,7 +37,7 @@
                       <div class="pad-top">
                          <div class="form-line">
                             <div class="input email required user_session_email">
-                              <input class="required" id="email" name="email" type="email" placeholder="Email">
+                              <input class="required" id="email" name="enroll_email" type="email" placeholder="Email">
                             </div>
                          </div>
                       </div>
@@ -64,7 +73,7 @@
                         <div class="form-label">Số điện thoại</div>
                         <div class="form-line">
                           <div class="required">
-                            <input class="required" id="" name="" type="text">
+                            <input class="required" id="phone" name="enroll_phone" type="text">
                           </div>
                         </div>
                       </div>
@@ -74,7 +83,7 @@
                         <div class="form-label">Xác nhận số điện thoại</div>
                          <div class="form-line">
                             <div class="required">
-                              <input class="required" id="" name="" type="text">
+                              <input class="required" id="" name="repeatphone" type="text">
                             </div>
                          </div>
                       </div>
@@ -83,10 +92,10 @@
                       <div class="pad-top">
                         <div class="form-label">Giới tính</div>
                         <div class="form-line">
-                          <select>
-                            <option>Nam</option>
-                            <option>Nữ</option>
-                            <option>Khác</option>
+                          <select class="required" name="enroll_gender">
+                            <option value="male">Nam</option>
+                            <option value="female">Nữ</option>
+                            <option value="other">Khác</option>
                           </select>
                         </div>
                       </div>
@@ -96,7 +105,7 @@
                         <div class="form-label">Số CMND</div>
                          <div class="form-line">
                             <div class="required">
-                              <input class="required" id="" name="" type="text">
+                              <input class="required" id="" name="enroll_identifier" type="text">
                             </div>
                          </div>
                       </div>
@@ -106,7 +115,7 @@
                         <div class="form-label">Nơi cấp</div>
                          <div class="form-line">
                             <div class="required">
-                              <input class="required" id="" name="" type="text">
+                              <input class="required" id="" name="enroll_issueby" type="text">
                             </div>
                          </div>
                       </div>
@@ -116,7 +125,7 @@
                         <div class="form-label">Ngày cấp</div>
                          <div class="form-line">
                             <div class="required">
-                              <input class="required" id="" name="" type="date">
+                              <input class="required" id="" name="enroll_issueon" type="date">
                             </div>
                          </div>
                       </div>
@@ -126,7 +135,7 @@
                         <div class="form-label">Địa chỉ thường trú </div>
                         <div class="form-line">
                             <div class="required">
-                              <input class="required" id="" name="" type="text">
+                              <input class="required" id="" name="enroll_address" type="text">
                             </div>
                          </div>
                       </div>
@@ -136,7 +145,7 @@
                         <div class="form-label">Chỗ ở hiện nay</div>
                         <div class="form-line">
                             <div class="required">
-                              <input class="required" id="" name="" type="text">
+                              <input class="required" id="" name="enroll_tempaddress" type="text">
                             </div>
                          </div>
                       </div>
@@ -145,10 +154,10 @@
                       <div class="pad-top">
                         <div class="form-label">Tình trạng gia đình</div>
                         <div class="form-line">
-                          <select>
-                            <option>Độc thân</option>
-                            <option>Đã kết hôn</option>
-                            <option>Khác</option>
+                          <select class="required" name="enroll_marital">
+                            <option value="single">Độc thân</option>
+                            <option value="maried">Đã kết hôn</option>
+                            <option value="other">Khác</option>
                           </select>
                         </div>
                       </div>
@@ -157,9 +166,10 @@
                       <div class="pad-top">
                         <div class="form-label">Tình trạng sức khoẻ</div>
                          <div class="form-line">
-                          <select>
-                            <option>Tốt</option>
-                            <option>Khác</option>
+                          <select class="required" name="enroll_healthy">
+                            <option value="verygood">Rất Tốt</option>
+                            <option value="good">Tốt</option>
+                            <option value="other">Khác</option>
                           </select>
                         </div>
                       </div>
@@ -175,24 +185,13 @@
                       <div class="pad-top">
                         <div class="form-label">Bạn có thể thực hiện tốt những công việc nào (đánh dấu vào tất cả các công việc mà bạn có thể thực hiện)</div>
                         <div class="form-line">
-                          <div class="option">
-                            <div class="label"> Vệ sinh bảo dưỡng </div>
-                            <input type="checkbox" name=""> 
-                          </div>
-                          <div class="option">
-                            <div class="label"> Xử lý sự cố khẩn cấp
+                          <?php foreach ($this->experiences as $row) {?>
+                            <div class="option">
+                              <div class="label"><?= $row->getPostTitle()?></div>
+                              <input type="checkbox" name="experience[]" value="<?= $row->getId()?>"> 
                             </div>
-                             <input type="checkbox" name="">
-                          </div>
-                          <br/>
-                          <div class="option">
-                            <div class="label">  Lắp đặt máy mới</div>
-                            <input type="checkbox" name="">
-                          </div>
-                          <div class="option">
-                             <div class="label"> Di dời máy</div>
-                             <input type="checkbox" name="">
-                          </div>
+                          <?php }?>
+                          
                          </div>
                       </div>
                     </div>
@@ -201,7 +200,7 @@
                       <div class="pad-top">
                         <div class="form-label" style="width: 50%;">Số năm kinh nghiệm làm việc</div>
                         <div class="form-line">
-                          <select>
+                          <select value="required" name="enroll_year">
                             <option>0 - 6 tháng</option>
                             <option>6 tháng - 1 năm</option>
                             <option>1 năm - 3 năm</option>
@@ -217,7 +216,7 @@
                         <div class="form-label">Các kỹ năng khác</div>
                         <div class="form-line">
                             <div class="required">
-                              <textarea></textarea>
+                              <textarea name="enroll_skills"></textarea>
                             </div>
                          </div>
                       </div>
@@ -227,15 +226,12 @@
                       <div class="pad-top">
                         <div class="form-label">Bạn có những dụng cụ gì cho công việc - đánh dấu vào các dụng cụ mà bạn có thể chuẩn bị</div>
                         <div class="form-line">
+                          <?php foreach ($this->tools as $row) {?>
                           <div class="option fullline">
-                            <input type="checkbox" name=""> 
-                            <div class="label"> Vệ sinh - bảo dưỡng ( đồng hồ gas, Ampe kiềm, bơm chuyên dụng, ... ) </div>
+                            <input type="checkbox" name="tools[]" value="<?= $row->getId()?>"> 
+                            <div class="label"><?= $row->getToolTitle()?></div>
                           </div>
-                          <div class="option fullline">
-                             <input type="checkbox" name="">
-                            <div class="label"> Xử lý sự cố khẩn cấp (đồng hồ gas, ampe kiềm, lục giác, máy hút )</div>
-                          </div>
-                          <br/>
+                          <?php }?>
                          </div>
                       </div>
                     </div>
@@ -244,7 +240,7 @@
                       <div class="pad-top">
                         <div class="form-label" style="width: 60%">Bạn biết đến VAPOR qua phương tiện nào</div>
                         <div class="form-line">
-                          <select>
+                          <select name="enroll_know">
                             <option>Quảng cáo</option>
                             <option>Khác</option>
                           </select>
@@ -255,16 +251,16 @@
                     <div class="form-fields-wrapper fullline">
                       <div class="pad-top">
                           <div class="option fullline">
-                             <input type="checkbox" name="">
-                            <div class="label"> Tôi đồng ý với <a>Điều khoản Sử dụng</a> của Vapor,
-                              <a>Tuyên bố về quyền riêng tư</a></div>
+                            <input type="checkbox" class="required" name="terms">
+                            <div class="label"> Tôi đồng ý với <a> Điều khoản Sử dụng </a> của Vapor,
+                              <a> Tuyên bố về quyền riêng tư </a></div>
                           </div>
                         </div>
                     </div>
 
                     <div class="form-fields-wrapper center">
                         <div class="form-steps-bottom"></div>
-                        <input id="participan-next" class="button btn-full push-top btn-primary" name="commit" type="submit" value="Nộp Đơn">
+                        <input id="participan-next" class="button btn-full push-top btn-primary" name="" type="submit" value="Nộp Đơn">
                     </div>
                   </div>
               </div>
@@ -276,3 +272,4 @@
     
     
   </form>
+  <?php }?>

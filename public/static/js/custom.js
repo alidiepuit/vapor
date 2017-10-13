@@ -1,6 +1,9 @@
 jQuery(document).ready(function( $ ) {
     // Smoth scroll on page hash links
     $('a[href*="#"]:not([href="#"])').on('click', function() {
+        if ($(this).attr('data-toggle')) {
+            return
+        }
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
             var target = $(this.hash);
             if (target.length) {
@@ -21,7 +24,7 @@ jQuery(document).ready(function( $ ) {
     });
 
     var loginSocial = function(data) {
-        $.post( "/authenticate/login", 
+        $.post( "/dang-nhap.html", 
             { 
                 accessToken: data.accessToken, 
                 userID: data.userID,
@@ -101,6 +104,9 @@ jQuery(document).ready(function( $ ) {
             email: {
                 required: true,
                 email: true
+            },
+            repeatphone: {
+                equalTo: "#phone",
             }
         },
         messages: {
@@ -114,6 +120,12 @@ jQuery(document).ready(function( $ ) {
             $("#form-participan").steps("next");
         }
     });
+
+    $('#thamgia').on('click', function() {
+        window.location.replace("/tham-gia.html");
+    });
+
+    $('#previous-and-upcoming-control').tabs();
 });
 
 (function() {

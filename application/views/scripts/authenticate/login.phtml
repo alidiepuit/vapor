@@ -5,7 +5,7 @@
       <div class="main-body-container">
          <div class="login-background">
             <div class="row">
-               <form accept-charset="UTF-8" action="/authenticate/login" class="gs-form simple_form analytics-event" data-event-name="regular email log in attempt" id="form-login" method="post">
+               <form accept-charset="UTF-8" action="/dang-nhap.html" class="gs-form simple_form analytics-event" data-event-name="regular email log in attempt" id="form-login" method="post">
                   <div style="margin:0;padding:0;display:inline">
                      <input name="type" type="hidden" value="email">
                      <input name="<?= $this->form->getElements()['csrf']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf']->getValue()?>">
@@ -33,7 +33,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="even-smaller center" style="text-transform: ">Don't have an account? <a href="/authenticate/register" class="alt-link"> Register</a></div>
+                     <div class="even-smaller center" style="text-transform: ">Don't have an account? <a href="/dang-ky.html" class="alt-link"> Register</a></div>
                      <div class="form-fields-wrapper">
                         <div class="form-steps-bottom"></div>
                         <input class="button btn-full push-top btn-primary" name="commit" type="submit" value="Log in">

@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="google-signin-client_id" content="<?= Zend_Registry::get('configs')->google->clientID?>">
+
+  <link rel="profile" href="http://gmpg.org/xfn/11">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/glamsquad.css");?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/home.css");?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/popup.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/font-awesome.min.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/flexslider.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/custom.css")?>">
+
+  <title>Vapor</title>
+  
+  <?php echo $this->partial('partials/seo.phtml')?>
+</head>
+<body class="">
+  <?= $this->partial('partials/social.phtml');?>
+  <div class="site-container">
+    <?php echo $this->partial('partials/topmenu.phtml')?>
+
+    <main class="site-main">
+      <div class="page-container components">
+
+      <section class="component-hero">
+        <picture>
+          <img src="<?php echo $this->baseUrl("static/images/home-slide-1.png");?>" alt="">
+        </picture>
+        <div class="hero-copy">
+          <hgroup class="headline-group">
+            <h1 class="headline"></h1>
+            <h2 class="subheadline"></h2>
+          </hgroup>
+          <a href="/book/" class="gs-button inline" style="max-width: 400px;width: 400px;">Đặt ngay dịch vụ</a>
+        </div>
+      </section>
+
+      <?php echo $this->partial('partials/section-services.phtml')?>
+
+<section class="component-how-it-works">
+  <div class="grid-container">
+    <div class="grid">
+      <div class="cell">
+        <ul class="how-it-works">
+            <li>
+              <h3 class="headline">lựa chọn thời gian của bạn</h3>
+              <figure class="icon">
+                <img src="<?php echo $this->baseUrl("static/images/icon-clock.png");?>" class="lipstick" alt="">
+              </figure>
+              <p class="description">bạn luôn gặp vấn đề về máy lạnh, chúng tôi luôn sẵn sàng, hãy lựa chọn thời gian phù hợp với bạn.</p>
+            </li>
+            <li>
+              <h3 class="headline">đặt dịch vụ</h3>
+              <figure class="icon">
+                <img src="<?php echo $this->baseUrl("static/images/icon-mobile.png");?>" class="calendar" alt="">
+              </figure>
+              <p class="description">lựa chọn nhu cầu của bạn trên web hoặc ứng dụng. Vapor sẽ xác nhận dịch vụ và lịch hẹn.</p>
+            </li>
+            <li>
+              <h3 class="headline">đội ngũ chuyên nghiệp</h3>
+              <figure class="icon">
+                <img src="<?php echo $this->baseUrl("static/images/icon-worker.png");?>" class="team" alt="">
+              </figure>
+              <p class="description">chuyên viên kỹ thuật với đầy đủ dụng cụ sẽ xuất hiện đúng giờ trước cửa nhà bạn.</p>
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<?php echo $this->partial('partials/section-customer.phtml')?>
+
+    </div>
+  </main>
+  
+  <?php echo $this->partial('partials/footer.phtml')?>
+</div>
+
+  <?= $this->partial("partials/js.phtml")?>
+</body></html>
