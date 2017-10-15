@@ -1,3 +1,61 @@
+var initNumberInput = function(ele) {
+    jQuery('<div class="quantity-nav"><div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div></div>').insertAfter(ele + ' input');
+    jQuery(ele).each(function() {
+      var spinner = jQuery(this),
+        input = spinner.find('input[type="number"]'),
+        btnUp = spinner.find('.quantity-up'),
+        btnDown = spinner.find('.quantity-down'),
+        min = input.attr('min'),
+        max = input.attr('max');
+
+      btnUp.click(function() {
+        var oldValue = parseFloat(input.val() || min);
+        if (oldValue >= max) {
+          var newVal = oldValue;
+        } else {
+          var newVal = oldValue + 1;
+        }
+        spinner.find("input").val(newVal);
+        spinner.find("input").trigger("change");
+      });
+
+      btnDown.click(function() {
+        var oldValue = parseFloat(input.val() || min);
+        if (oldValue <= min) {
+          var newVal = oldValue;
+        } else {
+          var newVal = oldValue - 1;
+        }
+        spinner.find("input").val(newVal);
+        spinner.find("input").trigger("change");
+      });
+        
+        $(this).attr('data-init', 'done');
+    });
+}
+
+
+var dataBooking = [];
+var initSummary = function() {
+    if (dataBooking.length > 0) {
+        $('bf-services-summary button').removeAttr('disabled');
+        $('bf-services-summary .booking-panel').addClass('show');
+        
+        $('.booking-panel .summary').html('');
+        $(dataBooking).each(function(i, val) {
+            var total = 0;
+            $(val.data).each(function(i, val) {
+                total += val.cost;
+            })
+            var div = $('<div/>').html('<p>' + val.service + ' - ' + val.title + ' - ' + total + '</p>');
+            $('.booking-panel .summary').append(div);
+        });
+    } else {
+        $('bf-services-summary button').attr('disabled','disabled');
+        $('bf-services-summary .booking-panel').removeClass('show');
+    }
+}
+
 jQuery(document).ready(function( $ ) {
     // Smoth scroll on page hash links
     $('a[href*="#"]:not([href="#"])').on('click', function() {
@@ -83,6 +141,10 @@ jQuery(document).ready(function( $ ) {
         });
     })
 
+    //////////////////////////
+    /// Homebody services ////
+    //////////////////////////
+
     $('.services-grid>li').on('click', function() {
         $('#service-content').find('.modal-body').html($(this).find('.content').html());
         $('#service-content').find('.modal-title').html($(this).find('.service-name').html());
@@ -91,6 +153,11 @@ jQuery(document).ready(function( $ ) {
     $('#service-content').on('shown.bs.modal', function() {
         $('#service-content').focus()
     });
+
+    
+    //////////////////////////
+    /// Participation ////
+    //////////////////////////
 
     var formStep1 = $("#form-participan").show();
     $("#form-participan").steps({
@@ -125,8 +192,82 @@ jQuery(document).ready(function( $ ) {
         window.location.replace("/tham-gia.html");
     });
 
+    
+    //////////////////////////
+    ///       User        ////
+    //////////////////////////
+
+
     $('#previous-and-upcoming-control').tabs();
+    $("#datepicker").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: 'dd/mm/yy'
+    });
+
+    
+    //////////////////////////
+    ///      Booking      ////
+    //////////////////////////
+    
+    $('#booking-list-machine').tabs();
+
+    $('#booking-machine').on('shown.bs.modal', function() {
+        $('#booking-machine').focus()
+    });
+
+    $('.booking-services>li').on('click', function() {
+        $('#booking-machine').find('.modal-title').html($(this).attr('data-title'));
+        $('#booking-form').attr('data-service',$(this).attr('data-service'));
+    });
+
+    
+
+    $('#booking-add-row').on('click', function() {
+        $('#booking-table tbody').append($('#booking-temp-table tbody').html())
+        initNumberInput('#booking-table tbody tr td div.quantity[data-init="none"]');
+    })
+    
+    $('#booking-accept').click(function() {
+        if ($('#booking-form').valid()) {
+            var title = $('#booking-title').text();
+            var service = $('#booking-form').attr('data-service');
+            var obj = [];
+            $('#booking-table tbody tr').each(function(i, val) {
+                var power = parseInt($(val).find('select.booking').val());
+                var amount = parseInt($(val).find('input.amount').val());
+                var cost = parseInt($(val).find('p.cost').text());
+                obj.push({
+                    "power": power,
+                    "amount": amount,
+                    "cost": cost,
+                })
+            });
+            if (obj.length > 0) {
+                dataBooking.push({
+                                title: title,
+                                service: service,
+                                data: obj,
+                            })
+                $('#booking-table tbody').html('')
+                initSummary();
+            }
+            $('#booking-machine').modal('hide')
+        }
+    })
+
+    $('.booking-flow.steps').steps({
+        headerTag: "h3",
+        bodyTag: "section",
+        transitionEffect: "slideLeft",
+        autoFocus: true,
+    });
+    $('#booking-next').click(function() {
+        $(".booking-flow.steps").steps("next");
+    });
 });
+
+
 
 (function() {
  

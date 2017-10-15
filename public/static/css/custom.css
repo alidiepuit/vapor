@@ -201,29 +201,5 @@ picture.participan {
   display: block;
 }
 
-/*
-////////////////
-// User
-////////////////
-*/
-.previous-and-upcoming-control li {
-  display: inline-flex;
-}
-.previous-and-upcoming-control li a {
-  text-decoration: none;
-}
-.previous-and-upcoming-control li a {
-  color: #000;
-  box-shadow: none;
-}
-.previous-and-upcoming-control li a.booking-tab.pressed-tab {
-  color: #000;
-  box-shadow: none;
-}
-.previous-and-upcoming-control li.active a {
-  color: #00cded;
-  box-shadow: 0 4px 0px -2px #00cded;
-}
-html [type=button] {
-  -webkit-appearance: inherit;
-}
+
+

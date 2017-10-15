@@ -1,3 +1,5 @@
+
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/login.css?v=1");?>">
 <?php if ($this->success) {?>
 <section class="component-hero">
       <div class="hero-copy">
@@ -8,6 +10,8 @@
 <h2>Đơn tham gia của bạn đã được ghi nhận vào hệ thống.</h2>
 </div></div></div></div></div></section>
 <?php } else {?>
+
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/jquery-ui.min.css")?>">
   <form accept-charset="UTF-8" action="/participation" class="gs-form simple_form analytics-event" id="form-participan" method="post">
     <h3>step 1</h3>
     <section class="component-hero participan">
@@ -60,10 +64,6 @@
           <div class="main-body-container">
             <div class="login-background">
               <div class="row">
-                
-                  <div style="margin:0;padding:0;display:inline">
-                    <input name="" type="hidden" value="">
-                  </div>
                   <div class="login-block participation-step2">
                     <h2 alt="Login to Vapor" class="larger center">Tham gia cùng vapor</h2>
                     <div class="error"><?= $this->error ? '<p class="error">'.$this->error.'</p>' : "" ?>  </div>
@@ -125,7 +125,7 @@
                         <div class="form-label">Ngày cấp</div>
                          <div class="form-line">
                             <div class="required">
-                              <input class="required" id="" name="enroll_issueon" type="date">
+                              <input class="required" id="datepicker" name="enroll_issueon" type="text">
                             </div>
                          </div>
                       </div>

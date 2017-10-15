@@ -1,8 +1,9 @@
-<div class="account-page-container ng-scope">
+<link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/user.css")?>">
+  <div class="account-page-container ng-scope">
    <div class="row previous-and-upcoming-control" id="previous-and-upcoming-control">
       <ul class="small-12 medium-7 large-8 columns">
         <li>
-          <a data-toggle="tab" href="#upcoming-bookings-section" class="btn booking-tab pressed-tab" type="button">Đang đặt hàng</a>
+          <a data-toggle="tab" href="#upcoming-bookings-section" class="btn booking-tab" type="button">Đang đặt hàng</a>
         </li>
         <li>
           <a data-toggle="tab" href="#previous-bookings-section" class="btn booking-tab" type="button">Lịch sử</a>
@@ -14,9 +15,22 @@
             <div class="">
                <div class="small-12 columns">
                   <div class="account-info-slab">
-                     <img alt="Account-empty" class="push-bot" src="https://cache.hbfiles.com/assets/account-page/account-empty-014a7862a4a5e13d5addd7661e75be14.png">
-                     <p>You don't have any upcoming bookings</p>
-                     
+                     <div class="booking-details-column">
+                      Thời gian
+                     </div>
+                     <div class="booking-details-column">
+                      Chi tiết 
+                     </div>
+                  </div>
+               </div>
+               <div class="small-12 columns">
+                  <div class="account-info-slab">
+                     <div class="booking-details-column">
+                      Thời gian
+                     </div>
+                     <div class="booking-details-column">
+                      Chi tiết 
+                     </div>
                   </div>
                </div>
             </div>
