@@ -228,7 +228,7 @@ screen and (min-width: 64em) {
     flex-grow: 1
 }
 .booking-flow .booking-flow-steps.cell {
-    background-color: #37173d;
+    background-color: #fff300;
     padding-top: 55px;
     padding-bottom: 60px;
     position: relative;
@@ -339,7 +339,7 @@ screen and (min-width: 48em) {
 .booking-flow .booking-flow-title {
     font-family: Freight, Georgia, Cambria, "Times New Roman", Times, serif;
     font-weight: 400;
-    color: #fff;
+    color: #000;
     font-size: 2rem;
     letter-spacing: .018em;
     line-height: 1.25
@@ -443,14 +443,14 @@ screen and (min-width: 64em) {
     .booking-flow .order-summary {
         float: right;
         margin-top: 23px;
-        width: 230px
+        width: 300px
     }
 }
 @media screen and (min-width: 75em) {
     .booking-flow .appointment-summary,
     .booking-flow .order-summary {
         padding: 30px;
-        width: 250px
+        width: 300px
     }
 }
 .booking-flow-appointment .address-type-fields {
@@ -509,7 +509,7 @@ screen and (min-width: 64em) {
     font-weight: 700;
     font-size: 1rem;
     letter-spacing: .0625em;
-    line-height: 1;
+    line-height: 2;
     text-transform: uppercase;
     margin-bottom: 15px;
     padding-bottom: 15px;
@@ -1470,7 +1470,7 @@ screen and (min-width: 64em) {
 .booking-flow-services .booking-panel {
     background: #fff;
     box-shadow: 0 -2px 6px rgba(153, 153, 153, .2);
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     padding: 15px 38px;
@@ -1499,12 +1499,14 @@ screen and (min-width: 48em) {
         justify-content: flex-start;
         -webkit-align-items: center;
         -ms-flex-align: center;
-        align-items: center
+        align-items: center;
+        margin-bottom: 20px;
     }
 }
 .booking-flow-services .booking-panel.show {
     -webkit-transform: translateY(0);
-    transform: translateY(0)
+    transform: translateY(0);
+    display: block!important;
 }
 .booking-flow-services .booking-panel p {
     font-size: .875rem;
@@ -1951,4 +1953,14 @@ input[type=number]
 }
 .booking-flow.steps .content {
     width: 100%;
+}
+.gs-radio {
+    width: 145px;
+    display: inline-table;
+}
+.gs-radio-buttons {
+    display: block;
+}
+.booking-flow-services .booking-panel>div {
+    display: block;
 }
