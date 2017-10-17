@@ -4,29 +4,29 @@
        <div ng-controller="LoginController" class="signin-register-wrap cell ng-scope">
          <div class="signin-container">
              <div>
-               <h1 class="signin-head ng-scope">Sign In</h1>
+               <h1 class="signin-head ng-scope">ĐĂNG NHẬP</h1>
                <div class="login-form-wrap ng-scope">
                   <div class="error"><?= $this->error ? '<p class="error">'.$this->error.'</p>' : "" ?></div>
                  <form name="loginForm" class="ng-pristine ng-valid" action="/dang-nhap.html" method="POST">
                   <input name="type" type="hidden" value="email">
                   <input name="<?= $this->form->getElements()['csrf']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf']->getValue()?>">
                   <div class="form-fields-wrapper">
-                   <label class="no-acc-txt mar-btm-10">EMAIL ADDRESS</label>
-                   <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="username" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" name="<?=$this->form->getElements()['user_name']->getName()?>">
+                   <label class="no-acc-txt mar-btm-10">Email </label>
+                   <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="user_name" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" name="<?=$this->form->getElements()['user_name']->getName()?>">
                 </div>
                 <div class="form-fields-wrapper">
-                   <label class="no-acc-txt mar-btm-10">PASSWORD</label>
-                   <input type="password" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="password" placeholder="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'" name="<?= $this->form->getElements()['user_password']->getName()?>">
+                   <label class="no-acc-txt mar-btm-10">Mật khẩu </label>
+                   <input type="password" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="password" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'" name="<?= $this->form->getElements()['user_password']->getName()?>">
                    </div>
                    <div class="form-fields-wrapper">
-                   <button type="submit" class="gs-button mar-top-5">Sign In</button>
+                   <button type="submit" class="gs-button mar-top-5">Đăng nhập </button>
                 </div>
                    <div style="clear: both;"></div>
                  </form>
                </div>
              </div>
              <div class="not-registered-wrap center ng-scope">
-               <h1 class="no-acc-txt pad-top-25 pad-btm-25">DON’T HAVE AN ACCOUNT? <a href="/dang-ky.html"><span> REGISTER</span><div class="align-middle"></div></a></h1>
+               <h1 class="no-acc-txt pad-top-25 pad-btm-25">Chưa có tài khoản? <a href="/dang-ky.html"><span> Đăng Ký </span><div class="align-middle"></div></a></h1>
              </div>
                <?php echo $this->partial('partials/login-social.phtml')?>
          </div>

@@ -85,7 +85,48 @@ jQuery(document).ready(function( $ ) {
         if (!$(this).valid()) {
             event.preventDefault();
         }
-    })
+    }).validate({
+        rules: {
+            user_password: "required",
+            user_name: {
+                required: true,
+                email: true
+            }
+        },
+        messages: {
+            user_name: "Please enter a valid email address",
+            user_password: "Please enter a valid password",
+        }
+    });
+
+    $('form[name="registerForm"]').on('submit', function(event) {
+        if (!$(this).valid()) {
+            event.preventDefault();
+        }
+    }).validate({
+        rules: {
+            user_password: "required",
+            user_name: {
+                required: true,
+                email: true
+            },
+            confirm_password: {
+                equalTo: "#password",
+            },
+            user_display_name: {
+                required: true,
+            },
+            user_phone: {
+                required: true,
+            }
+        },
+        messages: {
+            user_name: "Please enter a valid email address",
+            confirm_password: "Please enter the same password again",
+            user_display_name: "Please enter the display name",
+            user_phone: "Please enter the phone number",
+        }
+    });
 
     var loginSocial = function(data) {
         $.post( "/dang-nhap.html", 
