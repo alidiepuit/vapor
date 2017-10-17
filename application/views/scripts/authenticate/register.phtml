@@ -1,75 +1,51 @@
-
-  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/login.css?v=1");?>">
-<div class="page-container components login">
-<section class="component-how-it-works">
+<div class="page-container">
    <div class="grid-container">
-      <div class="main-body-container">
-         <div class="login-background">
-            <div class="row">
-               <form accept-charset="UTF-8" action="/dang-ky.html" class="simple_form analytics-event gs-form" data-event-name="regular email log in attempt" id="form-register" method="post">
-                  <div style="margin:0;padding:0;display:inline">
-                     <input name="<?= $this->form->getElements()['csrf']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf']->getValue()?>">
+     <div class="grid">
+       <div ng-controller="LoginController" class="signin-register-wrap cell ng-scope">
+         <div class="signin-container">
+             <div>
+               <h1 class="signin-head ng-scope">Đăng ký </h1>
+               <div class="login-form-wrap ng-scope">
+                  <div class="error"><?= $this->error ? '<p class="error">'.$this->error.'</p>' : "" ?></div>
+               <form accept-charset="UTF-8" action="/dang-ky.html" class="ng-pristine ng-valid" data-event-name="regular email log in attempt" id="form-register" method="post">
+                  <input name="<?= $this->form->getElements()['csrf']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf']->getValue()?>">
+                  <div class="form-fields-wrapper">
+                     <label class="no-acc-txt mar-btm-10">EMAIL ADDRESS</label>
+                     <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="username" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" name="<?=$this->form->getElements()['user_name']->getName()?>" value="<?=$this->form->getElements()['user_name']->getValue()?>">
                   </div>
-                  <div class="login-block">
-                     <h2 alt="Login to Vapor" class="larger center">Register to Vapor</h2>
-                     <div class="error"><?= $this->error ? '<p class="error">'.$this->error.'</p>' : "" ?></div>
-                     <div class="form-fields-wrapper">
-                        <div class="pad-top">
-                           <div class="form-label">Email</div>
-                           <div class="form-line">
-                              <div class="input email required user_session_email">
-                                <input class="string email required inspectletIgnore" id="user_session_email" name="<?=$this->form->getElements()['user_name']->getName()?>" required="required" size="50" type="email" value="<?=$this->form->getElements()['user_name']->getValue()?>">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="pad-top">
-                           <div class="form-label">
-                              Password
-                           </div>
-                           <div class="form-line">
-                              <div class="input password required user_session_password">
-                                <input class="password required" id="user_session_password" name="<?= $this->form->getElements()['user_password']->getName()?>" required="required" size="50" type="password">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="pad-top">
-                           <div class="form-label">
-                              Confirm Password
-                           </div>
-                           <div class="form-line">
-                              <div class="input password required user_session_password">
-                                <input class="password required" id="user_session_password" name="<?= $this->form->getElements()['confirm_password']->getName()?>" required="required" size="50" type="password">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="pad-top">
-                           <div class="form-label">Display name</div>
-                           <div class="form-line">
-                              <div class="input email required user_session_email">
-                                <input class="string email required inspectletIgnore" id="user_session_email" name="<?=$this->form->getElements()['user_display_name']->getName()?>" required="required" size="50" type="text" value="<?=$this->form->getElements()['user_display_name']->getValue()?>">
-                              </div>
-                           </div>
-                        </div>
-                        <div class="pad-top">
-                           <div class="form-label">Phone</div>
-                           <div class="form-line">
-                              <div class="input email required user_session_email">
-                                <input class="string email required inspectletIgnore" id="user_session_email" name="<?=$this->form->getElements()['user_phone']->getName()?>" required="required" size="50" type="text" value="<?=$this->form->getElements()['user_phone']->getValue()?>">
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="even-smaller center" style="text-transform: ">Already have an account? <a href="/dang-nhap.html" class="alt-link"> Sign In</a></div>
-                     <div class="form-fields-wrapper">
-                        <div class="form-steps-bottom"></div>
-                        <input class="button btn-full push-top btn-primary" name="commit" type="submit" value="Register">
-                     </div>
-                     <?php echo $this->partial('partials/login-social.phtml')?>
+                  <div class="form-fields-wrapper">
+                     <label class="no-acc-txt mar-btm-10">PASSWORD</label>
+                     <input type="password" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="password" placeholder="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'" name="<?= $this->form->getElements()['user_password']->getName()?>">
                   </div>
-               </form>
+                  <div class="form-fields-wrapper">
+                     <label class="no-acc-txt mar-btm-10">PASSWORD</label>
+                     <input type="password" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="confirm-password" placeholder="password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'password'" name="<?= $this->form->getElements()['confirm_password']->getName()?>">
+                  </div>
+                  <div class="form-fields-wrapper">
+                     <label class="no-acc-txt mar-btm-10">Display name</label>
+                     <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="username" placeholder="Display name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Display name'" name="<?=$this->form->getElements()['user_display_name']->getName()?>" value="<?=$this->form->getElements()['user_display_name']->getValue()?>">
+                  </div>
+                  <div class="form-fields-wrapper">
+                     <label class="no-acc-txt mar-btm-10">Phone</label>
+                     <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="username" placeholder="Phone" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Phone'" name="<?=$this->form->getElements()['user_phone']->getName()?>" value="<?=$this->form->getElements()['user_phone']->getValue()?>">
+                  </div>
+                  
+                  <div class="not-registered-wrap center ng-scope">
+                     <h1 class="no-acc-txt pad-top-25 pad-btm-25">ALREADY HAVE AN ACCOUNT ? <a href="/dang-nhap.html"><span> Đăng nhập </span><div class="align-middle"></div></a></h1>
+                  </div>
+                  <div class="form-fields-wrapper">
+                     <button type="submit" class="gs-button mar-top-5">Đăng ký </button>
+                  </div>
+                  <div style="clear: both;"></div>
+                  <div class="form-fields-wrapper">
+                     <div class="form-steps-bottom"></div>
+                  </div>
+                  <?php echo $this->partial('partials/login-social.phtml')?>
+                  </form>
+               </div>
             </div>
          </div>
       </div>
    </div>
-</section>
+</div>
 </div>

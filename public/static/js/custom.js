@@ -81,6 +81,12 @@ jQuery(document).ready(function( $ ) {
         }
     });
 
+    $('form[name="loginForm"]').on('submit', function(event) {
+        if (!$(this).valid()) {
+            event.preventDefault();
+        }
+    })
+
     var loginSocial = function(data) {
         $.post( "/dang-nhap.html", 
             { 

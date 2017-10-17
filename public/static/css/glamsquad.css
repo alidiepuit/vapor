@@ -2378,7 +2378,7 @@ hr {
     font-style: italic
 }
 .site-footer {
-    margin-top: 0px;
+    margin-top: 40px;
     padding-bottom: 40px;
 }
 @media print,
@@ -2399,7 +2399,7 @@ screen and (min-width: 48em) {
         padding-left: .9375rem
     }
     .site-footer {
-        margin-top: 0px
+        margin-top: 40px
     }
 }
 .site-footer .grid-container {
@@ -2477,7 +2477,7 @@ screen and (min-width: 64em) {
 }
 @media screen and (min-width: 75em) {
     .site-footer {
-        margin-top: 0px
+        margin-top: 40px
     }
     .site-footer .grid-container {
         max-width: 1200px
