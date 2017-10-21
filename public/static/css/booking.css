@@ -232,7 +232,8 @@ screen and (min-width: 64em) {
     padding-top: 55px;
     padding-bottom: 60px;
     position: relative;
-    text-align: center
+    text-align: center;
+    width: 30%;
 }
 .booking-flow .booking-flow-steps.cell .logo-link {
     margin-bottom: 60px
@@ -1165,7 +1166,6 @@ screen and (min-width: 48em) {
     letter-spacing: .1em;
     line-height: 1;
     margin: 0 10px;
-    padding-bottom: 5px;
     position: relative;
     text-transform: uppercase
 }
@@ -1177,7 +1177,7 @@ screen and (min-width: 48em) {
 @media print,
 screen and (min-width: 48em) {
     .booking-flow.steps .booking-flow-services .booking-flow-content.cell {
-        width: 66.66667%;
+        width: 70%;
         padding-right: 0;
         padding-left: 0;
         margin-left: 0;
@@ -1187,7 +1187,7 @@ screen and (min-width: 48em) {
         margin: 0 20px
     }
 }
-.booking-flow-services .service-type-nav li:after {
+.booking-flow-services .service-type-nav li.ui-state-active:after {
     background-color: #fc4945;
     content: "";
     display: block;
@@ -1204,7 +1204,7 @@ screen and (min-width: 48em) {
     width: 100%;
     height: 4px
 }
-.booking-flow-services .service-type-nav li.active:after {
+.booking-flow-services .service-type-nav li.ui-state-active:after {
     -webkit-transform: translateX(-50%) scaleX(1);
     transform: translateX(-50%) scaleX(1)
 }
@@ -1470,7 +1470,7 @@ screen and (min-width: 64em) {
 .booking-flow-services .booking-panel {
     background: #fff;
     box-shadow: 0 -2px 6px rgba(153, 153, 153, .2);
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     padding: 15px 38px;
@@ -1506,13 +1506,15 @@ screen and (min-width: 48em) {
 .booking-flow-services .booking-panel.show {
     -webkit-transform: translateY(0);
     transform: translateY(0);
-    display: block!important;
+    display: flex;
+    flex-direction: column;
 }
 .booking-flow-services .booking-panel p {
     font-size: .875rem;
     line-height: 1.42857;
     letter-spacing: .028em;
-    text-transform: uppercase
+    text-transform: uppercase;
+    text-align: left;
 }
 .booking-flow-services .booking-panel .gs-button {
     transition: none
@@ -1520,13 +1522,13 @@ screen and (min-width: 48em) {
 @media print,
 screen and (min-width: 48em) {
     .booking-flow-services .booking-panel p {
-        max-width: 386px
+        
     }
     .booking-flow.steps .booking-flow-services .booking-panel .gs-button {
         -webkit-flex: 0 0 auto;
         -ms-flex: 0 0 auto;
         flex: 0 0 auto;
-        margin-left: 30px;
+        margin-left: auto;
         margin-right: 0;
         width: 200px;
         display: inline-block;
@@ -1841,7 +1843,7 @@ screen and (min-width: 48em) {
 ////////////////
 */
 .ng-hide {
-  display: none!important;
+  visibility: hidden;
 }
 
 .booking-flow-content a {
@@ -1963,4 +1965,167 @@ input[type=number]
 }
 .booking-flow-services .booking-panel>div {
     display: block;
+}
+
+.booking-cell {
+-ms-box-orient: horizontal;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  padding: 0 10px;
+}
+
+.booking-cell .left-cell {
+width: 45%;
+}
+.booking-cell .left-cell .column {
+}
+.booking-cell .right-cell {
+    width: 55%;    
+}
+.booking-cell .left-cell img {
+max-height: 300px;
+}
+.booking-cell .right-cell .header {
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+}
+.booking-cell .right-cell .row {
+    -ms-box-orient: horizontal;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    margin-bottom: 10px;
+}
+.booking-cell .right-cell .column {
+    width: 50%;
+    height: 34px;
+    line-height: 34px;
+}
+.booking-flow-services .services .service {
+    width: 47%;
+    padding-top: 20px;
+}
+.booking-flow-content a {
+    font-size: 15px;
+}
+.ng-hide.active.in {
+    visibility: visible;
+}
+*:focus {
+    outline: 0;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.input-group-addon, .input-group-btn {
+    width: 1%;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+.input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+}
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.input-group .form-control {
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+}
+.input-group-addon:not(:first-child):not(:last-child), .input-group-btn:not(:first-child):not(:last-child), .input-group .form-control:not(:first-child):not(:last-child) {
+    border-radius: 0;
+}
+.input-group-addon, .input-group-btn, .input-group .form-control {
+    display: table-cell;
+}
+.input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group {
+    margin-right: -1px;
+}
+.input-group .form-control:first-child, .input-group-addon:first-child, .input-group-btn:first-child>.btn, .input-group-btn:first-child>.btn-group>.btn, .input-group-btn:first-child>.dropdown-toggle, .input-group-btn:last-child>.btn:not(:last-child):not(.dropdown-toggle), .input-group-btn:last-child>.btn-group:not(:last-child)>.btn {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group {
+    margin-left: -1px;
+}
+.input-group .form-control:last-child, .input-group-addon:last-child, .input-group-btn:last-child>.btn, .input-group-btn:last-child>.btn-group>.btn, .input-group-btn:last-child>.dropdown-toggle, .input-group-btn:first-child>.btn:not(:first-child), .input-group-btn:first-child>.btn-group:not(:first-child)>.btn {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+.text-center {
+    text-align: center;
+}
+.total-cost {
+    margin-right: 20px;
+    color: red;
+}
+.grid-container-full .cell {
+    min-height: 1000px;
 }

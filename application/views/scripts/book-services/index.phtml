@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/booking.css")?>">
 <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/w3.css")?>">
-<link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/jquery.datetimepicker.min.css")?>">
+<link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/bootstrap-datetimepicker.min.css")?>">
 
 <div class="page-container">
    <bf-booking-flow class="bf-booking-flow">
@@ -19,114 +19,72 @@
                   <div class="booking-flow-content cell" id="booking-list-machine">
                      <nav class="service-type-nav">
                         <ul>
-                           <li class="ng-binding ng-scope active">
-                              <a data-toggle="tab" href="#machine-popular">Vệ sinh - bảo dưỡng</a>
+                          <?php foreach ($this->services as $id => $service) {?>
+                            <li class="ng-binding ng-scope active">
+                              <a data-toggle="tab" href="#<?=$service->getServiceSlug()?>"><?=$service->getServiceTitle()?></a>
                            </li>
-                           <li class="ng-binding ng-scope">
-                              <a data-toggle="tab" href="#machine-hair">Lắp đặt mới</a>
-                           </li>
+                          <?php }?>
                         </ul>
                      </nav>
-                     <ul class="booking-services services" id="machine-popular">
-                        
-                        <li class="service ng-scope" data-toggle="modal" data-target="#booking-machine" data-title="Máy lạnh 1" data-service="Vệ sinh - bảo dưỡng">
-                           <header class="service-hdr">
-                              <span class="service-link">
-                                 <img alt="BLOWOUT" class="service-image" src="/static/images/maylanh-1.png">
-                                 
-                              </span>
-                           </header>
-                           <div class="service-content">
-                              
-                              <ul class="service-options">
-                                 <li class="ng-scope">
-                                    <span class="option">Máy lạnh 1</span>
-                                 </li>
-                              </ul>
-                           </div>
-                        </li>
-                     </ul>
-                     <ul class="booking-services services" id="machine-hair">
-                      <li class="service ng-scope" data-toggle="modal" data-target="#booking-machine" data-title="Máy lạnh 2" data-service="Lắp đặt mới">
-                           <header class="service-hdr">
-                              <span class="service-link">
-                                 <img alt="BLOWOUT" class="service-image" src="/static/images/maylanh-2.png">
-                                 
-                              </span>
-                           </header>
-                           <div class="service-content">
-                              
-                              <ul class="service-options">
-                                 <li class="ng-scope">
-                                    <span class="option">Máy lạnh 2</span>
-                                 </li>
-                              </ul>
-                           </div>
-                        </li>
-                     </ul>
-                     <bf-services-summary>
-                        <section class="booking-panel ng-hide">
-                          <div class="summary">
-                           <div>
-                              <p class="ng-scope">
-                                 vệ sinh - máy lạnh 1 – $100
-                              </p>
+                     <?php foreach ($this->services as $key => $service) {?>
+                     <ul class="booking-services services" id="<?=$service->getServiceSlug()?>">
+                        <?php $listMachine = $service->getListMachine()?>
+                        <?php foreach ($listMachine as $machine) {?>
+                        <li class="service ng-scope" data-title="<?=$machine->getMachineTitle()?>" data-service="<?=$service->getServiceTitle()?>">
+                          <div class="booking-cell">
+                            <div class="left-cell">
+                              <div class="header"><p><?=$machine->getMachineTitle()?></p></div>
+                              <img alt="BLOWOUT" class="service-image" src="<?=$machine->getMachineImage()?>">
+                            </div>
+                            <div class="right-cell">
+                              <div class="header">
+                                <div class="column">Công suất </div>
+                                <div class="column">Số lượng </div>
+                              </div>
+                          <?php $listPower = $machine->getListPower()?>
+                          <?php foreach ($listPower as $detailService) {?>
+                            <div class="row" data-service-title="<?=$service->getServiceTitle()?>" data-machine-title="<?=$machine->getMachineTitle()?>" data-service-id="<?=$detailService->getId()?>" data-power="<?=$detailService->getServicesPower()?>" data-service-count="">
+                                <div class="column"><?=$detailService->getServicesPower()?></div>
+                                <div class="column">
+                                  <div class="input-group number-spinner">
+                                    <span class="input-group-btn">
+                                      <button  type="button" class="btn btn-default" data-dir="dwn">
+                                        <span class="glyphicon glyphicon-minus">
+                                          <i class="fa fa-minus" aria-hidden="true"></i>
+                                        </span>
+                                      </button>
+                                    </span>
+                                    <input data-service-title="<?=$service->getServiceTitle()?>" data-machine-title="<?=$machine->getMachineTitle()?>" data-service-id="<?=$detailService->getId()?>" data-power="<?=$detailService->getServicesPower()?>" data-service-count="" type="text" class="form-control text-center service-detail" data-service-cost="<?=$detailService->getServicesCost()?>" id="" value="0">
+                                    <span class="input-group-btn">
+                                      <button type="button"  class="btn btn-default" data-dir="up">
+                                        <span class="glyphicon glyphicon-plus">
+                                          <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </span>
+                                      </button>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                          <?php }?>
                             </div>
                           </div>
-                              <button id="booking-next" class="gs-button" disabled="disabled">Book</button>
+                        </li>
+                        <?php }?>
+                               
+                     </ul>
+                     <?php }?>
+                     <bf-services-summary>
+                        <section class="booking-panel">
+                          <div class="summary">
+                          </div>
+                          <div style="text-align: right">
+                            <span class="total-cost currency"></span>
+                            <button  type="button" id="" class="gs-button booking-next" disabled="disabled">Book</button>
+                          </div>
                         </section>
                      </bf-services-summary>
 
-  <!-- Modal -->
-  <table class="w3-table ng-hide" id="booking-temp-table">
-    <tr>
-      <td>
-        <select class="booking" class="required" >
-          <option>100</option>
-          <option>200</option>
-          <option>300</option>
-        </select>
-      </td>
-      <td>
-        <div class="quantity" data-init="none">
-          <input type="number" class="amount required" min="1" max="9" step="1" value="1">
-        </div>
-      </td>
-      <td>
-        <p class="cost">100</p>
-      </td>
-    </tr>
-  </table>
-  <div class="modal fade" role="dialog" id="booking-machine" tabindex="-1" role="dialog" aria-labelledby="booking-title">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="booking-title" data-service="">Đặt dịch vụ</h4>
-        </div>
-        <div class="modal-body">
-          <form id="booking-form" data-service="">
-            <table class="w3-table" id="booking-table">
-              <thead>
-              <tr>
-                <th>Công suất </th>
-                <th>Số lượng </th>
-                <th>Đơn giá</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-            </table>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" style="margin-left: 40px" id="booking-add-row">Thêm </button>
-          <button type="button" class="btn btn-primary" style="margin-left: 40px" id="booking-accept" data-tile="">Đồng ý  </button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 
 
                   </div>
@@ -150,48 +108,26 @@
                      </bf-appointment-header>
                   </div>
                   <div class="booking-flow-content cell">
-                     <form name="addressForm" class="gs-form ng-pristine ng-invalid ng-invalid-required" novalidate="" autocomplete="off">
+                     <div class="gs-form ng-pristine ng-invalid ng-invalid-required form-location" novalidate="" autocomplete="off">
                         <label class="gs-label">Địa điểm của bạn ?</label>
                         <div class="gs-formatted-address">
-                           <input force-selection="true" googleplace="" bind="address" type="text" name="fullAddress" placeholder="Nhập địa chỉ của bạn " ng-model="address.formatted" class="street gs-textbox ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required" required="" autocomplete="off">
+                           <input force-selection="true" googleplace="" bind="address" type="text" name="fullAddress" placeholder="Nhập địa chỉ của bạn " id="booking-address" class="street gs-textbox ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required" required="" autocomplete="on" value="385 Trần Hưng Đạo, Ho Chi Minh City, Ho Chi Minh">
                            <i class="gs-icon fa fa-map-marker" aria-hidden="true"></i>
+                           <input type="hidden" id="booking-latitude" name="lattitude" value="10.7602476"/>
+                           <input type="hidden" id="booking-longitude" name="longitude" value="106.68894369999998"/>
                         </div>
                         
                         <bf-address-tags>
                            <div class="address-type-fields">
                               <label class="gs-label">Vị trí này là?</label>
                               <div class="gs-radio-buttons">
-                                 <!-- ngRepeat: addressType in ADDRESS_TYPES -->
+                                 <?php foreach ($this->locations as $location) {?>
                                  <div class="gs-radio ng-scope" ng-repeat="addressType in ADDRESS_TYPES">
-                                    <input type="radio" id="addressTypes_0" name="addressType" ng-model="state.addressType" ng-value="addressType" ng-click="dispatch(actionCreators.setAddressType(address, addressType, userInfo, state.addressId))" class="ng-pristine ng-untouched ng-valid" value="Home">
-                                    <label for="addressTypes_0" class="ng-binding">Nhà riêng </label>
+                                    <input type="radio" id="addressTypes_<?=$location->getId()?>" name="type_location" class="ng-pristine ng-untouched ng-valid" value="<?=$location->getId()?>">
+                                    <label for="addressTypes_<?=$location->getId()?>" class="ng-binding"><?=$location->getLocationTitle()?></label>
                                  </div>
-                                 <!-- end ngRepeat: addressType in ADDRESS_TYPES -->
-                                 <div class="gs-radio ng-scope" ng-repeat="addressType in ADDRESS_TYPES">
-                                    <input type="radio" id="addressTypes_1" name="addressType" ng-model="state.addressType" ng-value="addressType" ng-click="dispatch(actionCreators.setAddressType(address, addressType, userInfo, state.addressId))" class="ng-pristine ng-untouched ng-valid" value="Hotel">
-                                    <label for="addressTypes_1" class="ng-binding">Văn phòng</label>
-                                 </div>
-                                 <!-- end ngRepeat: addressType in ADDRESS_TYPES -->
-                                 <div class="gs-radio ng-scope" ng-repeat="addressType in ADDRESS_TYPES">
-                                    <input type="radio" id="addressTypes_2" name="addressType" ng-model="state.addressType" ng-value="addressType" ng-click="dispatch(actionCreators.setAddressType(address, addressType, userInfo, state.addressId))" class="ng-pristine ng-untouched ng-valid" value="Office">
-                                    <label for="addressTypes_2" class="ng-binding">Nhà hàng</label>
-                                 </div>
-                                 <!-- end ngRepeat: addressType in ADDRESS_TYPES -->
-                                 <div class="gs-radio ng-scope" ng-repeat="addressType in ADDRESS_TYPES">
-                                    <input type="radio" id="addressTypes_3" name="addressType" ng-model="state.addressType" ng-value="addressType" ng-click="dispatch(actionCreators.setAddressType(address, addressType, userInfo, state.addressId))" class="ng-pristine ng-untouched ng-valid" value="Other">
-                                    <label for="addressTypes_3" class="ng-binding">Căn hộ chung cư</label>
-                                 </div>
-                                 <!-- end ngRepeat: addressType in ADDRESS_TYPES -->
-                                 <div class="gs-radio ng-scope" ng-repeat="addressType in ADDRESS_TYPES">
-                                    <input type="radio" id="addressTypes_3" name="addressType" ng-model="state.addressType" ng-value="addressType" ng-click="dispatch(actionCreators.setAddressType(address, addressType, userInfo, state.addressId))" class="ng-pristine ng-untouched ng-valid" value="Other">
-                                    <label for="addressTypes_3" class="ng-binding">Cửa hàng tiện ích</label>
-                                 </div>
-                                 <div class="gs-radio ng-scope" ng-repeat="addressType in ADDRESS_TYPES">
-                                    <input type="radio" id="addressTypes_3" name="addressType" ng-model="state.addressType" ng-value="addressType" ng-click="dispatch(actionCreators.setAddressType(address, addressType, userInfo, state.addressId))" class="ng-pristine ng-untouched ng-valid" value="Other">
-                                    <label for="addressTypes_3" class="ng-binding">Khác</label>
-                                 </div>
+                                 <?php }?>
                               </div>
-                              
                            </div>
                         </bf-address-tags>
                         <label class="gs-label">Thời gian?</label>
@@ -200,19 +136,14 @@
                           <i class="gs-icon fa fa-calendar" aria-hidden="true"></i>
                         </div>
                         
-                        <button type="submit" ng-click="submitted=true" class="address-button gs-button" ng-class="{working: isWorking()}" style="">Tiếp tục </button>
-                     </form>
+                        <button type="button" class="address-button gs-button booking-next" style="">Tiếp tục </button>
+                     </div>
                      <bf-order-summary>
                         <div class="order-summary">
                            <h2 class="order-title">Các dịch vụ đã đặt</h2>
                            <ul class="order-services">
-                            <li class="ng-scope" style="">
-                              <span class="order-service ng-binding">blowout</span>
-                              <span class="order-price ng-binding">$50.00</span>
-                              <!-- ngIf: orderItem.addOnServices -->
-                            </li>
                             <li class="edit">
-                               <a href="javascript:void(0)">Edit</a>
+                               <a href="javascript:void(0)">Chỉnh sửa </a>
                             </li>
                            </ul>
                         </div>
@@ -221,14 +152,31 @@
                </div>
             </div>
          </section>
+
          <!-- STEP 3 -->
-         <!-- ngIf: state.isMode(MODES.SIGN_IN) -->
-         <!-- ngIf: state.isMode(MODES.REGISTER) -->
-         <!-- ngIf: state.isMode(MODES.FORGOT_PASSWORD) -->
-         <!-- STEP 4 -->
-         <!-- ngIf: state.isMode(MODES.PAYMENT) -->
-         <!-- ngIf: state.isMode(MODES.ADD_PAYMENT_METHOD) -->
-         <!-- ngIf: state.isMode(MODES.CONFIRMATION) -->
+         <h3>step 3</h3>
+         <section class="booking-flow-section booking-flow-authentication" style="">
+          <div class="grid-container-full">
+            <div class="col-4-8 grid">
+              <div class="booking-flow-steps cell">
+                     <bf-appointment-header>
+                        <a href="/" class="logo-link">
+                        <h2>VAPOR</h2>
+                        </a>
+                        <div class="step-details ng-binding">Bước 3 - 4</div>
+                        <h1 class="booking-flow-title">Đăng ký để tiếp tục đặt hàng.</h1>
+                        
+                     </bf-appointment-header>
+                  </div>
+              <div class="booking-flow-content cell">
+                <h3>login</h3>
+                <?php echo $this->action('login', 'authenticate', 'application', array('embed' => true, 'hidden' => false))?>
+                <h3>register</h3>
+                <?php echo $this->action('register', 'authenticate', 'application', array('embed' => true, 'hidden' => true))?>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
       <!-- ngIf: showDebugger && state -->
    </bf-booking-flow>

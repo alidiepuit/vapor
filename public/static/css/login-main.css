@@ -328,6 +328,10 @@ a {
     margin-left: auto;
     margin-right: auto;
     padding-top: 1.2em;
+    text-align: left;
+    display: inline-flex;
+    flex-direction: column;
+    width: 100%;
 }
 .btn-default {
     padding: .6em .95em;
@@ -337,24 +341,26 @@ a {
     font-size: 1.6em;
 }
 .btn-facebook {
-    background-color: #3b5998;
-    border: 1px solid #3b5998;
-    color: #fff;
+    background-color: #3b5998!important;
+    border: 1px solid #3b5998!important;
+    color: #fff!important;
     padding: 10px 10px;
+    font-size: 1em!important;
 }
 .btn-facebook a:visited {
-    color: #0bb8e3;
+    color: #0bb8e3!important;
     text-decoration: none;
 }
 .btn-google {
-    background-color: #DE5E55;
-    border: 1px solid #DE5E55;
-    color: #fff;
+    background-color: #DE5E55!important;
+    border: 1px solid #DE5E55!important;
+    color: #fff!important;
     padding: 10px 10px;
     margin-top: 10px;
+    font-size: 1em!important;
 }
 .btn-google a:visited {
-    color: #DE5E55;
+    color: #DE5E55!important;
     text-decoration: none;
 }
 .or-line {
@@ -367,4 +373,9 @@ a {
 }
 .error {
   color: red;
+}
+.form-fields-wrapper a {
+    font-size: 15px;
+    width: 300px;
+    margin: 0 auto;
 }

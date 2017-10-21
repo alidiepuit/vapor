@@ -20,6 +20,7 @@ class AuthenticateController extends Zend_Controller_Action
         $request = $this->getRequest();
         $form    = new Application_Form_Signin();
 
+
         $data = $request->getPost();
 
         $typeLogin = isset($data["type"]) ? $data["type"] : "email";
@@ -77,6 +78,7 @@ class AuthenticateController extends Zend_Controller_Action
         $request = $this->getRequest();
         $form    = new Application_Form_Register();
 
+        // pr($request->getParams());
         if ($this->getRequest()->isPost()) {
             if ($form->isValid($request->getPost())) {
                 $modelUser = new Application_Model_User($request->getPost());
