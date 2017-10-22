@@ -110,8 +110,8 @@ class Application_Model_BookingService extends Application_Model_BaseModel_BaseM
       $api = sprintf($formatUrlAPI, $latitudeFrom, $longitudeFrom, $destination, $key);
       // pr($api);
 
-      // $query = file_get_contents($api);
-      $query = '{ "destination_addresses" : [ "72 Tản Đà, phường 11, Quận 5, Hồ Chí Minh, Vietnam" ], "origin_addresses" : [ "373 Trần Hưng Đạo, Cầu Kho, Quận 1, Hồ Chí Minh, Vietnam" ], "rows" : [ { "elements" : [ { "distance" : { "text" : "4.4 km", "value" : 840 }, "duration" : { "text" : "10 mins", "value" : 624 }, "status" : "OK" } ] } ], "status" : "OK" }';
+      $query = file_get_contents($api);
+      // $query = '{ "destination_addresses" : [ "72 Tản Đà, phường 11, Quận 5, Hồ Chí Minh, Vietnam" ], "origin_addresses" : [ "373 Trần Hưng Đạo, Cầu Kho, Quận 1, Hồ Chí Minh, Vietnam" ], "rows" : [ { "elements" : [ { "distance" : { "text" : "4.4 km", "value" : 840 }, "duration" : { "text" : "10 mins", "value" : 624 }, "status" : "OK" } ] } ], "status" : "OK" }';
       // echo $query; die;
 
       $query = json_decode($query, true);

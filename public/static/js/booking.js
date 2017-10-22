@@ -175,14 +175,14 @@ jQuery(document).ready(function( $ ) {
     });
 
     // Advanced usage
-    // $("#booking-address").placepicker({
-    //     placeChanged: function(place) {
-    //         var location = this.getLocation()
-    //         console.log("place changed: ", place.formatted_address, location);
-    //         $('#booking-latitude').val(location.latitude);
-    //         $('#booking-longitude').val(location.longitude);
-    //     }
-    // });
+    $("#booking-address").placepicker({
+        placeChanged: function(place) {
+            var location = this.getLocation()
+            console.log("place changed: ", place.formatted_address, location);
+            $('#booking-latitude').val(location.latitude);
+            $('#booking-longitude').val(location.longitude);
+        }
+    });
 
     
     $('#booking-location').submit(function(event) {
