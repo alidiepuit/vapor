@@ -1,4 +1,5 @@
-<div class="page-container">
+<section id="section-register">
+<div class="page-container authenticate">
    <div class="grid-container">
      <div class="grid">
        <div ng-controller="LoginController" class="signin-register-wrap cell ng-scope">
@@ -8,14 +9,14 @@
                <div class="login-form-wrap ng-scope">
                   <div class="error"><?= $this->error ? '<p class="error">'.$this->error.'</p>' : "" ?></div>
                <form accept-charset="UTF-8" action="/dang-ky.html" class="ng-pristine ng-valid" name="registerForm" id="form-register" method="post">
-                  <input name="<?= $this->form->getElements()['csrf']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf']->getValue()?>">
+                  <input name="<?= $this->form->getElements()['csrf_register']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf_register']->getValue()?>">
                   <div class="form-fields-wrapper">
                      <label class="no-acc-txt mar-btm-10">ĐỊA CHỈ EMAIL </label>
                      <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="username" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" name="<?=$this->form->getElements()['user_name']->getName()?>" value="<?=$this->form->getElements()['user_name']->getValue()?>">
                   </div>
                   <div class="form-fields-wrapper">
                      <label class="no-acc-txt mar-btm-10">MẬT KHẨU </label>
-                     <input type="password" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="password" placeholder="MẬT KHẨU" onfocus="this.placeholder = ''" onblur="this.placeholder = 'MẬT KHẨU'" name="<?= $this->form->getElements()['user_password']->getName()?>">
+                     <input type="password" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="register_password" placeholder="MẬT KHẨU" onfocus="this.placeholder = ''" onblur="this.placeholder = 'MẬT KHẨU'" name="<?= $this->form->getElements()['user_password']->getName()?>">
                   </div>
                   <div class="form-fields-wrapper">
                      <label class="no-acc-txt mar-btm-10">NHẬP LẠI MẬT KHẨU</label>
@@ -49,3 +50,4 @@
    </div>
 </div>
 </div>
+</section>

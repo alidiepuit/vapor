@@ -371,7 +371,7 @@ a {
 .fa.fa-facebook-square.fa-2, .fa.fa-google-plus-square.fa-2 {
     font-size: 2em;
 }
-.error {
+div.error, label.error {
   color: red;
 }
 .form-fields-wrapper a {

@@ -49,7 +49,7 @@ class Application_Form_Register extends Zend_Form
         ));
 
         // Add some CSRF protection
-        $this->addElement('hash', 'csrf', array(
+        $this->addElement('hash', 'csrf_register', array(
             'salt' => Zend_Registry::get('configs')->FORM_SALT,
         ));
     }

@@ -18,6 +18,11 @@
   <title>Vapor</title>
   
   <?php echo $this->partial('partials/seo.phtml')?>
+
+  <script>
+    <?php $user = $this->authen();?>
+    var USER_ID = '<?=$user ? $user->getId() : ''?>';
+  </script>
 </head>
 <body class="">
   <?= $this->partial('partials/social.phtml');?>

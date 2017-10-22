@@ -1,4 +1,5 @@
-<div class="page-container">
+<section id="section-login">
+<div class="page-container authenticate">
    <div class="grid-container">
      <div class="grid">
        <div ng-controller="LoginController" class="signin-register-wrap cell ng-scope">
@@ -9,7 +10,7 @@
                   <div class="error"><?= $this->error ? '<p class="error">'.$this->error.'</p>' : "" ?></div>
                  <form name="loginForm" class="ng-pristine ng-valid " action="/dang-nhap.html" method="POST">
                   <input name="type" type="hidden" value="email">
-                  <input name="<?= $this->form->getElements()['csrf']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf']->getValue()?>">
+                  <input name="<?= $this->form->getElements()['csrf_login']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf_login']->getValue()?>">
                   <div class="form-fields-wrapper">
                    <label class="no-acc-txt mar-btm-10">Email </label>
                    <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="user_name" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" name="<?=$this->form->getElements()['user_name']->getName()?>">
@@ -34,3 +35,4 @@
      </div>
    </div>
 </div>
+</section>

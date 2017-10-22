@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/bootstrap-datetimepicker.min.css")?>">
 
 <div class="page-container">
-   <bf-booking-flow class="bf-booking-flow">
-      <div class="booking-flow steps">
+   <bf-booking-flow class="bf-booking-flow ng-hide">
+      <div class="booking-flow steps" style="">
         <h3>step 1</h3>
          <section class="booking-flow-section booking-flow-services" style="">
             <div class="grid-container-full">
@@ -81,6 +81,9 @@
                             <span class="total-cost currency"></span>
                             <button  type="button" id="" class="gs-button booking-next" disabled="disabled">Book</button>
                           </div>
+                          <div>
+                            <span style="color:red;">Tiến hành bước tiếp theo, nhập địa điểm và thời gian để có thể được giảm 10% - 35%</span>
+                          </div>
                         </section>
                      </bf-services-summary>
 
@@ -108,13 +111,29 @@
                      </bf-appointment-header>
                   </div>
                   <div class="booking-flow-content cell">
+                    <form id="booking-location" data-valid-location="0">
+                      <div id="booking-location-error" class="error"></div>
+                      <input type="hidden" id="booking-service-amount" name="amount"/>
+                      <input type="hidden" id="booking-data" name="booking_data"/>
                      <div class="gs-form ng-pristine ng-invalid ng-invalid-required form-location" novalidate="" autocomplete="off">
                         <label class="gs-label">Địa điểm của bạn ?</label>
                         <div class="gs-formatted-address">
-                           <input force-selection="true" googleplace="" bind="address" type="text" name="fullAddress" placeholder="Nhập địa chỉ của bạn " id="booking-address" class="street gs-textbox ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required" required="" autocomplete="on" value="385 Trần Hưng Đạo, Ho Chi Minh City, Ho Chi Minh">
+                           <input force-selection="true" googleplace="" bind="address" type="text" name="full_address" placeholder="Nhập địa chỉ của bạn " id="booking-address" class="street gs-textbox ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required required" required="" autocomplete="on" value="385 Trần Hưng Đạo, Ho Chi Minh City, Ho Chi Minh">
                            <i class="gs-icon fa fa-map-marker" aria-hidden="true"></i>
-                           <input type="hidden" id="booking-latitude" name="lattitude" value="10.7602476"/>
-                           <input type="hidden" id="booking-longitude" name="longitude" value="106.68894369999998"/>
+                           <input class="" type="hidden" id="booking-latitude" name="lattitude" value="10.7602476"/>
+                           <input class="" type="hidden" id="booking-longitude" name="longitude" value="106.68894369999998"/>
+                        </div>
+                        <div class="gs-address-summary" style="display: none;">
+                          <ul class="details">
+                            
+                          </ul>
+                          <gs-icon name="location" class="ng-isolate-scope gs-icon">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                          </gs-icon>
+                          <gs-icon name="pencil" class="ng-isolate-scope gs-icon" id="booking-location-edit">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                          </gs-icon>
+                          
                         </div>
                         
                         <bf-address-tags>
@@ -123,21 +142,25 @@
                               <div class="gs-radio-buttons">
                                  <?php foreach ($this->locations as $location) {?>
                                  <div class="gs-radio ng-scope" ng-repeat="addressType in ADDRESS_TYPES">
-                                    <input type="radio" id="addressTypes_<?=$location->getId()?>" name="type_location" class="ng-pristine ng-untouched ng-valid" value="<?=$location->getId()?>">
+                                    <input type="radio" id="addressTypes_<?=$location->getId()?>" name="type_location" class="ng-pristine ng-untouched ng-valid required" value="<?=$location->getId()?>">
                                     <label for="addressTypes_<?=$location->getId()?>" class="ng-binding"><?=$location->getLocationTitle()?></label>
                                  </div>
                                  <?php }?>
                               </div>
+                              <div id="booking-type-location-error" class="error"></div>
                            </div>
                         </bf-address-tags>
                         <label class="gs-label">Thời gian?</label>
                         <div class="gs-formatted-address">
-                          <input id="datetimepicker" type="text" class="street gs-textbox ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required">
+                          <input id="datetimepicker" type="text" class="street gs-textbox ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required required" name="datetime">
                           <i class="gs-icon fa fa-calendar" aria-hidden="true"></i>
                         </div>
-                        
-                        <button type="button" class="address-button gs-button booking-next" style="">Tiếp tục </button>
+                        <div id="booking-discount" style="color:red;">
+                          
+                        </div>
+                        <button type="submit" class="address-button gs-button" style="">Done </button>
                      </div>
+                    </form>
                      <bf-order-summary>
                         <div class="order-summary">
                            <h2 class="order-title">Các dịch vụ đã đặt</h2>
@@ -168,7 +191,7 @@
                         
                      </bf-appointment-header>
                   </div>
-              <div class="booking-flow-content cell">
+              <div id="booking-flow-authentication" class="booking-flow-content cell authenticate">
                 <h3>login</h3>
                 <?php echo $this->action('login', 'authenticate', 'application', array('embed' => true, 'hidden' => false))?>
                 <h3>register</h3>
@@ -177,6 +200,57 @@
             </div>
           </div>
         </section>
+
+        <!-- STEP 4 -->
+        <h3>step 4</h3>
+        <section class="booking-flow-section booking-flow-summary booking-flow-payment">
+          <div class="grid-container-full">
+            <div class="col-4-8 grid">
+              <div class="booking-flow-steps cell">
+                     <bf-appointment-header>
+                        <a href="/" class="logo-link">
+                        <h2>VAPOR</h2>
+                        </a>
+                        <div class="step-details ng-binding">Bước 4 - 4</div>
+                        <h1 class="booking-flow-title">Xác nhận thông tin đặt hàng.</h1>
+                        
+                     </bf-appointment-header>
+                  </div>
+              <div class="booking-flow-content cell summary">
+                <bf-appointment-summary>
+                  <div class="appointment-summary">
+                    <h2 class="booking-time">
+                      
+                    </h2>
+                    <ul class="details">
+                    </ul>
+                    <hr>
+                    <ul class="prices">
+                      
+                      <li class="total">
+                        <span class="item">Tổng </span>
+                        <span class="price ng-binding ng-scope currency" ng-switch-default=""></span>
+                      </li>
+                    </ul>
+                  </div>
+                  </bf-appointment-summary>
+                  <button type="submit" class="book-now gs-button">Book Now</button>
+              </div>
+              <div class="booking-flow-content cell booking-success">
+                <bf-appointment-summary>
+                  <div class="appointment-summary">
+                    <h2 class="">
+                      Đặt dịch vụ thành công. Xem lịch sử đặt dịch vụ <a href="/user">tại đây</a>.
+                    </h2>
+                    
+                  </div>
+                  </bf-appointment-summary>
+                  <button type="submit" class="book-now gs-button">Book Now</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
       <!-- ngIf: showDebugger && state -->
    </bf-booking-flow>

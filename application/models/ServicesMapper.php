@@ -32,6 +32,38 @@ class Application_Model_ServicesMapper extends Application_Model_BaseModel_BaseM
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
+
+    public function getService($ids)
+    {
+        try {
+            // pr($listIds);
+            $select = $this->getDbTable()->select()
+                    ->from('fe_services')
+                    ->joinLeft('fe_type_services', 'fe_type_services.id = fe_services.services_type', 
+                        array('typeservice_title','typeservice_slug'))
+                    ->joinLeft('fe_type_machines', 'fe_type_machines.id = fe_services.services_typemachine',
+                        array('typemachine_title','typemachine_image'))
+                    ->where('fe_services.id IN (?)', $ids) 
+                    ->setIntegrityCheck(false);
+            
+            // echo $select;die;
+            $services = $this->getDbTable()->fetchAll($select);
+            $services = $services ? $services->toArray() : Null;
+            // pr($services);
+            
+            $res = array();
+            foreach ($services as $service) {
+                // pr($service);
+                $res[] = new Application_Model_Service_DetailService($service);
+            }
+            
+            // pr($res);
+            return $res;
+        } catch (Exception $e) {
+            pr($e);
+        }
+
+    }
  
     public function getServices()
     {

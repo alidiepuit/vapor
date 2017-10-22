@@ -1487,8 +1487,9 @@ screen and (min-width: 64em) {
 screen and (min-width: 48em) {
     .booking-flow-services .booking-panel {
         padding: 20px;
-        left: 33.33333%;
-        width: 66.66667%
+        left: auto;
+        right: 0;
+        width: 70%;
     }
     .booking-flow-services .booking-panel>div {
         display: -webkit-flex;
@@ -2128,4 +2129,13 @@ max-height: 300px;
 }
 .grid-container-full .cell {
     min-height: 1000px;
+}
+.booking-flow-summary .gs-button {
+    margin-top: 20px;
+    width: 200px;
+}
+.booking-flow-summary .appointment-summary {
+    width: auto;
+    float: none;
+    position: inherit;
 }

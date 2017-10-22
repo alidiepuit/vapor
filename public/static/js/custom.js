@@ -55,7 +55,7 @@ jQuery(document).ready(function( $ ) {
                 email: true
             },
             confirm_password: {
-                equalTo: "#password",
+                equalTo: "#register_password",
             },
             user_display_name: {
                 required: true,

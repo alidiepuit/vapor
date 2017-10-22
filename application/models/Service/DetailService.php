@@ -5,6 +5,7 @@ class Application_Model_Service_DetailService extends Application_Model_BaseMode
     protected $_servicesTitle;
     protected $_servicesImage;
     protected $_servicesTypeMachine;
+    protected $_servicesTypeMachineTitle;
     protected $_servicesType;
     protected $_servicesPower;
     protected $_servicesCost;
@@ -78,7 +79,19 @@ class Application_Model_Service_DetailService extends Application_Model_BaseMode
  
     public function setTypemachineTitle($text)
     {
-        $this->_servicesTypeMachine = (string) $text;
+        $this->_servicesTypeMachineTitle = (string) $text;
+        return $this;
+    }
+ 
+    public function getServicesTypeMachineTitle()
+    {
+        return $this->_servicesTypeMachineTitle;
+    }
+
+ 
+    public function setServicesTypemachine($text)
+    {
+        $this->_servicesTypeMachine = (int) $text;
         return $this;
     }
  

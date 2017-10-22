@@ -5,14 +5,29 @@ class AuthenticateController extends Zend_Controller_Action
 
     public function init()
     {
+        $request = $this->getRequest();
+        $params = $request->getParams();
         $namespace = new Zend_Session_Namespace('Zend_Auth');
-        if (isset($namespace->user)) {
+        $embed = isset($params['embed']) ? $params['embed'] : false;
+        if (!$embed && !$request->isXmlHttpRequest() && isset($namespace->user)) {
             $this->_redirect('/');
         }
     }
 
     public function indexAction()
     {
+        $user = Application_Model_Authen::getInstance()->getCurrentUser();
+        
+        if ($user->getId()) {
+            echo json_encode(array('success' => true, 
+                'error' => NULL,
+            ));
+            $this->_helper->layout()->disableLayout();
+            $this->_helper->viewRenderer->setNoRender(true);
+            return;
+        }
+        throw new Exception("Error Processing Request", 1);
+        
     }
 
     public function loginAction()
@@ -20,14 +35,13 @@ class AuthenticateController extends Zend_Controller_Action
         $request = $this->getRequest();
         $form    = new Application_Form_Signin();
 
-
         $data = $request->getPost();
 
         $typeLogin = isset($data["type"]) ? $data["type"] : "email";
         $isValid = false;
 
         $isLoginSocial = Application_Model_Authen::getInstance()->isValidAuthenSocial($typeLogin);
-        $isResponseJSON = $isLoginSocial;
+        $isResponseJSON = $isLoginSocial || $request->isXmlHttpRequest();
 
         try {
             if ($isLoginSocial) {
@@ -56,8 +70,15 @@ class AuthenticateController extends Zend_Controller_Action
             $form->populate($data);
         }
 
+        $form->getElements()['csrf_login']->initCsrfToken();
+
         if ($isResponseJSON) {
-            echo json_encode(array('success' => $isValid, 'error' => $this->view->error));
+            $user = Application_Model_Authen::getInstance()->getCurrentUser();
+            echo json_encode(array('success' => $isValid, 
+                'error' => $this->view->error,
+                'token' => $form->getElements()['csrf_login']->getValue(),
+                'userId' => $user ? $user->getId() : '',
+            ));
             $this->_helper->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
             return;
@@ -68,8 +89,6 @@ class AuthenticateController extends Zend_Controller_Action
             return;
         }
 
-
-        $form->getElements()['csrf']->initCsrfToken();
         $this->view->form = $form;
     }
 
@@ -77,6 +96,9 @@ class AuthenticateController extends Zend_Controller_Action
     {
         $request = $this->getRequest();
         $form    = new Application_Form_Register();
+
+        $isResponseJSON = $request->isXmlHttpRequest();
+        $isValid = false;
 
         // pr($request->getParams());
         if ($this->getRequest()->isPost()) {
@@ -91,9 +113,12 @@ class AuthenticateController extends Zend_Controller_Action
 
                     $result = Application_Model_Authen::getInstance()->register($modelUser);
                     // pr($result);
-                    if ($result) {
+                    if (!$isResponseJSON && $result) {
                         $this->_redirect('/');
+                        return;
                     }
+
+                    $isValid = true;
                 } catch (Exception $e) {
                     // pr($e->getCode());
                     $this->view->error = $e->getMessage();
@@ -112,7 +137,20 @@ class AuthenticateController extends Zend_Controller_Action
             }
         }
 
-        $form->getElements()['csrf']->initCsrfToken();
+        $form->getElements()['csrf_register']->initCsrfToken();
+
+        if ($isResponseJSON) {
+            $user = Application_Model_Authen::getInstance()->getCurrentUser();
+            echo json_encode(array('success' => $isValid, 
+                'error' => $this->view->error,
+                'token' => $form->getElements()['csrf_register']->getValue(),
+                'userId' => $user ? $user->getId() : '',
+            ));
+            $this->_helper->layout()->disableLayout();
+            $this->_helper->viewRenderer->setNoRender(true);
+            return;
+        }
+
         $this->view->form = $form;
     }
 

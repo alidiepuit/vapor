@@ -6,7 +6,7 @@ class UserController extends Zend_Controller_Action
     public function init()
     {
         $user = Application_Model_Authen::getInstance()->getCurrentUser();
-        if (!$user) {
+        if (!$user || !$user->getId()) {
             $this->redirect('/');
             return;
         }
@@ -14,12 +14,8 @@ class UserController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $userId = $this->getParam('userId', '');
         $user = Application_Model_Authen::getInstance()->getCurrentUser();
-        if ($user->getId() != $userId) {
-            $this->redirect('/');
-            return;
-        }
+        $userId = $user->getId();
         // pr($userId);
     }
 }
