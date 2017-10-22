@@ -17,5 +17,10 @@ class UserController extends Zend_Controller_Action
         $user = Application_Model_Authen::getInstance()->getCurrentUser();
         $userId = $user->getId();
         // pr($userId);
+
+        $services = Application_Model_GroupOrderMapper::getInstance()->getHistoryBooking($userId);
+        // pr($services);
+
+        $this->view->history = $services;
     }
 }

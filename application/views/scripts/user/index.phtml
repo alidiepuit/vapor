@@ -12,6 +12,7 @@
       <div class="account-page-main-content-block">
       <div class="ng-scope">
          <div class="row upcoming-bookings-section" id="upcoming-bookings-section">
+          <?php if (count($this->history['comming'])) {?>
             <div class="">
                <div class="small-12 columns">
                   <div class="account-info-slab">
@@ -23,29 +24,78 @@
                      </div>
                   </div>
                </div>
+               <?php foreach ($this->history['comming'] as $row) {?>
+               
                <div class="small-12 columns">
                   <div class="account-info-slab">
                      <div class="booking-details-column">
-                      Thời gian
+                      <?= $row->getGrouporderDatetime()?>
                      </div>
                      <div class="booking-details-column">
-                      Chi tiết 
+                      <ul class="prices">
+                        <li><span class="title">Số tiền: </span><span class="detail"><?= $row->getGrouporderCost()?></span></li>
+                        <li><span class="title">Giảm giá:</span><span class="detail"><?= $row->getGrouporderDiscount()?></span></li>
+                      </ul>
                      </div>
                   </div>
                </div>
+               <?php }?>
             </div>
-            
-         </div>
-         <div class="row previous-bookings-section ng-hide" id="previous-bookings-section">
+            <?php } else {?>
             <div class="">
                <div class="small-12 columns">
                   <div class="account-info-slab">
                      <img alt="Account-empty" class="push-bot" src="<?php echo $this->baseUrl('/static/images/empty-history.png')?>">
-                     <p>You don't have any past bookings</p>
+                     <p>You don't have any comming bookings</p>
                      
                   </div>
                </div>
             </div>
+            
+            <?php }?>
+         </div>
+         <div class="row previous-bookings-section ng-hide" id="previous-bookings-section">
+            <?php if (count($this->history['pass'])) {?>
+            <div class="">
+               <div class="small-12 columns">
+                  <div class="account-info-slab">
+                     <div class="booking-details-column">
+                      Thời gian
+                     </div>
+                     <div class="booking-details-column">
+                      Chi tiết 
+                     </div>
+                  </div>
+               </div>
+               <?php foreach ($this->history['pass'] as $row) {?>
+               
+               <div class="small-12 columns">
+                  <div class="account-info-slab">
+                     <div class="booking-details-column">
+                      <?= $row->getGrouporderDatetime()?>
+                     </div>
+                     <div class="booking-details-column">
+                      <ul class="prices">
+                        <li><span class="title">Số tiền: </span><span class="detail"><?= $row->getGrouporderCost()?></span></li>
+                        <li><span class="title">Giảm giá:</span><span class="detail"><?= $row->getGrouporderDiscount()?></span></li>
+                      </ul>
+                     </div>
+                  </div>
+               </div>
+               <?php }?>
+            </div>
+            <?php } else {?>
+            <div class="">
+               <div class="small-12 columns">
+                  <div class="account-info-slab">
+                     <img alt="Account-empty" class="push-bot" src="<?php echo $this->baseUrl('/static/images/empty-history.png')?>">
+                     <p>You don't have any pass bookings</p>
+                     
+                  </div>
+               </div>
+            </div>
+            
+            <?php }?>
             
          </div>
       </div>

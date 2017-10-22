@@ -38,4 +38,39 @@ class Application_Model_GroupOrderMapper extends Application_Model_BaseModel_Bas
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }
+
+    public function getHistoryBooking($userID) 
+    {
+        try {
+            // pr($listIds);
+            $select = $this->getDbTable()->select()
+                    ->from('frontend_grouporders')
+                    ->where('grouporder_user = ?', $userID);
+            
+            // echo $select;die;
+            $services = $this->getDbTable()->fetchAll($select);
+            $services = $services ? $services->toArray() : Null;
+            // pr($services);
+            
+            $res = array(
+                'comming' => array(),
+                'pass' => array(),
+            );
+            foreach ($services as $service) {
+                // pr($service);
+                $order = new Application_Model_Order_GroupOrder($service);
+                // pr($order);
+                if ($order->isPass()) {
+                    $res['pass'][] = $order;
+                } else {
+                    $res['comming'][] = $order;
+                }
+            }
+            
+            // pr($res);
+            return $res;
+        } catch (Exception $e) {
+            pr($e);
+        }
+    }
 }

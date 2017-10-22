@@ -217,3 +217,23 @@ picture.participan {
 .content-post strong {
   font: initial;
 }
+
+/*
+////////////////
+// User
+////////////////
+*/
+#previous-and-upcoming-control .account-info-slab ul {
+  display: grid;
+}
+#previous-and-upcoming-control .account-info-slab ul li {
+  display: block;
+}
+#previous-and-upcoming-control .account-info-slab ul li span.title{
+  float:left;
+}
+#previous-and-upcoming-control .account-info-slab ul li span.detail{
+  float:right;
+}
+
+
