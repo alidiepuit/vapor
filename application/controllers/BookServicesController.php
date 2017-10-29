@@ -212,6 +212,11 @@ class BookServicesController extends Zend_Controller_Action
         // pr($cost);   
 
         ////////////////////
+        //code promotion //
+        ///////////////////
+        $codePromotion = $request->getParam('codePromotion', '');
+
+        ////////////////////
         //add order to DB //
         ///////////////////
         $groupOrder = new Application_Model_Order_GroupOrder(array(
@@ -226,6 +231,7 @@ class BookServicesController extends Zend_Controller_Action
             'grouporder_cost'           => $cost,
             'grouporder_discount'       => $dataBooking['discount'],
             'grouporder_tools'          => $dataTools,
+            'grouporder_code'           => $codePromotion,
         ));
         // pr($groupOrder);
         $groupOrderId = Application_Model_GroupOrderMapper::getInstance()->save($groupOrder);

@@ -13,6 +13,7 @@ class Application_Model_Order_GroupOrder extends Application_Model_BaseModel_Bas
   protected $_grouporderCost;
   protected $_grouporderDiscount;
   protected $_grouporderTools;
+  protected $_grouporderCode;
   protected $_grouporderStatus;
 
   public function setId($text)
@@ -156,6 +157,17 @@ class Application_Model_Order_GroupOrder extends Application_Model_BaseModel_Bas
   public function getGrouporderStatus()
   {
       return $this->_grouporderStatus;
+  }
+
+  public function setGrouporderCode($text)
+  {
+      $this->_grouporderCode = (string) $text;
+      return $this;
+  }
+
+  public function getGrouporderCode()
+  {
+      return $this->_grouporderCode;
   }
 
   public function isComming() {

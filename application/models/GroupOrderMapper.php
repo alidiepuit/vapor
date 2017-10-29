@@ -29,6 +29,7 @@ class Application_Model_GroupOrderMapper extends Application_Model_BaseModel_Bas
             'grouporder_cost'           => $obj->getGrouporderCost(),
             'grouporder_discount'       => $obj->getGrouporderDiscount(),
             'grouporder_tools'          => json_encode($obj->getGrouporderTools()),
+            'grouporder_code'           => $obj->getGrouporderCode(),
         );
  
         if (null === ($id = $obj->getId())) {

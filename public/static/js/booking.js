@@ -1,9 +1,13 @@
 $.fn.extend({
     formatCurrency: function(value) {
         var val = $.isNumeric(value) ? value.toString() : value;
-        this.html(parseFloat(val.replace(/,/g, ""))
+        if (val.length > 0) {
+            this.html(parseFloat(val.replace(/,/g, ""))
                     .toString()
                     .replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' VND');
+        } else {
+            this.html(0);
+        }
     }
 });
 
@@ -417,7 +421,8 @@ jQuery(document).ready(function( $ ) {
     $('.book-now').click(function(event) {
         event.preventDefault();
         var _this = this;
-        // $(this).prop('disabled', true);
+        $(this).prop('disabled', true);
+        bookingSummary.codePromotion = $('#code-promotion').val()
         $.ajax({
           url: '/book-services/book',
           type: 'post',
@@ -425,12 +430,12 @@ jQuery(document).ready(function( $ ) {
           data: bookingSummary,
           success: function(data) {
             if (data.success) {
-                $(_this).removeProp("disabled");
+                $(_this).hide();
                 bookingSummary = new Array();
                 $('.booking-flow-content.summary').fadeOut(300);
                 $('.booking-flow-content.booking-success').fadeIn(300);
             } else {
-                
+                $(_this).removeProp("disabled");
             }
           }
         });

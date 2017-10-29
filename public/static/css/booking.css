@@ -2203,3 +2203,6 @@ input[type=checkbox]:checked~.row-location {
 #service-adding-tool ul>li a {
     font-size: 14px;
 }
+input.promotion {
+    margin-left: 20px;
+}
