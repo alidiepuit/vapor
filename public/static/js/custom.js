@@ -180,7 +180,10 @@ jQuery(document).ready(function( $ ) {
     });
 
     $('#thamgia').on('click', function() {
-        window.location.replace("/tham-gia.html");
+        function goToRegisterVapor(){
+            window.location.replace("/tham-gia.html");
+        };
+        window.setTimeout(goToRegisterVapor, 500); 
     });
 
     

@@ -19,8 +19,13 @@ class BookServicesController extends Zend_Controller_Action
         $servicesRemoveSetup = Application_Model_ServicesMapper::getInstance()->getServicesRemoveSetup();
         $this->view->servicesRemoveSetup = $servicesRemoveSetup;
 
+        $servicesFix = Application_Model_ServicesMapper::getInstance()->getServicesFix();
+        $this->view->servicesFix = $servicesFix;
+        // pr($servicesFix);
+
         $serviceTool = Application_Model_ServiceToolMapper::getInstance()->getTools();
         $this->view->serviceTool = $serviceTool;
+        // pr($serviceTool);
 
         $locations = Application_Model_LocationMapper::getInstance()->getLocations();
         $this->view->locations = $locations;
@@ -143,14 +148,19 @@ class BookServicesController extends Zend_Controller_Action
             return;
         }
 
+        ///////////////////
+        //booking services//
+        ///////////////////
         $services = $request->getParam('services', '');
         
         $ids = array();
         $listAmount = array();
         foreach ($services as $service) {
-            $id = (int)$service['serviceId'];
-            $ids[] = $id;
-            $listAmount[$id] = (int)$service['serviceCount'];
+            $id = isset($service['serviceId']) ? (int)$service['serviceId'] : 0;
+            if ($id > 0) {
+                $ids[] = $id;
+                $listAmount[$id] = (int)$service['serviceCount'];
+            }
         }
 
         // pr($ids);
@@ -162,10 +172,48 @@ class BookServicesController extends Zend_Controller_Action
             $cost += $service->getServicesCost() * $listAmount[$service->getId()];
         }
 
+
+        ////////////////
+        //booking date//
+        ////////////////
         $date = date_create_from_format('d/m/Y H:i A', $dataBooking['datetime']);
         $dateBooking = date_format($date, 'Y-m-d H:i:s');
         // pr($dateBooking);
 
+        /////////////////
+        //booking tools//
+        /////////////////
+        $tools = $request->getParam('tools', '');
+        $ids = array();
+        $listAmountTool = array();
+        $dataTools = array();
+        // pr($tools);
+        if (is_array($tools) && count($tools) > 0) {
+            foreach ($tools as $tool) {
+                $id = isset($tool['toolId']) ? (int)$tool['toolId'] : 0;
+                if ($id > 0) {
+                    $ids[] = $id;
+                    $listAmountTool[$id] = (int)$tool['toolCount'];
+                }
+            }
+
+            $listTools = Application_Model_ServiceToolMapper::getInstance()->getToolsInList($ids);
+            
+            foreach ($listTools as $tool) {
+                $cost += $tool->getToolCost() * $listAmountTool[$tool->getId()];
+                $dataTools[] = array(
+                    'id' => $tool->getId(),
+                    'title' => $tool->getToolSlug(),
+                    'number' => $listAmountTool[$tool->getId()],
+                    'total' => $tool->getToolCost() * $listAmountTool[$tool->getId()],
+                );
+            }
+        }
+        // pr($cost);   
+
+        ////////////////////
+        //add order to DB //
+        ///////////////////
         $groupOrder = new Application_Model_Order_GroupOrder(array(
             'grouporder_location'       => $dataBooking['address'],
             'grouporder_datetime'       => $dateBooking,
@@ -177,6 +225,7 @@ class BookServicesController extends Zend_Controller_Action
             'grouporder_amount'         => $dataBooking['amount'],
             'grouporder_cost'           => $cost,
             'grouporder_discount'       => $dataBooking['discount'],
+            'grouporder_tools'          => $dataTools,
         ));
         // pr($groupOrder);
         $groupOrderId = Application_Model_GroupOrderMapper::getInstance()->save($groupOrder);

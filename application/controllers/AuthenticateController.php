@@ -85,7 +85,7 @@ class AuthenticateController extends Zend_Controller_Action
         }
 
         if ($isValid) {
-            $this->_redirect('/');
+            $this->_redirect('/user');
             return;
         }
 
@@ -114,7 +114,7 @@ class AuthenticateController extends Zend_Controller_Action
                     $result = Application_Model_Authen::getInstance()->register($modelUser);
                     // pr($result);
                     if (!$isResponseJSON && $result) {
-                        $this->_redirect('/');
+                        $this->_redirect('/user');
                         return;
                     }
 

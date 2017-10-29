@@ -32,6 +32,7 @@ var setCurrentIndex = function(idx) {
 }
 
 var bookingSummary = {};
+var dataTool = {};
 
 var initSummary = function() {
     dataBooking = new Array();
@@ -51,13 +52,9 @@ var initSummary = function() {
             });
             var toolId = $(v).data('tool-id') || 0;
             if (toolId > 0) {
-                dataBooking.push({
-                    'serviceTitle': $(v).data('service-title'),
-                    'machineTitle': $(v).data('machine-title'),
-                    'serviceId': $(v).data('service-id'),
-                    'serviceCount': count,
-                    'serviceTotalCost': cost*count,
-                    'power': $(v).data('power'),
+                dataTool.push({
+                    'toolId': toolId,
+                    'toolCount': count,
                 });
             }
         }
@@ -243,6 +240,7 @@ jQuery(document).ready(function( $ ) {
                     $('#booking-discount').html('Có ' + data.amount + ' máy lạnh được đặt trong cùng khu vực, giảm thêm ' + data.discount + '%');
                 }
                 bookingSummary.services = dataBooking;
+                bookingSummary.tools = dataTool;
                 bookingSummary.address = data.address;
                 bookingSummary.datetime = data.datetime;
                 $(_this).find('button[type=submit]').text('Tiếp tục');
@@ -308,6 +306,15 @@ jQuery(document).ready(function( $ ) {
             $('#location-destination-latitude').val(location.latitude);
             $('#location-destination-longitude').val(location.longitude);
         }
+    });
+
+    ///////////////////////////
+    //Tab fix VAPOR ////
+    ///////////////////////////
+
+    $('#sua-chua-khan-cap > li').click(function() {
+        $(this).find('input').val(1)
+        initSummary();
     });
 
     ///////////////////////////

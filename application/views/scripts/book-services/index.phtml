@@ -19,16 +19,18 @@
                   <div class="booking-flow-content cell" id="booking-list-machine">
                      <nav class="service-type-nav">
                         <ul>
-                          <!--
+                          
                           <?php foreach ($this->typeServices as $typeService) {?>
                             <li class="ng-binding ng-scope active">
                               <a data-toggle="tab" href="#<?=$typeService->getTypeServiceSlug()?>"><?=$typeService->getTypeServiceTitle()?></a>
                            </li>
                           <?php }?>
-                        -->
+                        
+                        <!--
                           <li class="ng-binding ng-scope active">
                               <a data-toggle="tab" href="#thao-lap-di-doi-may">Thao lap di doi may</a>
                            </li>
+                         -->
                         </ul>
                      </nav>
                      <?php echo $this->partial('partials/service-clean-maintain.phtml', array(
@@ -36,6 +38,9 @@
                       ));?>
                      <?php echo $this->partial('partials/service-remove-setup.phtml', array(
                         'service' => $this->servicesRemoveSetup,
+                      ));?>
+                     <?php echo $this->partial('partials/service-fix.phtml', array(
+                        'service' => $this->servicesFix,
                       ));?>
                      <bf-services-summary>
                         <section class="booking-panel">

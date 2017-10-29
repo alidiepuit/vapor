@@ -39,4 +39,30 @@ class Application_Model_ServiceToolMapper extends Application_Model_BaseModel_Ba
             pr($e);
         }
     }
+
+    public function getToolsInList($ids)
+    {
+        try {
+            $select = $this->getDbTable()->select()
+                    ->from('fe_service_tools')
+                    ->where('id in (?)', $ids);
+
+            // echo $select;die;
+
+            $rows = $this->getDbTable()->fetchAll($select);
+            $rows = $rows ? $rows->toArray() : Null;
+            $res = array();
+            foreach ($rows as $row) {
+              // pr($bookingService);
+                $item = new Application_Model_Service_Tool($row);
+                $item->setToolSlug($this->slugify($item->getToolTitle()));
+                $item->setToolPowerSlug($this->slugify($item->getToolPower()));
+                $res[] = $item;
+            }
+            // pr($res);
+            return $res;
+        } catch (Exception $e) {
+            pr($e);
+        }
+    }
 }
