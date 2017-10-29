@@ -10,9 +10,17 @@ class BookServicesController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        $services = Application_Model_ServicesMapper::getInstance()->getServices();
-        $this->view->services = $services;
+        $listTypeService = Application_Model_Service_TypeServiceMapper::getInstance()->getTypeService();
+        $this->view->typeServices = $listTypeService;
 
+        $servicesMaintain = Application_Model_ServicesMapper::getInstance()->getServicesMaintain();
+        $this->view->servicesMaintain = $servicesMaintain;
+
+        $servicesRemoveSetup = Application_Model_ServicesMapper::getInstance()->getServicesRemoveSetup();
+        $this->view->servicesRemoveSetup = $servicesRemoveSetup;
+
+        $serviceTool = Application_Model_ServiceToolMapper::getInstance()->getTools();
+        $this->view->serviceTool = $serviceTool;
 
         $locations = Application_Model_LocationMapper::getInstance()->getLocations();
         $this->view->locations = $locations;
@@ -198,5 +206,4 @@ class BookServicesController extends Zend_Controller_Action
             'success' => true,
         ));
     }
-
 }

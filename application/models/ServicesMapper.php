@@ -65,15 +65,17 @@ class Application_Model_ServicesMapper extends Application_Model_BaseModel_BaseM
 
     }
  
-    public function getServices()
+    public function getServicesMaintain()
     {
         try {
+            $idServiceMaintain = 1;
             $select = $this->getDbTable()->select()
                     ->from('fe_services')
                     ->joinLeft('fe_type_services', 'fe_type_services.id = fe_services.services_type', 
                         array('typeservice_title','typeservice_slug'))
                     ->joinLeft('fe_type_machines', 'fe_type_machines.id = fe_services.services_typemachine',
                         array('typemachine_title','typemachine_image'))
+                    ->where('fe_type_services.id = ?', $idServiceMaintain)
                     ->setIntegrityCheck(false);
             
             // echo $select;die;
@@ -116,10 +118,110 @@ class Application_Model_ServicesMapper extends Application_Model_BaseModel_BaseM
                 $res[$idServiceType]->setListMachine($listMachine);
             }
             
-            // pr($res);
-            return $res;
+            return $res[$idServiceMaintain];
         } catch (Exception $e) {
             pr($e);
         }
     }
+
+    public function getServicesRemoveSetup()
+    {
+        try {
+            $idServiceMaintain = 2;
+            $select = $this->getDbTable()->select()
+                    ->from('fe_services')
+                    ->joinLeft('fe_type_services', 'fe_type_services.id = fe_services.services_type', 
+                        array('typeservice_title','typeservice_slug'))
+                    ->joinLeft('fe_type_machines', 'fe_type_machines.id = fe_services.services_typemachine',
+                        array('typemachine_title','typemachine_image', 'typemachine_cold', 'typemachine_warm'))
+                    ->where('fe_type_services.id = ?', $idServiceMaintain)
+                    ->setIntegrityCheck(false);
+            
+            // echo $select;die;
+            $services = $this->getDbTable()->fetchAll($select);
+            $services = $services ? $services->toArray() : Null;
+            // pr($services);
+            $res = array();
+            foreach ($services as $val) {
+                //group by services_type
+                $idServiceType = $val['services_type'];
+                $idServiceTypeMachine = $val['services_typemachine'];
+                
+                if (!isset($res[$idServiceType])) {
+                    $service = new Application_Model_Service_Service(array(
+                        'service_title' => $val['typeservice_title'],
+                        'service_slug' => $val['typeservice_slug'],
+                        'list_machine' => array(),
+                    ));
+                    $res[$idServiceType] = $service;
+                }
+
+                //may treo tuong, cassette, ...
+                $listMachine = $res[$idServiceType]->getListMachine();
+
+                if (!isset($listMachine[$idServiceTypeMachine])) {
+                    $machine = new Application_Model_Service_Machine(array(
+                        'machine_title' => $val['typemachine_title'],
+                        'machine_slug' => $this->slugify($val['typemachine_title']),
+                        'machine_image' => $val['typemachine_image'],
+                        'machine_image_cold' => $val['typemachine_cold'],
+                        'machine_image_warm' => $val['typemachine_warm'],
+                        'list_power' => array(),
+                    ));
+                    $listMachine[$idServiceTypeMachine] = $machine;
+                } 
+                
+
+                //dan nong, dan lanh
+                $grpMachineTitle = $val['services_grpmachine'];
+                $listGrpMachine = $listMachine[$idServiceTypeMachine]->getListGrpMachine();
+
+                if (!isset($listGrpMachine[$grpMachineTitle])) {
+                    $grpmachine = new Application_Model_Service_GrpMachine(array(
+                        'grpmachine_title' => $grpMachineTitle,
+                        'grpmachine_slug' => $this->slugify($grpMachineTitle),
+                        'list_sub_service' => array(),
+                    ));
+                    $listGrpMachine[$grpMachineTitle] = $grpmachine;
+                }
+
+                // pr($listGrpMachine);
+
+
+                //sub service: thao, lap, thao va lap
+                $subServiceTitle = $val['services_subservice'];
+                $listSubService = $listGrpMachine[$grpMachineTitle]->getListSubService();
+
+                if (!isset($listSubService[$subServiceTitle])) {
+                    $subservice = new Application_Model_Service_SubService(array(
+                        'sub_service_title' => $subServiceTitle,
+                        'sub_service_slug' => $this->slugify($subServiceTitle),
+                        'list_power' => array(),
+                    ));
+                    $listSubService[$subServiceTitle] = $subservice;
+                }
+
+                // pr($listSubService);
+
+                $listPower = $listSubService[$subServiceTitle]->getListPower();
+                
+                $detailService = new Application_Model_Service_DetailService($val);
+                $listPower[] = $detailService;
+
+                $listSubService[$subServiceTitle]->setListPower($listPower);
+
+                $listGrpMachine[$grpMachineTitle]->setListSubService($listSubService);
+
+                $listMachine[$idServiceTypeMachine]->setListGrpMachine($listGrpMachine);
+
+                $res[$idServiceType]->setListMachine($listMachine);
+            }
+            // pr($res);
+            return $res[$idServiceMaintain];
+        } catch (Exception $e) {
+            pr($e);
+        }
+    }
+
+
 }

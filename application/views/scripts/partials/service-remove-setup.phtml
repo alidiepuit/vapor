@@ -1,0 +1,100 @@
+<?php $service = $this->service; ?>
+<ul class="booking-services services" id="<?=$service->getServiceSlug()?>">
+  <?php $listMachine = $service->getListMachine()?>
+  <?php foreach ($listMachine as $machine) {?>
+  <li class="service ng-scope" data-title="<?=$machine->getMachineTitle()?>" data-service="<?=$service->getServiceTitle()?>">
+    <div class="booking-cell">
+      <div class="left-cell">
+        <div class="header"><p><?=$machine->getMachineTitle()?></p></div>
+        <div><p>Chọn đối tượng </p></div>
+      </div>
+      <div class="right-cell">
+        <div class="header">
+          <div class="column"> </div>
+          <div class="column"></div>
+        </div>
+        <?php $listGrpMachine = $machine->getListGrpMachine();?>
+        <?php foreach ($listGrpMachine as $grpMachine) {?>
+        
+        <div class="row grp-machine">
+          <div class="column">
+            <p><?= $grpMachine->getGrpMachineTitle()?></p>
+            <div>
+              <input type="radio" name="grp-machine" class="radio-grp-machine" id="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>" value="<?= $grpMachine->getGrpMachineSlug()?>">
+              <img src="<?= strtolower($grpMachine->getGrpMachineTitle())=='dàn lạnh'?$machine->getMachineImageCold():$machine->getMachineImageWarm()?>"/>
+            </div>
+          </div>
+          <div class="column">
+            <div>
+              <div>
+                <select class="select-grp-machine" data-grp-machine="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>">
+                  <option>---</option>
+                  <?php $listSubService = $grpMachine->getListSubService()?>
+                  <?php foreach ($listSubService as $subService) {?>
+                  <option value="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug(),'-',$subService->getSubServiceSlug()?>"><?= $subService->getSubServiceTitle()?></option>
+                  <?php }?>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <?php }?>
+      </div>
+    </div>
+    <div class="clear"></div>
+
+      <?php foreach ($listGrpMachine as $grpMachine) {?>
+      <?php $listSubService = $grpMachine->getListSubService()?>
+      <?php foreach ($listSubService as $subService) {?>
+      <?php $listPower = $subService->getListPower()?>
+
+      <div class="row-power" id="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug(),'-',$subService->getSubServiceSlug()?>">
+      <?php foreach ($listPower as $detailService) {?>
+      <div class="column-row-power">
+        <p><?= $detailService->getServicesPower()?></p>
+        <div class="input-group number-spinner">
+          <span class="input-group-btn">
+            <button  type="button" class="btn btn-default" data-dir="dwn">
+              <span class="glyphicon glyphicon-minus">
+                <i class="fa fa-minus" aria-hidden="true"></i>
+              </span>
+            </button>
+          </span>
+          <input data-service-title="<?=$service->getServiceTitle()?>" data-machine-title="<?=$machine->getMachineTitle(),'-',$grpMachine->getGrpMachineTitle(),'-',$subService->getSubServiceTitle()?>" data-service-id="<?=$detailService->getId()?>" data-power="<?=$detailService->getServicesPower()?>" data-service-count="" type="text" class="form-control text-center service-detail" data-service-cost="<?=$detailService->getServicesCost()?>" id="" value="0">
+          <span class="input-group-btn">
+            <button type="button"  class="btn btn-default" data-dir="up">
+              <span class="glyphicon glyphicon-plus">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+              </span>
+            </button>
+          </span>
+        </div>
+      </div>
+      <?php }?>
+      </div>
+      <?php }?>
+      <?php }?>
+
+    <div class="">
+      <input type="checkbox" id="<?=$machine->getMachineSlug()?>-ossm" name="<?=$machine->getMachineSlug()?>-ossm"> 
+      <label for="<?=$machine->getMachineSlug()?>-ossm">Bạn có cần vận chuyển máy đến địa điểm khác?</label>
+      <div class="row-location">
+        <div class="row-item-location">
+          <label for="">Từ </label>
+          <input type="text" placeholder="Địa điểm tháo máy" class="location" id="<?=$machine->getMachineSlug()?>-location-from">
+          <input class="" type="hidden" id="<?=$machine->getMachineSlug()?>-location-from-latitude" name="" value=""/>
+          <input class="" type="hidden" id="<?=$machine->getMachineSlug()?>-location-from-longitude" name="" value=""/>
+        </div>
+        <div class="row-item-location">
+          <label for="">Đến </label>
+          <input type="text" placeholder="Địa điểm lắp máy" class="location" id="<?=$machine->getMachineSlug()?>-location-destination">
+          <input class="" type="hidden" id="<?=$machine->getMachineSlug()?>-location-destination-latitude" name="" value=""/>
+          <input class="" type="hidden" id="<?=$machine->getMachineSlug()?>-location-destination-longitude" name="" value=""/>
+        </div>
+      </div>
+    </div>
+  </li>
+  <?php }?>
+         
+</ul>

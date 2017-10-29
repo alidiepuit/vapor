@@ -35,10 +35,12 @@ var bookingSummary = {};
 
 var initSummary = function() {
     dataBooking = new Array();
+    dataTool = new Array();
     $('input.service-detail').each(function(i, v) {
         var count = parseInt(v.value);
         var cost = parseInt($(v).data('service-cost'))
         if (count > 0) {
+            var serviceId = $(v).data('service-id') || 0;
             dataBooking.push({
                 'serviceTitle': $(v).data('service-title'),
                 'machineTitle': $(v).data('machine-title'),
@@ -47,6 +49,17 @@ var initSummary = function() {
                 'serviceTotalCost': cost*count,
                 'power': $(v).data('power'),
             });
+            var toolId = $(v).data('tool-id') || 0;
+            if (toolId > 0) {
+                dataBooking.push({
+                    'serviceTitle': $(v).data('service-title'),
+                    'machineTitle': $(v).data('machine-title'),
+                    'serviceId': $(v).data('service-id'),
+                    'serviceCount': count,
+                    'serviceTotalCost': cost*count,
+                    'power': $(v).data('power'),
+                });
+            }
         }
     })
     if (dataBooking.length > 0) {
@@ -267,6 +280,34 @@ jQuery(document).ready(function( $ ) {
         $('#booking-location .gs-address-summary').hide();
         $('#booking-location').find('button[type=submit]').text('Done');
         $('#booking-discount').html('');
+    });
+
+    ///////////////////////////
+    //Tab remove setup VAPOR ////
+    ///////////////////////////
+
+    $('.select-grp-machine').change(function() {
+        var thisVal = $(this).val();
+        $('.select-grp-machine').val('---');
+        $(this).val(thisVal);
+        var id = $(this).val();
+        var dataGrpMachine = $(this).data('grp-machine');
+        $('#'+dataGrpMachine).click();
+        $('.row-power').removeClass('active');
+        $('#'+id).addClass('active');
+    })
+
+    $('#service-adding-tool').on('shown.bs.modal', function() {
+        $('#booking-list-service-tools').tabs();
+    });
+
+    $(".location").placepicker({
+        placeChanged: function(place) {
+            var location = this.getLocation()
+            console.log("place changed: ", place.formatted_address, location);
+            $('#location-destination-latitude').val(location.latitude);
+            $('#location-destination-longitude').val(location.longitude);
+        }
     });
 
     ///////////////////////////

@@ -19,60 +19,24 @@
                   <div class="booking-flow-content cell" id="booking-list-machine">
                      <nav class="service-type-nav">
                         <ul>
-                          <?php foreach ($this->services as $id => $service) {?>
+                          <!--
+                          <?php foreach ($this->typeServices as $typeService) {?>
                             <li class="ng-binding ng-scope active">
-                              <a data-toggle="tab" href="#<?=$service->getServiceSlug()?>"><?=$service->getServiceTitle()?></a>
+                              <a data-toggle="tab" href="#<?=$typeService->getTypeServiceSlug()?>"><?=$typeService->getTypeServiceTitle()?></a>
                            </li>
                           <?php }?>
+                        -->
+                          <li class="ng-binding ng-scope active">
+                              <a data-toggle="tab" href="#thao-lap-di-doi-may">Thao lap di doi may</a>
+                           </li>
                         </ul>
                      </nav>
-                     <?php foreach ($this->services as $key => $service) {?>
-                     <ul class="booking-services services" id="<?=$service->getServiceSlug()?>">
-                        <?php $listMachine = $service->getListMachine()?>
-                        <?php foreach ($listMachine as $machine) {?>
-                        <li class="service ng-scope" data-title="<?=$machine->getMachineTitle()?>" data-service="<?=$service->getServiceTitle()?>">
-                          <div class="booking-cell">
-                            <div class="left-cell">
-                              <div class="header"><p><?=$machine->getMachineTitle()?></p></div>
-                              <img alt="BLOWOUT" class="service-image" src="<?=$machine->getMachineImage()?>">
-                            </div>
-                            <div class="right-cell">
-                              <div class="header">
-                                <div class="column">Công suất </div>
-                                <div class="column">Số lượng </div>
-                              </div>
-                          <?php $listPower = $machine->getListPower()?>
-                          <?php foreach ($listPower as $detailService) {?>
-                            <div class="row" data-service-title="<?=$service->getServiceTitle()?>" data-machine-title="<?=$machine->getMachineTitle()?>" data-service-id="<?=$detailService->getId()?>" data-power="<?=$detailService->getServicesPower()?>" data-service-count="">
-                                <div class="column"><?=$detailService->getServicesPower()?></div>
-                                <div class="column">
-                                  <div class="input-group number-spinner">
-                                    <span class="input-group-btn">
-                                      <button  type="button" class="btn btn-default" data-dir="dwn">
-                                        <span class="glyphicon glyphicon-minus">
-                                          <i class="fa fa-minus" aria-hidden="true"></i>
-                                        </span>
-                                      </button>
-                                    </span>
-                                    <input data-service-title="<?=$service->getServiceTitle()?>" data-machine-title="<?=$machine->getMachineTitle()?>" data-service-id="<?=$detailService->getId()?>" data-power="<?=$detailService->getServicesPower()?>" data-service-count="" type="text" class="form-control text-center service-detail" data-service-cost="<?=$detailService->getServicesCost()?>" id="" value="0">
-                                    <span class="input-group-btn">
-                                      <button type="button"  class="btn btn-default" data-dir="up">
-                                        <span class="glyphicon glyphicon-plus">
-                                          <i class="fa fa-plus" aria-hidden="true"></i>
-                                        </span>
-                                      </button>
-                                    </span>
-                                  </div>
-                                </div>
-                              </div>
-                          <?php }?>
-                            </div>
-                          </div>
-                        </li>
-                        <?php }?>
-                               
-                     </ul>
-                     <?php }?>
+                     <?php echo $this->partial('partials/service-clean-maintain.phtml', array(
+                        'service' => $this->servicesMaintain,
+                      ));?>
+                     <?php echo $this->partial('partials/service-remove-setup.phtml', array(
+                        'service' => $this->servicesRemoveSetup,
+                      ));?>
                      <bf-services-summary>
                         <section class="booking-panel">
                           <div class="summary">
@@ -82,17 +46,85 @@
                             <button  type="button" id="" class="gs-button booking-next" disabled="disabled">Book</button>
                           </div>
                           <div>
-                            <span style="color:red;">Tiến hành bước tiếp theo, nhập địa điểm và thời gian để có thể được giảm 10% - 35%</span>
+                            <p style="color:red;">* Tiến hành bước tiếp theo, nhập địa điểm và thời gian để có thể được giảm 10% - 35%</p>
+                            <p style="color:red;">* Giá trên bao gồm nhân công tháo - lắp máy lạnh và nhân công tháo - lắp các vật tư liên quan </p>
+                            <p style="color:red;">* Khi lắp máy VAPOR ưu tiên sử dụng vật tư hiện có của quý khách, nếu sau khi khảo sát cần thêm vật tư chúng tôi sẽ thông báo hoặc quý khách có thể chọn <a data-toggle="modal" data-target="#service-adding-tool" href="#">tại đây</a> </p>
                           </div>
                         </section>
                      </bf-services-summary>
 
-  
-
-
                   </div>
                </div>
             </div>
+            <!-- Modal -->
+  <div class="modal fade" role="dialog" id="service-adding-tool" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="">Thêm vật tư </h4>
+        </div>
+        <div class="modal-body">
+          <div class="" id="booking-list-service-tools">
+            <nav class="service-type-nav">
+              <ul>
+                <?php foreach ($this->serviceTool as $key => $value) {?>
+                <li class="ng-binding ng-scope">
+                    <a data-toggle="tab" href="#<?=$value[0]->getToolPowerSlug()?>"><?= $key?></a>
+                </li>
+                <?php }?>
+              </ul>
+            </nav>
+            <?php foreach ($this->serviceTool as $key => $tool) {?>
+            <ul class="" id="<?=$tool[0]->getToolPowerSlug()?>">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Vật tư </th>
+                    <th>Đơn vị tính </th>
+                    <th>Đơn giá </th>
+                    <th width="20%">Số lượng </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php foreach ($tool as $item) {?>
+                  <tr>
+                    <td><?=$item->getToolTitle()?></td>
+                    <td><?=$item->getToolUnit()?></td>
+                    <td><?=$item->getToolCost()?></td>
+                    <td>
+                      <div class="input-group number-spinner">
+                        <span class="input-group-btn">
+                          <button  type="button" class="btn btn-default" data-dir="dwn">
+                            <span class="glyphicon glyphicon-minus">
+                              <i class="fa fa-minus" aria-hidden="true"></i>
+                            </span>
+                          </button>
+                        </span>
+                        <input data-service-title="Vật tư" data-machine-title="<?=$item->getToolTitle()?>" data-tool-id="<?=$item->getId()?>" data-power="<?=$item->getToolUnit()?>" data-service-count="" type="text" class="form-control text-center service-detail" data-service-cost="<?=$item->getToolCost()?>" id="" value="0">
+                        <span class="input-group-btn">
+                          <button type="button"  class="btn btn-default" data-dir="up">
+                            <span class="glyphicon glyphicon-plus">
+                              <i class="fa fa-plus" aria-hidden="true"></i>
+                            </span>
+                          </button>
+                        </span>
+                      </div>
+                    </td>
+                  </tr>
+                  <?php }?>
+                </tbody>
+              </table>
+            </ul>
+            <?php }?>
+          </div>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
          </section>
          <!-- end ngIf: state.isMode(MODES.SERVICES) -->
          <!-- STEP 2 -->

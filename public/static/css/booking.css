@@ -2011,7 +2011,6 @@ max-height: 300px;
 }
 .booking-cell .right-cell .column {
     width: 50%;
-    height: 34px;
     line-height: 34px;
 }
 .booking-flow-services .services .service {
@@ -2138,4 +2137,69 @@ max-height: 300px;
     width: auto;
     float: none;
     position: inherit;
+}
+
+.row-power,.row-location {
+    display: none;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.row-location {
+    -webkit-justify-content: left;
+    -ms-flex-pack: left;
+    justify-content: left;
+}
+.row-location label {
+    width: 30%;
+}
+.row-item-location {
+    display: inline-flex;
+    width: 100%;
+    margin:5px 0px;
+}
+.column-row-power {
+    margin-left: 10px;
+    width: 30%;
+}
+input[type=checkbox] + label {
+  color: #ccc;
+  font-style: italic;
+} 
+input[type=checkbox]~.row-location {
+    display: none;
+}
+input[type=checkbox]:checked + label {
+  color: #f00;
+  font-style: normal;
+}
+input[type=checkbox]:checked~.row-location {
+    display: flex;
+}
+.row-power.ng-hide {
+    display: none;
+}
+.row.grp-machine img {
+    width: 50px;
+    height: auto;
+}
+.row-power.active {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+.table {
+    border-spacing: 0;
+}
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #999;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 5px;
+}
+#service-adding-tool ul>li a {
+    font-size: 14px;
 }

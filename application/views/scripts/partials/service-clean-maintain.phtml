@@ -1,0 +1,46 @@
+<?php $service = $this->service; ?>
+<ul class="booking-services services" id="<?=$service->getServiceSlug()?>">
+  <?php $listMachine = $service->getListMachine()?>
+  <?php foreach ($listMachine as $machine) {?>
+  <li class="service ng-scope" data-title="<?=$machine->getMachineTitle()?>" data-service="<?=$service->getServiceTitle()?>">
+    <div class="booking-cell">
+      <div class="left-cell">
+        <div class="header"><p><?=$machine->getMachineTitle()?></p></div>
+        <img alt="BLOWOUT" class="service-image" src="<?=$machine->getMachineImage()?>">
+      </div>
+      <div class="right-cell">
+        <div class="header">
+          <div class="column">Công suất </div>
+          <div class="column">Số lượng </div>
+        </div>
+    <?php $listPower = $machine->getListPower()?>
+    <?php foreach ($listPower as $detailService) {?>
+      <div class="row" data-service-title="<?=$service->getServiceTitle()?>" data-machine-title="<?=$machine->getMachineTitle()?>" data-service-id="<?=$detailService->getId()?>" data-power="<?=$detailService->getServicesPower()?>" data-service-count="">
+          <div class="column"><?=$detailService->getServicesPower()?></div>
+          <div class="column">
+            <div class="input-group number-spinner">
+              <span class="input-group-btn">
+                <button  type="button" class="btn btn-default" data-dir="dwn">
+                  <span class="glyphicon glyphicon-minus">
+                    <i class="fa fa-minus" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </span>
+              <input data-service-title="<?=$service->getServiceTitle()?>" data-machine-title="<?=$machine->getMachineTitle()?>" data-service-id="<?=$detailService->getId()?>" data-power="<?=$detailService->getServicesPower()?>" data-service-count="" type="text" class="form-control text-center service-detail" data-service-cost="<?=$detailService->getServicesCost()?>" id="" value="0">
+              <span class="input-group-btn">
+                <button type="button"  class="btn btn-default" data-dir="up">
+                  <span class="glyphicon glyphicon-plus">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </span>
+            </div>
+          </div>
+        </div>
+    <?php }?>
+      </div>
+    </div>
+  </li>
+  <?php }?>
+         
+</ul>
