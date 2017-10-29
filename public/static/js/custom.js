@@ -81,7 +81,7 @@ jQuery(document).ready(function( $ ) {
             },
             function(data) {
                 if (data.success) {
-                    window.location.replace("/");
+                    window.location.replace("/user");
                 } else {
                     $('div.error').html('<p class="error">'+data.error+'</p>');
                 }
@@ -199,9 +199,48 @@ jQuery(document).ready(function( $ ) {
         dateFormat: 'dd/mm/yy'
     });
 
-    
-    
+    $('#star-rating').rateYo({
+        fullStar: true,
+        maxValue: 5,
+        numStars: 5,
+        onSet: function (rating, rateYoInstance) {
+            $('#vote').val(rating);
+        }
+    });
 
+    $('.vote-link').click(function() {
+        var grouporder = $(this).data('grouporder');
+        $('#service-vote').find('input#grouporder').val(grouporder);
+    })
+
+    $('.star-rating').each(function(i, v) {
+        var $rateYo = $(this).rateYo({
+            fullStar: true,
+            readOnly: true,
+            maxValue: 5,
+            numStars: 5,
+        });
+        $rateYo.rateYo("rating", $(this).data('rating'));
+    })
+
+    $('form[name=voteForm]').submit(function(e) {
+        e.preventDefault();
+        if ($(this).valid()) {
+            $.ajax({
+              url: '/user/vote',
+              type: 'post',
+              dataType: 'json',
+              data: $(this).serialize(),
+              success: function(data) {
+                if (data.success) {
+                    window.location.replace("/user");
+                } else {
+                    $('.vote-form').find('div.error').html('<p class="error">'+data.error+'</p>');
+                }
+              }
+            });
+        }
+    }).validate();
 });
 
 

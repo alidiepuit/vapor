@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/user.css")?>">
+<link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/jquery.rateyo.css")?>">
   <div class="account-page-container ng-scope">
    <div class="row previous-and-upcoming-control" id="previous-and-upcoming-control">
       <ul class="small-12 medium-7 large-8 columns">
@@ -72,7 +73,12 @@
                <div class="small-12 columns">
                   <div class="account-info-slab">
                      <div class="booking-details-column">
-                      <?= $row->getGrouporderDatetime()?>
+                      <p><?= $row->getGrouporderDatetime()?></p>
+                      <?php if ($row->getVoteStar() > 0) {?>
+                      <div class="star-rating" data-rating="<?=$row->getVoteStar()?>"></div>
+                      <?php } else {?>
+                      <a class="vote-link" data-toggle="modal" data-target="#service-vote" href="#" data-grouporder="<?= $row->getId()?>">Đánh giá </a>
+                      <?php }?>
                      </div>
                      <div class="booking-details-column">
                       <ul class="prices">
@@ -105,3 +111,34 @@
    
    
 </div>
+<div class="modal fade" role="dialog" id="service-vote" tabindex="-1" role="dialog" aria-labelledby="">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <form name="voteForm" class="ng-pristine ng-valid vote-form" action="/user/vote" method="POST">
+          <div class="error"></div>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="">Đánh giá dịch vụ</h4>
+          </div>
+          <div class="modal-body">
+            <div class="" id="row-vote">
+              
+                <div class="form-fields-wrapper">
+                  <input type="hidden" id="vote" name="vote" class="required"/>
+                  <label class="no-acc-txt mar-btm-10">Đánh giá:</label>
+                  <div id="star-rating"></div>
+                </div>
+                <div class="form-fields-wrapper">
+                  <label class="no-acc-txt mar-btm-10">Bình luận:</label>
+                  <textarea name="comment" class="required"></textarea>
+                </div>
+                <input type="hidden" name="grouporder" id="grouporder" class="required"/>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="gs-button mar-top-5" value="Done"/>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -47,7 +47,13 @@ class Application_Model_GroupOrderMapper extends Application_Model_BaseModel_Bas
             // pr($listIds);
             $select = $this->getDbTable()->select()
                     ->from('frontend_grouporders')
-                    ->where('grouporder_user = ?', $userID);
+                    ->joinLeft(
+                        array('fe_votes'),
+                        'fe_votes.vote_grouporder = frontend_grouporders.id',
+                        array('vote_star')
+                    )
+                    ->where('grouporder_user = ?', $userID)
+                    ->setIntegrityCheck(false);
             
             // echo $select;die;
             $services = $this->getDbTable()->fetchAll($select);

@@ -235,5 +235,12 @@ picture.participan {
 #previous-and-upcoming-control .account-info-slab ul li span.detail{
   float:right;
 }
-
-
+#star-rating a {
+  width: 20px;
+}
+.form-fields-wrapper textarea {
+      resize: horizontal;
+}
+.star-rating {
+  margin: 0 auto;
+}
