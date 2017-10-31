@@ -1,29 +1,76 @@
+// left: 37, up: 38, right: 39, down: 40,
+// spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
+var keys = {37: 1, 38: 1, 39: 1, 40: 1};
 
+function preventDefault(e) {
+  e = e || window.event;
+  if (e.preventDefault)
+      e.preventDefault();
+  e.returnValue = false;  
+}
+
+function preventDefaultForScrollKeys(e) {
+    if (keys[e.keyCode]) {
+        preventDefault(e);
+        return false;
+    }
+}
+
+function disableScroll() {
+  if (window.addEventListener) // older FF
+      window.addEventListener('DOMMouseScroll', preventDefault, false);
+  window.onwheel = preventDefault; // modern standard
+  window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
+  window.ontouchmove  = preventDefault; // mobile
+  document.onkeydown  = preventDefaultForScrollKeys;
+}
+
+function enableScroll() {
+    if (window.removeEventListener)
+        window.removeEventListener('DOMMouseScroll', preventDefault, false);
+    window.onmousewheel = document.onmousewheel = null; 
+    window.onwheel = null; 
+    window.ontouchmove = null;  
+    document.onkeydown = null;  
+}
 
 jQuery(document).ready(function( $ ) {
+    var jump = function(e) {
+        disableScroll();
+        var target = location.hash;
+        if (e) {
+           var target = e;
+        }
+
+        $('html,body').animate({
+           scrollTop: $(target).offset().top
+        }, 1500, function() {
+            enableScroll();
+        });
+    }
     // Smoth scroll on page hash links
-    $('a[href*="#"]:not([href="#"])').on('click', function() {
+    $('a[href*="#"]:not([href="#"])').bind('click', function(e) {
         if ($(this).attr('data-toggle')) {
             return
         }
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-            var target = $(this.hash);
-            if (target.length) {
-                
-                var top_space = 0;
-                
-                if( $('#header').length ) {
-                  top_space = $('#header').outerHeight();
-                }
-                
-                $('html, body').animate({
-                    scrollTop: target.offset().top - top_space
-                }, 1500, 'easeInOutExpo');
-                
-                return false;
-            }
+        var target = $(this).attr('href')
+        if ($(target).length > 0) {
+            e.preventDefault();
+            jump(target)
+        } else {
+            //going on href
+            window.location.replace('/' + target);
         }
     });
+
+    if (location.hash){
+        setTimeout(function(){
+            $('html, body').show();
+            jump();
+        }, 200);
+    }else{
+        $('html, body').show();
+    }
 
     $('form[name="loginForm"]').on('submit', function(event) {
         if (!$(this).valid()) {

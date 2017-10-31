@@ -2206,3 +2206,6 @@ input[type=checkbox]:checked~.row-location {
 input.promotion {
     margin-left: 20px;
 }
+.gs-formatted-address .gs-icon {
+    top: 25px;
+}
