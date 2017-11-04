@@ -63,6 +63,10 @@ jQuery(document).ready(function( $ ) {
         }
     });
 
+    $('.btn-booking-service-now').click(function() {
+        window.location.replace("/book-services");
+    })
+
     if (location.hash){
         setTimeout(function(){
             $('html, body').show();

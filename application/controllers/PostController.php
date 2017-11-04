@@ -17,6 +17,7 @@ class PostController extends Zend_Controller_Action
         throw new Exception_Authen(Exception_Authen::EXCEPTION_POST_WRONG_ID);
       }
       $this->view->data = $data;
+      // pr($data);
     }
 
 
