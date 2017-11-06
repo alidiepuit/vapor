@@ -2209,3 +2209,9 @@ input.promotion {
 .gs-formatted-address .gs-icon {
     top: 25px;
 }
+.services-fix .column {
+    margin: 0 auto;
+}
+.services-fix .column img{
+    max-height: 200px;
+}
