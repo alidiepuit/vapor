@@ -53,6 +53,7 @@ class Application_Model_GroupOrderMapper extends Application_Model_BaseModel_Bas
                         array('vote_star')
                     )
                     ->where('grouporder_user = ?', $userID)
+                    ->where('frontend_grouporders.deleted_at IS NULL')
                     ->setIntegrityCheck(false);
             
             // echo $select;die;

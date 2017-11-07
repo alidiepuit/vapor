@@ -44,6 +44,7 @@ class Application_Model_ServicesMapper extends Application_Model_BaseModel_BaseM
                     ->joinLeft('fe_type_machines', 'fe_type_machines.id = fe_services.services_typemachine',
                         array('typemachine_title','typemachine_image'))
                     ->where('fe_services.id IN (?)', $ids) 
+                    ->where('deleted_at IS NULL')
                     ->setIntegrityCheck(false);
             
             // echo $select;die;
@@ -76,6 +77,7 @@ class Application_Model_ServicesMapper extends Application_Model_BaseModel_BaseM
                     ->joinLeft('fe_type_machines', 'fe_type_machines.id = fe_services.services_typemachine',
                         array('typemachine_title','typemachine_image'))
                     ->where('fe_type_services.id = ?', $idServiceMaintain)
+                    ->where('fe_services.deleted_at IS NULL')
                     ->setIntegrityCheck(false);
             
             // echo $select;die;

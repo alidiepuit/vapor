@@ -33,7 +33,8 @@ class Application_Model_ToolMapper extends Application_Model_BaseModel_BaseMappe
     {
         try {
             $select = $this->getDbTable()->select()
-                    ->from('frontend_tools');
+                    ->from('frontend_tools')
+                    ->where('deleted_at IS NULL');
 
             $services = $this->getDbTable()->fetchAll($select);
             $services = $services ? $services->toArray() : Null;

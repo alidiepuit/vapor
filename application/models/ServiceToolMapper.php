@@ -45,7 +45,8 @@ class Application_Model_ServiceToolMapper extends Application_Model_BaseModel_Ba
         try {
             $select = $this->getDbTable()->select()
                     ->from('fe_service_tools')
-                    ->where('id in (?)', $ids);
+                    ->where('id in (?)', $ids)
+                    ->where('deleted_at IS NULL');
 
             // echo $select;die;
 

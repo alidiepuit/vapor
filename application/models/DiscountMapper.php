@@ -17,7 +17,8 @@ class Application_Model_DiscountMapper extends Application_Model_BaseModel_BaseM
         try {
             $select = $this->getDbTable()->select()
                     ->from('fe_discounts')
-                    ->order('discount_amount ASC');
+                    ->order('discount_amount ASC')
+                    ->where('deleted_at IS NULL');
 
             // echo $select;die;
 

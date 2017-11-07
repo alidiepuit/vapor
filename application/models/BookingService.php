@@ -20,7 +20,8 @@ class Application_Model_BookingService extends Application_Model_BaseModel_BaseM
             $select = $this->getDbTable()->select()
                     ->from('frontend_grouporders')
                     ->where('grouporder_datetime LIKE ?', $date . '%')
-                    ->where('grouporder_status = 1');
+                    ->where('grouporder_status = 1')
+                    ->where('deleted_at IS NULL');
 
             // echo $select;die;
 

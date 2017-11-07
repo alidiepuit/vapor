@@ -10,7 +10,10 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+        // $username = 'Admin';
+        // $salt = 'DtkD0_##$@!dbmcsfkjf';
+        // $akey = md5($username.$salt);
+        // pr($akey);
     }
 
 

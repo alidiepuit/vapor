@@ -42,8 +42,9 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
             $select = $this->getDbTable()->select()
                     ->from('frontend_posts')
                     ->order('updated_at DESC')
-                    ->where('post_type = ?', (int)$type);
-
+                    ->where('post_type = ?', (int)$type)
+                    ->where('deleted_at IS NULL');
+            // echo $select;die;
             $services = $this->getDbTable()->fetchAll($select);
             $services = $services ? $services->toArray() : Null;
             $res = array();
@@ -61,7 +62,8 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
         try {
             $select = $this->getDbTable()->select()
                     ->from('frontend_posts')
-                    ->where('post_slug LIKE ?', $slug);
+                    ->where('post_slug LIKE ?', $slug)
+                    ->where('deleted_at IS NULL');
 
             $row = $this->getDbTable()->fetchRow($select);
             $row = $row ? $row->toArray() : Null;

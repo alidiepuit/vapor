@@ -54,7 +54,8 @@ class Application_Model_MenuMapper extends Application_Model_BaseModel_BaseMappe
                         array()
                     )
                 ->order('parent_id ASC')
-                ->where('parent.menu_position = ? AND parent.menu_parent_id = parent.id', (int)$position);
+                ->where('parent.menu_position = ? AND parent.menu_parent_id = parent.id', (int)$position)
+                ->where('parent.deleted_at IS NULL');
             // echo $select;die;
             $result = $this->getDbTable()->fetchAll($select);
             // pr($result);
