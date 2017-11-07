@@ -1,8 +1,8 @@
 <?php $service = $this->service; ?>
-<ul class="booking-services services" id="<?=$service->getServiceSlug()?>">
+<ul class="booking-services services service-remove-setup" id="<?=$service->getServiceSlug()?>">
   <?php $listMachine = $service->getListMachine()?>
   <?php foreach ($listMachine as $machine) {?>
-  <li class="service ng-scope" data-title="<?=$machine->getMachineTitle()?>" data-service="<?=$service->getServiceTitle()?>">
+  <li class="service ng-scope <?=$machine->getMachineSlug()?>" data-title="<?=$machine->getMachineTitle()?>" data-service="<?=$service->getServiceTitle()?>" data-machine="<?=$machine->getMachineSlug()?>">
     <div class="booking-cell">
       <div class="left-cell">
         <div class="header"><p><?=$machine->getMachineTitle()?></p></div>
@@ -20,14 +20,14 @@
           <div class="column">
             <p><?= $grpMachine->getGrpMachineTitle()?></p>
             <div>
-              <input type="radio" name="grp-machine" class="radio-grp-machine" id="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>" value="<?= $grpMachine->getGrpMachineSlug()?>">
-              <img src="<?= strtolower($grpMachine->getGrpMachineTitle())=='dàn lạnh'?$machine->getMachineImageCold():$machine->getMachineImageWarm()?>"/>
+              <input type="radio" name="grp-machine" class="radio-grp-machine <?=$machine->getMachineSlug()?>" id="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>" value="<?= $grpMachine->getGrpMachineSlug()?>">
+              <img for="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>" src="<?= strtolower($grpMachine->getGrpMachineSlug())=='dan_lanh'?$machine->getMachineImageCold():(strtolower($grpMachine->getGrpMachineSlug())=='dan_nong'?$machine->getMachineImageWarm():$machine->getMachineImage())?>"/>
             </div>
           </div>
           <div class="column">
             <div>
               <div>
-                <select class="select-grp-machine" data-grp-machine="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>">
+                <select class="select-grp-machine" data-machine="<?=$machine->getMachineSlug()?>" data-grp-machine="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>">
                   <option>---</option>
                   <?php $listSubService = $grpMachine->getListSubService()?>
                   <?php foreach ($listSubService as $subService) {?>
@@ -76,19 +76,20 @@
       <?php }?>
       <?php }?>
 
-    <div class="">
+    <div class="service-cary">
       <input type="checkbox" id="<?=$machine->getMachineSlug()?>-ossm" name="<?=$machine->getMachineSlug()?>-ossm"> 
       <label for="<?=$machine->getMachineSlug()?>-ossm">Bạn có cần vận chuyển máy đến địa điểm khác?</label>
       <div class="row-location">
         <div class="row-item-location">
           <label for="">Từ </label>
-          <input type="text" placeholder="Địa điểm tháo máy" class="location" id="<?=$machine->getMachineSlug()?>-location-from">
+          <input type="text" placeholder="Địa điểm tháo máy" class="location" id="<?=$machine->getMachineSlug()?>-location-from" data-longitude="<?=$machine->getMachineSlug()?>-location-from-longitude" data-latitude="<?=$machine->getMachineSlug()?>-location-from-latitude">
           <input class="" type="hidden" id="<?=$machine->getMachineSlug()?>-location-from-latitude" name="" value=""/>
           <input class="" type="hidden" id="<?=$machine->getMachineSlug()?>-location-from-longitude" name="" value=""/>
+          <input data-service-title="Vận chuyển" data-machine-title="<?=$machine->getMachineTitle(),'-',$grpMachine->getGrpMachineTitle(),'-',$subService->getSubServiceTitle()?>" data-service-id="<?=$detailService->getId()?>" data-power="" data-service-count="" class="form-control text-center service-detail" data-service-cost="0" id="" value="1" type="hidden">
         </div>
         <div class="row-item-location">
           <label for="">Đến </label>
-          <input type="text" placeholder="Địa điểm lắp máy" class="location" id="<?=$machine->getMachineSlug()?>-location-destination">
+          <input type="text" placeholder="Địa điểm lắp máy" class="location" id="<?=$machine->getMachineSlug()?>-location-destination" data-longitude="<?=$machine->getMachineSlug()?>-location-destination-longitude" data-latitude="<?=$machine->getMachineSlug()?>-location-destination-latitude">
           <input class="" type="hidden" id="<?=$machine->getMachineSlug()?>-location-destination-latitude" name="" value=""/>
           <input class="" type="hidden" id="<?=$machine->getMachineSlug()?>-location-destination-longitude" name="" value=""/>
         </div>

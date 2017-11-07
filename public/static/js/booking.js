@@ -294,7 +294,10 @@ jQuery(document).ready(function( $ ) {
         $(this).val(thisVal);
         var id = $(this).val();
         var dataGrpMachine = $(this).data('grp-machine');
+
         $('#'+dataGrpMachine).click();
+
+        //show/hide list power
         $('.row-power').removeClass('active');
         $('#'+id).addClass('active');
     })
@@ -303,21 +306,30 @@ jQuery(document).ready(function( $ ) {
         $('#booking-list-service-tools').tabs();
     });
 
-    $(".location").placepicker({
-        placeChanged: function(place) {
-            var location = this.getLocation()
-            console.log("place changed: ", place.formatted_address, location);
-            $('#location-destination-latitude').val(location.latitude);
-            $('#location-destination-longitude').val(location.longitude);
-        }
+    $(".location").each(function(i, v) {
+        var idInputLongitude = $(v).data('longitude');
+        var idInputLatitude = $(v).data('latitude');
+        $(this).placepicker({
+            placeChanged: function(place) {
+                var location = this.getLocation()
+                console.log("place changed: ", place.formatted_address, location);
+                $('#'+idInputLatitude).val(location.latitude);
+                $('#'+idInputLongitude).val(location.longitude);
+            }
+        });
     });
+
+    $('.row.grp-machine .column').click(function() {
+        $(this).find('input[type=radio]').prop('checked', true);
+    })
 
     ///////////////////////////
     //Tab fix VAPOR ////
     ///////////////////////////
 
     $('#sua-chua-khan-cap > li').click(function() {
-        $(this).find('input').val(1)
+        var val = parseInt($(this).find('input').val()) || 0;
+        $(this).find('input').val(1 - val)
         initSummary();
     });
 

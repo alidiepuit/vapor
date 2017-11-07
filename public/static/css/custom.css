@@ -244,3 +244,9 @@ picture.participan {
 .star-rating {
   margin: 0 auto;
 }
+.label.terms {
+  display: inline!important;
+}
+.label.terms a {
+  width: auto;
+}

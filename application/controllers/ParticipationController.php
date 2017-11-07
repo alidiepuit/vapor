@@ -14,6 +14,10 @@ class ParticipationController extends Zend_Controller_Action
         $experiences = Application_Model_PostMapper::getInstance()->getPostByType(Application_Model_Post::POST_TYPE_SERVICE);
         $this->view->experiences = $experiences;
 
+        $term = Application_Model_PostMapper::getInstance()->getPostByType(Application_Model_Post::POST_TYPE_TERM);
+        // pr($term);
+        $this->view->term = $term;
+
         $tools = Application_Model_ToolMapper::getInstance()->getTools();
         $this->view->tools = $tools;
         // pr($tools);

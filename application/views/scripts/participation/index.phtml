@@ -252,7 +252,7 @@
                       <div class="pad-top">
                           <div class="option fullline">
                             <input type="checkbox" class="required" name="terms">
-                            <div class="label terms"> Tôi đồng ý với <a> Điều khoản Sử dụng </a> của Vapor, <a> Tuyên bố về quyền riêng tư </a></div>
+                            <div class="label terms"> Tôi đồng ý với <a data-toggle="modal" data-target="#using-term" href="#">Điều khoản Sử dụng</a> của Vapor và bằng cách nhấp vào đây, tôi đồng ý rằng Vapor hoặc các đại diện của Vapor có thể liên hệ với tôi qua email, điện thoại hoặc SMS (bao gồm cả hệ thống quay số bằng điện thoại tự động) theo địa chỉ email hoặc số điện thoại mà tôi cung cấp, ao gồm cả mục đích tiếp thị. Tôi đã đọc và hiểu <a data-toggle="modal" data-target="#privacy-term" href="#">Tuyên bố về Quyền Riêng Tư</a> có liên quan.</div>
                           </div>
                         </div>
                     </div>
@@ -271,4 +271,37 @@
     
     
   </form>
+  <!-- Modal -->
+  <div class="modal fade" role="dialog" id="using-term" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="">Điều khoản sử dụng</h4>
+        </div>
+        <div class="modal-body">
+          <?=$this->term[1]->getPostContent()?>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+   <div class="modal fade" role="dialog" id="privacy-term" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="">Quyền riêng tư</h4>
+        </div>
+        <div class="modal-body">
+          <?=$this->term[0]->getPostContent()?>
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+    </div>
+  </div>
   <?php }?>

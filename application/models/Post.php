@@ -5,6 +5,7 @@ class Application_Model_Post extends Application_Model_BaseModel_BaseModel
     const POST_TYPE_SERVICE     = 2;
     const POST_TYPE_FEATURE     = 3;
     const POST_TYPE_CUSTOMER    = 4;
+    const POST_TYPE_TERM        = 5;
 
     protected $_id;
     protected $_postTitle;
