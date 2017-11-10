@@ -86,10 +86,7 @@ jQuery(document).ready(function( $ ) {
     //////////////////////////
     ///      Booking      ////
     //////////////////////////
-    $('.dropdown.dropdown-inline').click(function() {
-        $(this).toggleClass('open');
-    });
-
+    initScriptTopMenuUserInfo();
 
     $('.booking-flow.steps').steps({
         headerTag: "h3",

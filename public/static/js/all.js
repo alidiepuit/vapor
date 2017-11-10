@@ -62,9 +62,16 @@ var initTopMenuUserInfo = function() {
       data: $(this).serialize(),
       success: function(html) {
         $('#topmenu-user-info').html(html);
+        initScriptTopMenuUserInfo();
       }
     });
 };
+
+var initScriptTopMenuUserInfo = function() {
+    $('.dropdown.dropdown-inline').click(function() {
+        $(this).toggleClass('open');
+    });
+}
 
 var initFormUpdateInfo = function(callbackUpdateInfoSuccess) {
     $('form[name="updateInfoForm"]').on('submit', function(event) {
