@@ -55,6 +55,7 @@ class Application_Model_UserMapper
             $data['created_at'] = $user->getCreatedAt();
             $this->getDbTable()->insert($data);
         } else {
+            // pr($id);
             $this->getDbTable()->update($data, array('id = ?' => $id));
         }
     }

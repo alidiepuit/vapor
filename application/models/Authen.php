@@ -48,8 +48,8 @@ class Application_Model_Authen {
       // Zend_Auth::getInstance()->clearIdentity();
       $modelUser = new Application_Model_User($object);
 
-      $namespace = new Zend_Session_Namespace('Zend_Auth');
-      $namespace->user = $modelUser;
+      // $namespace = new Zend_Session_Namespace('Zend_Auth');
+      // $namespace->user = $modelUser;
 
       $auth->getStorage()->write($modelUser);
 
@@ -62,6 +62,10 @@ class Application_Model_Authen {
   public function getCurrentUser() {
     $auth = Zend_Auth::getInstance();
     return $auth->getIdentity();
+  }
+
+  public function logout() {
+    Zend_Auth::getInstance()->clearIdentity();
   }
 
   public function register($modelUser, $typeLogin = self::TYPE_REGISTER_EMAIL) {
@@ -88,8 +92,8 @@ class Application_Model_Authen {
     }
 
     // pr($modelUser->getUserName() . ' ' . $modelUser->getUserPassword());
-    $namespace = new Zend_Session_Namespace('Zend_Auth');
-    $namespace->user = $user;
+    // $namespace = new Zend_Session_Namespace('Zend_Auth');
+    // $namespace->user = $user;
     
     $auth = Zend_Auth::getInstance();
     $auth->getStorage()->write($user);

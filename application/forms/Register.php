@@ -41,11 +41,12 @@ class Application_Form_Register extends Zend_Form
             'filters'    => array('StringTrim', 'StripTags'),
         ));
 
-        // Add an repeat password element
+        // Add an phone element
         $this->addElement('text', 'user_phone', array(
             'label'      => 'phone',
             'required'   => true,
             'filters'    => array('StringTrim', 'StripTags'),
+            'validators'  => array('NotEmpty', 'Digits'),
         ));
 
         // Add some CSRF protection

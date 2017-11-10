@@ -4,6 +4,9 @@
    <div class="row previous-and-upcoming-control" id="previous-and-upcoming-control">
       <ul class="small-12 medium-7 large-8 columns">
         <li>
+          <a data-toggle="tab" href="#user-info-section" class="btn booking-tab" type="button">Thông tin cá nhân</a>
+        </li>
+        <li>
           <a data-toggle="tab" href="#upcoming-bookings-section" class="btn booking-tab" type="button">Đang đặt hàng</a>
         </li>
         <li>
@@ -12,7 +15,8 @@
       </ul>
       <div class="account-page-main-content-block">
       <div class="ng-scope">
-         <div class="row upcoming-bookings-section" id="upcoming-bookings-section">
+        <?php echo $this->action('update-info', 'user')?>
+        <div class="row upcoming-bookings-section" id="upcoming-bookings-section">
           <?php if (count($this->history['comming'])) {?>
             <div class="">
                <div class="small-12 columns">
@@ -54,8 +58,8 @@
             </div>
             
             <?php }?>
-         </div>
-         <div class="row previous-bookings-section ng-hide" id="previous-bookings-section">
+        </div>
+        <div class="row previous-bookings-section ng-hide" id="previous-bookings-section">
             <?php if (count($this->history['pass'])) {?>
             <div class="">
                <div class="small-12 columns">

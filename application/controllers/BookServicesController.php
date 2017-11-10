@@ -6,6 +6,11 @@ class BookServicesController extends Zend_Controller_Action
     public function init()
     {
         $this->_helper->layout->setLayout('bookinglayout');
+
+        $user = Application_Model_Authen::getInstance()->getCurrentUser();
+        if (isset($user) && empty($user->getUserPhone())) {
+            $this->redirect('/user');
+        }
     }
 
     public function indexAction()

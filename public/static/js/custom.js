@@ -190,13 +190,6 @@ jQuery(document).ready(function( $ ) {
         }
     });
 
-    $('#thamgia').on('click', function() {
-        function goToRegisterVapor(){
-            window.location.replace("/tham-gia.html");
-        };
-        window.setTimeout(goToRegisterVapor, 500); 
-    });
-
     
     //////////////////////////
     ///       User        ////

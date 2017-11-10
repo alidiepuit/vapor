@@ -7,22 +7,17 @@
       <ul>
         <?php $helper = new Helpers_View_Menu();?>
         <?= $helper->topMenu() ?>
-        <?php $user = $this->authen();
-              if($user) { ?>
-              <li class="sign-in" style="margin-left: auto;">
-                <a href="/user/<?=$user->getId()?>">welcome, <?= $user->getUserDisplayName()?></a>
-              </li>
-              <?php } else {?>
-              <li class="sign-in" style="margin-left: auto;">
-                <a href="/dang-nhap.html">đăng nhập</a>
-              </li>
-              <?php }?>
-              <li id="thamgia" class="book-now" style="margin-left: inherit!important;">
-                <label class="switch">
-                  <input type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-              </li>
+
+        <li class="sign-in" id="topmenu-user-info" style="margin-left: auto;">
+          <?php echo $this->action('topmenu', 'user')?>
+        </li>
+
+        <li id="thamgia" class="thamgia" style="margin-left: inherit!important;">
+          <label class="switch">
+            <input type="checkbox" class="slide-btn">
+            <span class="slider round"></span>
+          </label>
+        </li>
       </ul>
     </nav>
   </div>

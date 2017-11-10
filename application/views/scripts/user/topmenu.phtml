@@ -1,0 +1,13 @@
+
+<?php if($this->user) { ?>
+  
+    <div class="dropdown dropdown-inline">
+      <a id="topmenu-user-info" href="#" class="dropdown-toggle" style="border: 0" data-toggle="dropdown">welcome, <?= $this->user->getUserDisplayName()?> <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li style="margin-left: 0"><a href="/user">Thông tin khách hàng</a></li>
+        <li style="margin-left: 0"><a href="/logout">Đăng xuất</a></li>
+      </ul>
+    </div>
+  <?php } else {?>
+    <a id="topmenu-user-info" href="/dang-nhap.html">đăng nhập</a>
+  <?php }?>

@@ -39,4 +39,61 @@ jQuery(document).ready(function( $ ) {
     }else{
         $('html, body').show();
     }
+
+    
+    $('.thamgia').on('click', function() {
+        function goToRegisterVapor(){
+            window.location.replace("/tham-gia.html");
+        };
+        window.setTimeout(goToRegisterVapor, 500); 
+    });
+
+    var callbackUpdateInfoSuccess = function() {
+        window.location.replace("/user");
+    }
+
+    initFormUpdateInfo(callbackUpdateInfoSuccess);
 });
+
+var initTopMenuUserInfo = function() {
+    $.ajax({
+      url: '/user/topmenu',
+      type: 'GET',
+      data: $(this).serialize(),
+      success: function(html) {
+        $('#topmenu-user-info').html(html);
+      }
+    });
+};
+
+var initFormUpdateInfo = function(callbackUpdateInfoSuccess) {
+    $('form[name="updateInfoForm"]').on('submit', function(event) {
+        event.preventDefault();
+        if (!$(this).valid()) {
+            return
+        }
+        var _this = this
+        $.ajax({
+          url: '/user/update-info',
+          type: 'post',
+          dataType: 'json',
+          data: $(this).serialize(),
+          success: function(data) {
+            var token = data.token
+            $(_this).find('input[name="csrf_update_info"]').val(token);
+            if (data.success) {
+                callbackUpdateInfoSuccess();
+                return;
+            } else {
+                $(_this).find('div.error').html('<p class="error">'+data.error+'</p>');
+            }
+          }
+        });
+    }).validate({
+        rules: {
+            update_form_username: "required",
+            update_form_display_name: "required",
+            update_form_phone_number: "required",
+        },
+    });
+};

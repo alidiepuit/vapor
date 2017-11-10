@@ -1,0 +1,35 @@
+<?php if (!$this->refresh) {?>
+<section id="section-update-info">
+<?php }?>
+
+  <div class="row user-info-section" id="user-info-section">
+    <div class="">
+         <div class="small-12 columns">
+            <div class="account-info-slab">
+              <form name="updateInfoForm" class="ng-pristine ng-valid " action="/user/update-info" method="POST">
+                <div class="error"><?= $this->error ? '<p class="error">'.$this->error.'</p>' : "" ?></div>
+                <input name="<?= $this->form->getElements()['csrf_update_info']->getName()?>" type="hidden" value="<?= $this->form->getElements()['csrf_update_info']->getValue()?>">
+                <div class="form-fields-wrapper" style="display: block">
+                  <label class="no-acc-txt mar-btm-10">Email </label>
+                  <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="user_name" placeholder="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'email'" name="<?= $this->form->getElements()['email']->getName()?>" disabled="" value="<?= $this->form->getElements()['email']->getValue()?>"/>
+                </div>
+                <div class="form-fields-wrapper" style="display: block">
+                  <label class="no-acc-txt mar-btm-10">Tên hiển thị </label>
+                  <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="user_name" placeholder="Tên hiển thị" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tên hiển thị'" name="<?= $this->form->getElements()['display_name']->getName()?>" value="<?= $this->form->getElements()['display_name']->getValue()?>"/>
+                </div>
+                <div class="form-fields-wrapper" style="display: block">
+                  <label class="no-acc-txt mar-btm-10">Số điện thoại </label>
+                  <input type="text" class="gs-textbox ng-pristine ng-untouched ng-valid required" id="user_name" placeholder="Số điện thoại" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại'" name="<?= $this->form->getElements()['phone_number']->getName()?>" value="<?= $this->form->getElements()['phone_number']->getValue()?>"/>
+                </div>
+                <div class="form-fields-wrapper">
+                   <button type="submit" class="gs-button mar-top-5">Thay đổi</button>
+                </div>
+              </form>
+            </div>
+         </div>
+    </div>
+  </div>
+
+<?php if (!$this->refresh) {?>
+</section>
+<?php }?>

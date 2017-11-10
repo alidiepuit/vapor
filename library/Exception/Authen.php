@@ -9,8 +9,12 @@ class Exception_Authen extends Exception
     const EXCEPTION_AUTHEN_EMAIL_SOCIAL = array('code' => 104, 'message' => 'This email is used by authenticating social.');
     const EXCEPTION_AUTHEN_WRONG_EMAIL_PASSWORD = array('code' => 105, 'message' => 'Email or password is wrong.');
 
-
     const EXCEPTION_POST_WRONG_ID = array('code' => 200, 'message' => 'Wrong ID post.');
+
+    const EXCEPTION_UPDATE_INFO_WRONG_DISPLAY_NAME = array('code' => 300, 'message' => 'Display name is invalid.');
+    const EXCEPTION_UPDATE_INFO_WRONG_PHONE_NUMBER = array('code' => 301, 'message' => 'Phone number is invalid.');
+
+    const EXCEPTION_FORM_CRSF = array('code' => 400, 'message' => 'Please submit form again.');
 
     // Redefine the exception so message isn't optional
     public function __construct($exception = EXCEPTION_AUTHEN_UNKNOWN, Exception $previous = null) {

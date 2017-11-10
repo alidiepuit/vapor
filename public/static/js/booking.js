@@ -86,6 +86,10 @@ jQuery(document).ready(function( $ ) {
     //////////////////////////
     ///      Booking      ////
     //////////////////////////
+    $('.dropdown.dropdown-inline').click(function() {
+        $(this).toggleClass('open');
+    });
+
 
     $('.booking-flow.steps').steps({
         headerTag: "h3",
@@ -337,6 +341,7 @@ jQuery(document).ready(function( $ ) {
     //Section authenticate ////
     ///////////////////////////
     $("#section-register").hide();
+    $("#section-update-info").hide();
     $("#section-login").show();
     $('.not-registered-wrap a').click(function(event) {
       event.preventDefault()
@@ -348,6 +353,37 @@ jQuery(document).ready(function( $ ) {
         $("#section-login").fadeIn(300);
       }
     });
+
+    var handleCallbackLogin = function(data) {
+        if (data.success) {
+            initTopMenuUserInfo();
+            USER_ID = data.userId;
+            if (!data.phoneNumber) {
+                $.ajax({
+                  url: '/user/update-info',
+                  type: 'GET',
+                  data: {'refresh':true},
+                  success: function(html) {
+
+                    $("#section-register").hide();
+                    $("#section-update-info").html(html);
+                    $("#section-update-info").show();
+                    $("#section-login").hide();
+
+                    initFormUpdateInfo(function() {
+                        setCurrentIndex(3);
+                        $('.booking-flow.steps').steps('next');
+                    });
+                  }
+                });
+                return
+            }
+            setCurrentIndex(3);
+            $('.booking-flow.steps').steps('next');
+        } else {
+            $('div.error').html('<p class="error">'+data.error+'</p>');
+        }
+    }
 
     $('form[name="loginForm"]').on('submit', function(event) {
         event.preventDefault();
@@ -363,11 +399,8 @@ jQuery(document).ready(function( $ ) {
           success: function(data) {
             var token = data.token
             $(_this).find('input[name="csrf_login"]').val(token);
-            if (data.success) {
-              $('.booking-flow.steps').steps('next');
-              USER_ID = data.userId;
-              setCurrentIndex(3);
-            }
+
+            handleCallbackLogin(data);
           }
         });
     }).validate({
@@ -398,11 +431,8 @@ jQuery(document).ready(function( $ ) {
           success: function(data) {
             var token = data.token
             $(_this).find('input[name="csrf_register"]').val(token);
-            if (data.success) {
-              $('.booking-flow.steps').steps('next');
-              USER_ID = data.userId;
-              setCurrentIndex(3);
-            }
+            
+            handleCallbackLogin(data);
           }
         });
     }).validate({
@@ -450,6 +480,66 @@ jQuery(document).ready(function( $ ) {
                 $(_this).removeProp("disabled");
             }
           }
+        });
+    })
+
+    //////////////////////////
+    /// Login social      ////
+    //////////////////////////
+
+    var loginSocial = function(data) {
+        $.post( "/dang-nhap.html", 
+            { 
+                accessToken: data.accessToken, 
+                userID: data.userID,
+                type: data.type,
+            },
+            function(data) {
+                handleCallbackLogin(data);
+            }, "json"
+        );
+    }
+
+    var loginFB = function() {
+        FB.login(function(response) {
+        if (response.status == "connected") {
+            loginSocial({ 
+                accessToken: response.authResponse.accessToken, 
+                userID: response.authResponse.userID,
+                type: "facebook",
+            });
+        }
+
+        }, {scope: 'email,public_profile'});            
+    }
+
+    $('.btnFB').click(function() {
+        loginFB();
+    })
+
+    var ggCalback = function(googleUser) {
+        console.log( "signedin");
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+        console.log("Name: " + profile.getName());
+    };
+
+    $('.btnGG').click(function() {
+        gapi.load('auth2', function() {
+            gapi.auth2.init({
+                client_id: GGClientID,
+                scope: "profile email" // this isn't required
+            }).then(function(auth2) {
+                console.log( "signed in: " + auth2.isSignedIn.get() );
+                auth2.signIn().then(function(googleUser) {
+                    var profile = googleUser.getBasicProfile();
+                    loginSocial({ 
+                        accessToken: googleUser.getAuthResponse().access_token, 
+                        userID: profile.getId(),
+                        type: "google",
+                    });
+                })
+            });
         });
     })
 });

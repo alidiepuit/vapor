@@ -5,17 +5,25 @@ class AuthenticateController extends Zend_Controller_Action
 
     public function init()
     {
+        
+    }
+
+    public function checkValidUser()
+    {
         $request = $this->getRequest();
         $params = $request->getParams();
-        $namespace = new Zend_Session_Namespace('Zend_Auth');
+        $user = Application_Model_Authen::getInstance()->getCurrentUser();
+        $userId = isset($user) ? $user->getId() : '';
         $embed = isset($params['embed']) ? $params['embed'] : false;
-        if (!$embed && !$request->isXmlHttpRequest() && isset($namespace->user)) {
+        if (!$embed && !$request->isXmlHttpRequest() && $userId) {
             $this->_redirect('/');
         }
     }
 
     public function indexAction()
     {
+        $this->checkValidUser();
+        
         $user = Application_Model_Authen::getInstance()->getCurrentUser();
         
         if ($user->getId()) {
@@ -32,6 +40,8 @@ class AuthenticateController extends Zend_Controller_Action
 
     public function loginAction()
     {
+        $this->checkValidUser();
+        
         $request = $this->getRequest();
         $form    = new Application_Form_Signin();
 
@@ -78,6 +88,7 @@ class AuthenticateController extends Zend_Controller_Action
                 'error' => $this->view->error,
                 'token' => $form->getElements()['csrf_login']->getValue(),
                 'userId' => $user ? $user->getId() : '',
+                'phoneNumber' => $user ? $user->getUserPhone() : '',
             ));
             $this->_helper->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
@@ -94,6 +105,8 @@ class AuthenticateController extends Zend_Controller_Action
 
     public function registerAction()
     {
+        $this->checkValidUser();
+        
         $request = $this->getRequest();
         $form    = new Application_Form_Register();
 
@@ -145,6 +158,9 @@ class AuthenticateController extends Zend_Controller_Action
                 'error' => $this->view->error,
                 'token' => $form->getElements()['csrf_register']->getValue(),
                 'userId' => $user ? $user->getId() : '',
+                'phoneNumber' => $user ? $user->getUserPhone() : '',
+                'email' => $user ? $user->getUserName() : '',
+                'displayName' => $user ? $user->getUserDisplayName() : '',
             ));
             $this->_helper->layout()->disableLayout();
             $this->_helper->viewRenderer->setNoRender(true);
@@ -154,7 +170,14 @@ class AuthenticateController extends Zend_Controller_Action
         $this->view->form = $form;
     }
 
-    public function testCaseAction() {
+    public function logoutAction() 
+    {
+        Application_Model_Authen::getInstance()->logout();
+        $this->_redirect('/');
+    }
+
+    public function testCaseAction() 
+    {
         $modelUser = new Application_Model_User(array(
             'user_name' => 'a1@fossil.com',
             'user_id' => '123',
