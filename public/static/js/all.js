@@ -80,6 +80,7 @@ var initFormUpdateInfo = function(callbackUpdateInfoSuccess) {
             return
         }
         var _this = this
+        $('body').loading();
         $.ajax({
           url: '/user/update-info',
           type: 'post',
@@ -88,6 +89,7 @@ var initFormUpdateInfo = function(callbackUpdateInfoSuccess) {
           success: function(data) {
             var token = data.token
             $(_this).find('input[name="csrf_update_info"]').val(token);
+            $('body').loading('stop');
             if (data.success) {
                 callbackUpdateInfoSuccess();
                 return;

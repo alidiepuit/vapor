@@ -352,6 +352,7 @@ jQuery(document).ready(function( $ ) {
     });
 
     var handleCallbackLogin = function(data) {
+        $('body').loading('stop');
         if (data.success) {
             initTopMenuUserInfo();
             USER_ID = data.userId;
@@ -388,6 +389,7 @@ jQuery(document).ready(function( $ ) {
             return
         }
         var _this = this
+        $('body').loading();
         $.ajax({
           url: '/dang-nhap.html',
           type: 'post',
@@ -420,6 +422,7 @@ jQuery(document).ready(function( $ ) {
             return;
         }
         var _this = this
+        $('body').loading();
         $.ajax({
           url: '/dang-ky.html',
           type: 'post',
@@ -462,12 +465,14 @@ jQuery(document).ready(function( $ ) {
         var _this = this;
         $(this).prop('disabled', true);
         bookingSummary.codePromotion = $('#code-promotion').val()
+        $('body').loading();
         $.ajax({
           url: '/book-services/book',
           type: 'post',
           dataType: 'json',
           data: bookingSummary,
           success: function(data) {
+            $('body').loading('stop');
             if (data.success) {
                 $(_this).hide();
                 bookingSummary = new Array();
@@ -511,17 +516,12 @@ jQuery(document).ready(function( $ ) {
     }
 
     $('.btnFB').click(function() {
+        $('body').loading();
         loginFB();
     })
 
-    var ggCalback = function(googleUser) {
-        console.log( "signedin");
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("Name: " + profile.getName());
-    };
-
     $('.btnGG').click(function() {
+        $('body').loading();
         gapi.load('auth2', function() {
             gapi.auth2.init({
                 client_id: GGClientID,
