@@ -113,6 +113,12 @@ class UserController extends Zend_Controller_Action
 
     public function voteAction()
     {
+        $user = Application_Model_Authen::getInstance()->getCurrentUser();
+        if (!$user || !$user->getId()) {
+            $this->redirect('/');
+            return;
+        }
+
         $this->_helper->layout()->disableLayout();
         $this->_helper->viewRenderer->setNoRender(true);
 
@@ -127,7 +133,7 @@ class UserController extends Zend_Controller_Action
                     'vote_grouporder'   => $form->getValue('grouporder', ''),
                     'vote_star'         => $form->getValue('vote', ''),
                     'vote_comment'      => $form->getValue('comment', ''),
-                    'vote_user'         => $this->user->getId(),
+                    'vote_user'         => $user->getId(),
                 );
                 // pr($data);
                 $vote = new Application_Model_Vote($data);
