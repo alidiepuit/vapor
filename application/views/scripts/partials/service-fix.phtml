@@ -6,7 +6,7 @@
         <div class="header"><p><?=$service->getServicesTypeMachineTitle()?></p></div>
         <img alt="BLOWOUT" class="service-image" src="<?=$service->getServicesImage()?>">
       </div>
-      <input type="hidden" data-service-title="<?=$service->getServicesTitle()?>" data-machine-title="<?=$service->getServicesTypeMachineTitle()?>" data-service-id="<?=$service->getId()?>" data-power="0" data-service-count="" type="text" class="form-control text-center service-detail" data-service-cost="0" id="" value="0">
+      <input type="hidden" data-service-slug="<?=$service->getServicesSlug()?>" data-service-title="<?=$service->getServicesTitle()?>" data-machine-title="<?=$service->getServicesTypeMachineTitle()?>" data-service-id="<?=$service->getId()?>" data-power="0" data-service-count="" type="text" class="form-control text-center service-detail" data-service-cost="0" id="" value="0">
     </div>
   </li>
   <?php }?>

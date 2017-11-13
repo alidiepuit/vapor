@@ -1,5 +1,5 @@
 <?php
-class Application_Model_BaseModel_BaseModel
+class Application_Model_BaseModel_BaseModel extends Application_Model_BaseModel_BaseClass
 {
     public function __construct(array $options = null)
     {

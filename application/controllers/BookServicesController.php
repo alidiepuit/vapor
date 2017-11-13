@@ -47,13 +47,14 @@ class BookServicesController extends Zend_Controller_Action
         if ($request->isPost()) {
             if ($form->isValid($data)) {
                 // pr($request->getParams());
-                $longitude          = (double)$request->getParam('longitude', '106.68894369999998');
-                $latitude           = (double)$request->getParam('latitude', '10.7602476');
+                $longitude          = (double)$request->getParam('longitude', '');
+                $latitude           = (double)$request->getParam('lattitude', '');
                 $address            = (string)$form->getValue('full_address', '');
                 $typeLocation       = (int)$request->getParam('type_location', '');
-                $datetime           = (string)$request->getParam('datetime', '10/25/2017 11:58 PM');
+                $datetime           = (string)$request->getParam('datetime', '');
                 $amountCurrentOrder = (int)$request->getParam('amount', 0);
 
+                // pr($request->getParams());
                 if (!Application_Model_BookingService::getInstance()->isInHCMCity($latitude, $longitude)) {
                     echo json_encode(array( 
                         'error' => 'Địa chỉ không hợp lệ.',

@@ -28,7 +28,7 @@ jQuery(document).ready(function( $ ) {
     });
 
     $('.btn-booking-service-now').click(function() {
-        window.location.replace("/book-services");
+        window.location.replace("/dat-dich-vu.html");
     })
 
     if (location.hash){
@@ -53,6 +53,7 @@ jQuery(document).ready(function( $ ) {
     }
 
     initFormUpdateInfo(callbackUpdateInfoSuccess);
+
 });
 
 var initTopMenuUserInfo = function() {

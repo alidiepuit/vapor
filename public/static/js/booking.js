@@ -41,11 +41,16 @@ var dataTool = {};
 var initSummary = function() {
     dataBooking = new Array();
     dataTool = new Array();
+    $('.note-service').hide();
     $('input.service-detail').each(function(i, v) {
         var count = parseInt(v.value);
         var cost = parseInt($(v).data('service-cost'))
         if (count > 0) {
             var serviceId = $(v).data('service-id') || 0;
+            var serviceSlug = $(v).data('service-slug') || '';
+            if (serviceSlug) {
+                $('#note-'+serviceSlug).show();
+            }
             dataBooking.push({
                 'serviceTitle': $(v).data('service-title'),
                 'machineTitle': $(v).data('machine-title'),
@@ -59,6 +64,7 @@ var initSummary = function() {
                 dataTool.push({
                     'toolId': toolId,
                     'toolCount': count,
+                    'toolCost': cost*count,
                 });
             }
         }
@@ -130,7 +136,11 @@ jQuery(document).ready(function( $ ) {
                 });
                 var li = $('<li/>').html('<span class="item order-service ng-binding"> Giảm giá </span><span class="price order-price ng-binding">' + bookingSummary.discount + '%</span>');
                 $(li).insertBefore($('.appointment-summary .prices li:last'));
-                $('.appointment-summary .prices li:last .price').formatCurrency(bookingSummary.cost - bookingSummary.cost*bookingSummary.discount/100);
+                var costDiscount = bookingSummary.cost
+                $(dataTool).each(function(i, v) {
+                    costDiscount -= v.toolCost;
+                });
+                $('.appointment-summary .prices li:last .price').formatCurrency(bookingSummary.cost - costDiscount*bookingSummary.discount/100);
             }
             $('bf-booking-flow').fadeIn(300);
         },
@@ -196,6 +206,10 @@ jQuery(document).ready(function( $ ) {
             console.log("place changed: ", place.formatted_address, location);
             $('#booking-latitude').val(location.latitude);
             $('#booking-longitude').val(location.longitude);
+            if (!$('.gs-icon.fa.fa-map-marker').hasClass('active')) {
+                $('.gs-icon.fa.fa-map-marker').click();
+                $('.gs-icon.fa.fa-map-marker').addClass('active');
+            }
         }
     });
 
@@ -256,9 +270,9 @@ jQuery(document).ready(function( $ ) {
                 $('#booking-location .gs-address-summary .details').html($('<li/>').html(data.address))
                 
             } else {
-                $(_this).find('button[type=submit]').text('Done');
+                $(_this).find('button[type=submit]').text('Đặt');
                 $('#booking-location-error').show();
-                $('#booking-location-error').html('Location is not valid.');
+                $('#booking-location-error').html(data.error);
             }
           }
         });

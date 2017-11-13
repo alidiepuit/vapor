@@ -3,6 +3,7 @@ class Application_Model_Service_DetailService extends Application_Model_BaseMode
 {
     protected $_id;
     protected $_servicesTitle;
+    protected $_servicesSlug;
     protected $_servicesImage;
     protected $_servicesTypeMachine;
     protected $_servicesTypeMachineTitle;
@@ -31,6 +32,11 @@ class Application_Model_Service_DetailService extends Application_Model_BaseMode
     public function getServicesTitle()
     {
         return $this->_servicesTitle;
+    }
+ 
+    public function getServicesSlug()
+    {
+        return $this->slugify($this->_servicesTitle);
     }
  
     public function setTypemachineImage($text)

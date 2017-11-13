@@ -48,12 +48,13 @@
                           </div>
                           <div style="text-align: right">
                             <span class="total-cost currency"></span>
-                            <button  type="button" id="" class="gs-button booking-next" disabled="disabled">Book</button>
+                            <button  type="button" id="" class="gs-button booking-next" disabled="disabled">Đặt</button>
                           </div>
-                          <div>
-                            <p style="color:red;">* Tiến hành bước tiếp theo, nhập địa điểm và thời gian để có thể được giảm 10% - 35%</p>
-                            <p style="color:red;">* Giá trên bao gồm nhân công tháo - lắp máy lạnh và nhân công tháo - lắp các vật tư liên quan </p>
-                            <p style="color:red;">* Khi lắp máy VAPOR ưu tiên sử dụng vật tư hiện có của quý khách, nếu sau khi khảo sát cần thêm vật tư chúng tôi sẽ thông báo hoặc quý khách có thể chọn <a data-toggle="modal" data-target="#service-adding-tool" href="#">tại đây</a> </p>
+                          <div class="note-service" id="note-thao-lap-di-doi-may" style="display:none;">
+                            <p style="color:red;">Khi lắp máy VAPOR ưu tiên sử dụng vật tư hiện có của quý khách, nếu sau khi khảo sát cần thêm vật tư chúng tôi sẽ thông báo hoặc quý khách có thể chọn <a data-toggle="modal" data-target="#service-adding-tool" href="#">tại đây</a> </p>
+                          </div>
+                          <div class="note-service" id="note-sua-chua-khan-cap" style="display:none;">
+                            <p style="color:red;">Sau khi đặt dịch vụ, Vapor sẽ tiến hành đến kiểm tra miễn phí và thông báo các hư hỏng đến quý khách</p>
                           </div>
                         </section>
                      </bf-services-summary>
@@ -155,10 +156,14 @@
                      <div class="gs-form ng-pristine ng-invalid ng-invalid-required form-location" novalidate="" autocomplete="off">
                         <label class="gs-label">Địa điểm của bạn ?</label>
                         <div class="gs-formatted-address">
-                           <input force-selection="true" googleplace="" bind="address" type="text" name="full_address" placeholder="Nhập địa chỉ của bạn " id="booking-address" class="street gs-textbox ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required required" required="" autocomplete="on" value="">
-                           <i class="gs-icon fa fa-map-marker" aria-hidden="true"></i>
-                           <input class="" type="hidden" id="booking-latitude" name="lattitude" value=""/>
-                           <input class="" type="hidden" id="booking-longitude" name="longitude" value=""/>
+                          <input force-selection="true" googleplace="" bind="address" type="text" name="full_address" placeholder="Nhập địa chỉ của bạn " id="booking-address" class="street gs-textbox ng-pristine ng-untouched ng-isolate-scope ng-invalid ng-invalid-required required" required="" autocomplete="on" value=""  data-map-container-id="collapseOne" style="">
+                          <i data-toggle="collapse" href="#collapseOne"  class="gs-icon fa fa-map-marker" aria-hidden="true"></i>
+                          <input class="" type="hidden" id="booking-latitude" name="lattitude" value=""/>
+                          <input class="" type="hidden" id="booking-longitude" name="longitude" value=""/>
+                          
+                        </div>
+                        <div id="collapseOne" class="collapse">
+                          <div class="placepicker-map thumbnail"></div>
                         </div>
                         <div class="gs-address-summary" style="display: none;">
                           <ul class="details">
@@ -195,7 +200,7 @@
                         <div id="booking-discount" style="color:red;">
                           
                         </div>
-                        <button type="submit" class="address-button gs-button" style="">Done </button>
+                        <button type="submit" class="address-button gs-button" style="">Đặt</button>
                      </div>
                     </form>
                      <bf-order-summary>
@@ -282,7 +287,7 @@
 
                   
 
-                  <button type="submit" class="book-now gs-button">Book Now</button>
+                  <button type="submit" class="book-now gs-button">Đặt dịch vụ</button>
               </div>
               <div class="booking-flow-content cell booking-success">
                 <bf-appointment-summary>
