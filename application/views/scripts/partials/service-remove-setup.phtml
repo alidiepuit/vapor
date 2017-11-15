@@ -21,7 +21,7 @@
             <p><?= $grpMachine->getGrpMachineTitle()?></p>
             <div>
               <input type="radio" name="grp-machine" class="radio-grp-machine <?=$machine->getMachineSlug()?>" id="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>" value="<?= $grpMachine->getGrpMachineSlug()?>">
-              <img for="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>" src="<?= strtolower($grpMachine->getGrpMachineSlug())=='dan_lanh'?$machine->getMachineImageCold():(strtolower($grpMachine->getGrpMachineSlug())=='dan_nong'?$machine->getMachineImageWarm():$machine->getMachineImage())?>"/>
+              <img for="<?= $machine->getMachineSlug(),'-',$grpMachine->getGrpMachineSlug()?>" src="<?= strtolower($grpMachine->getGrpMachineSlug())=='dan-lanh'?$machine->getMachineImageCold():(strtolower($grpMachine->getGrpMachineSlug())=='dan-nong'?$machine->getMachineImageWarm():$machine->getMachineImage())?>"/>
             </div>
           </div>
           <div class="column">

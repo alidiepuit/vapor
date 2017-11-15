@@ -16,6 +16,7 @@ class Application_Model_Order_GroupOrder extends Application_Model_BaseModel_Bas
   protected $_grouporderCode;
   protected $_grouporderStatus;
   protected $_grouporderStar;
+  protected $_grouporderDetail;
 
   public function setId($text)
   {
@@ -180,6 +181,17 @@ class Application_Model_Order_GroupOrder extends Application_Model_BaseModel_Bas
   public function getGrouporderCode()
   {
       return $this->_grouporderCode;
+  }
+
+  public function setGrouporderDetail($text)
+  {
+      $this->_grouporderDetail = (string) $text;
+      return $this;
+  }
+
+  public function getGrouporderDetail()
+  {
+      return $this->_grouporderDetail;
   }
 
   public function isComming() {

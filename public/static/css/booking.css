@@ -209,7 +209,7 @@ screen and (min-width: 48em) {
 screen and (min-width: 64em) {
     .booking-flow.steps .booking-flow-content.cell .gs-form {
         float: left;
-        width: 300px
+        width: 50%;
     }
 }
 .booking-flow.steps .booking-flow-content.cell .gs-button {
@@ -233,7 +233,7 @@ screen and (min-width: 64em) {
     padding-bottom: 60px;
     position: relative;
     text-align: center;
-    width: 30%;
+    width: 25%;
 }
 .booking-flow .booking-flow-steps.cell .logo-link {
     margin-bottom: 60px
@@ -495,7 +495,6 @@ screen and (min-width: 64em) {
     margin-top: 25px
 }
 .booking-flow-appointment .order-summary {
-    display: none;
     padding: 30px
 }
 @media print,
@@ -1177,7 +1176,7 @@ screen and (min-width: 48em) {
 @media print,
 screen and (min-width: 48em) {
     .booking-flow.steps .booking-flow-services .booking-flow-content.cell {
-        width: 70%;
+        width: 75%;
         padding-right: 0;
         padding-left: 0;
         margin-left: 0;
@@ -1489,7 +1488,7 @@ screen and (min-width: 48em) {
         padding: 20px;
         left: auto;
         right: 0;
-        width: 70%;
+        width: 75%;
     }
     .booking-flow-services .booking-panel>div {
         display: -webkit-flex;
@@ -1851,6 +1850,9 @@ screen and (min-width: 48em) {
   text-decoration: none!important;
 
 }
+.booking-flow-content.booking-success {
+    display: none;
+}
 .booking-flow-services .services .service-content{
       padding: 10px 30px;
 }
@@ -1980,12 +1982,12 @@ input[type=number]
 }
 
 .booking-cell .left-cell {
-width: 45%;
+width: 40%;
 }
 .booking-cell .left-cell .column {
 }
 .booking-cell .right-cell {
-    width: 55%;    
+    width: 60%;    
 }
 .booking-cell .left-cell img {
 max-height: 300px;
@@ -2016,6 +2018,7 @@ max-height: 300px;
 .booking-flow-services .services .service {
     width: 47%;
     padding-top: 20px;
+    min-width: 400px;
 }
 .booking-flow-content a {
     font-size: 15px;

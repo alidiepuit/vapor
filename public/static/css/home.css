@@ -871,7 +871,8 @@ screen and (min-width: 48em) {
     }
 }
 .component-hero .gs-button {
-    background-color: #37173d;
+    color: #000;
+    background-color: #fdee4f;
     border: 2px solid #fff;
     padding: 0;
     position: absolute;
@@ -1343,7 +1344,7 @@ screen and (min-width: 48em) {
     }
     .component-news {
         margin-bottom: 40px;
-        background-color: #FFFF00;
+        background-color: #fdee4f;
     }
     .component-news .grid-container {
         max-width: 48rem

@@ -1,5 +1,4 @@
 <?php
-
 class UserController extends Zend_Controller_Action
 {
 
@@ -27,6 +26,9 @@ class UserController extends Zend_Controller_Action
 
     public function updateInfoAction()
     {
+
+        
+
         $user = Application_Model_Authen::getInstance()->getCurrentUser();
         $request = $this->getRequest();
         $form    = new Application_Form_UpdateInfo();
@@ -47,9 +49,9 @@ class UserController extends Zend_Controller_Action
 
         $isResponseJSON = !$refresh && $request->isXmlHttpRequest();
         $isValid = false;
-
         try {
             if ($this->getRequest()->isPost()) {
+                // pr($form->isValid($data));
                 if ($form->isValid($data)) {
                     $displayName = $form->getValue('display_name', '');
                     $phoneNumber = $form->getValue('phone_number', '');

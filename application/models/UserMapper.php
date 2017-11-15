@@ -53,7 +53,7 @@ class Application_Model_UserMapper
             unset($data['id']);
             $user->setCreatedAt(time());
             $data['created_at'] = $user->getCreatedAt();
-            $this->getDbTable()->insert($data);
+            return $this->getDbTable()->insert($data);
         } else {
             // pr($id);
             $this->getDbTable()->update($data, array('id = ?' => $id));

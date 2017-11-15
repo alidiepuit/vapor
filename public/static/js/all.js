@@ -54,6 +54,9 @@ jQuery(document).ready(function( $ ) {
 
     initFormUpdateInfo(callbackUpdateInfoSuccess);
 
+    $('.component-news li:last').click(function() {
+        window.location = '/dat-dich-vu.html';
+    })
 });
 
 var initTopMenuUserInfo = function() {
@@ -95,7 +98,9 @@ var initFormUpdateInfo = function(callbackUpdateInfoSuccess) {
                 callbackUpdateInfoSuccess();
                 return;
             } else {
-                $(_this).find('div.error').html('<p class="error">'+data.error+'</p>');
+                if (data.error) {
+                    $(_this).find('div.error').html('<p class="error">'+data.error+'</p>');
+                }
             }
           }
         });

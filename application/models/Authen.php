@@ -87,7 +87,8 @@ class Application_Model_Authen {
 
     //add new user
     if (!$user) {
-      Application_Model_UserMapper::getInstance()->save($modelUser);
+      $idUser = Application_Model_UserMapper::getInstance()->save($modelUser);
+      $modelUser->setId($idUser);
       $user = $modelUser;
     }
 

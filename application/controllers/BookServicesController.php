@@ -244,27 +244,50 @@ class BookServicesController extends Zend_Controller_Action
         // pr($groupOrderId);
 
         $listOrderIds = array();
+        $listOrder = array();
         foreach ($listServices as $service) {
             // pr($service->getServicesType());
-            $order = new Application_Model_Order_Order(array(
+            $orderData = array(
                 'order_grouporder'          => $groupOrderId,
                 'order_typeservice'         => $service->getServicesType(),
                 'order_typemachine'         => $service->getServicesTypeMachine(),
                 'order_amount'              => $listAmount[$service->getId()],
                 'order_power'               => $service->getServicesPower(),
-            ));
+            );
+            $order = new Application_Model_Order_Order($orderData);
             // pr($order);
             $id = Application_Model_OrderMapper::getInstance()->save($order);
             $listOrderIds[] = $id;
+            $listOrder[] = $service->getServicesTitle() . ' - ' 
+                . $service->getServicesTypeMachineTitle() . ' - (' 
+                . $service->getServicesPower() . ') - #' 
+                . $listAmount[$service->getId()] . ' - $' 
+                . $service->getServicesCost();
         }
 
+        // pr(implode("\n",$listOrder));
         $groupOrder->setId($groupOrderId);
         $groupOrder->setGrouporderOrder($listOrderIds);
+        $groupOrder->setGrouporderDetail(implode("<br/>",$listOrder));
         Application_Model_GroupOrderMapper::getInstance()->save($groupOrder);
 
         echo json_encode(array( 
             'error' => '',
             'success' => true,
         ));
+
+        require_once APPLICATION_PATH . '/../library/Notification/init.php';
+        $wonderpush = new \WonderPush\WonderPush(Zend_Registry::get('configs')->webpush->token, Zend_Registry::get('configs')->webpush->id);
+        $response = $wonderpush->deliveries()->prepareCreate()
+            ->setTargetSegmentIds('@ALL')
+            ->setNotification(\WonderPush\Obj\Notification::_new()
+                ->setAlert(\WonderPush\Obj\NotificationAlert::_new()
+                    ->setTitle('Có đặt hàng mới')
+                    ->setText('')
+                    ->setTargetUrl('http://admin.vapor.vn/admin/frontend_grouporders')
+                ))
+            ->execute()
+            ->checked();
+        // pr($response->getNotificationId());
     }
 }
