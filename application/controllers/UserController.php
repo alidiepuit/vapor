@@ -26,9 +26,6 @@ class UserController extends Zend_Controller_Action
 
     public function updateInfoAction()
     {
-
-        
-
         $user = Application_Model_Authen::getInstance()->getCurrentUser();
         $request = $this->getRequest();
         $form    = new Application_Form_UpdateInfo();

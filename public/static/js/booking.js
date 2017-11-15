@@ -494,6 +494,9 @@ jQuery(document).ready(function( $ ) {
                 $('.booking-flow-content.booking-success').fadeIn(300);
             } else {
                 $(_this).removeProp("disabled");
+                if (data.error) {
+                    $('.appointment-summary .error').text(data.error);
+                }
             }
           }
         });

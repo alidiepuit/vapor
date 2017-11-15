@@ -15,6 +15,7 @@ class BookServicesController extends Zend_Controller_Action
 
     public function indexAction()
     {
+
         $listTypeService = Application_Model_Service_TypeServiceMapper::getInstance()->getTypeService();
         $this->view->typeServices = $listTypeService;
 
@@ -220,7 +221,27 @@ class BookServicesController extends Zend_Controller_Action
         ////////////////////
         //code promotion //
         ///////////////////
-        $codePromotion = $request->getParam('codePromotion', '');
+        $codePromotion = trim($request->getParam('codePromotion', ''));
+        $promotion = '';
+        if (!empty($codePromotion)) {
+            $modelCodePromotion = Application_Model_CodePromotionMapper::getInstance();
+            if (!$modelCodePromotion->isValidCode($codePromotion)) {
+                echo json_encode(array( 
+                    'error' => 'Invalid code promotion.',
+                    'success' => false,
+                ));
+                return;
+            }
+            $promotion = $modelCodePromotion->getPercentDiscount($codePromotion);
+            if ($promotion == 0) {
+                echo json_encode(array( 
+                    'error' => 'This code promotion is expired or not valid.',
+                    'success' => false,
+                ));
+                return;
+            }
+            $dataBooking['discount'] += $promotion;
+        }
 
         ////////////////////
         //add order to DB //
@@ -237,7 +258,7 @@ class BookServicesController extends Zend_Controller_Action
             'grouporder_cost'           => $cost,
             'grouporder_discount'       => $dataBooking['discount'],
             'grouporder_tools'          => $dataTools,
-            'grouporder_code'           => $codePromotion,
+            'grouporder_code'           => $promotion,
         ));
         // pr($groupOrder);
         $groupOrderId = Application_Model_GroupOrderMapper::getInstance()->save($groupOrder);
