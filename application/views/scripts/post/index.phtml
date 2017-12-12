@@ -1,4 +1,47 @@
-<div class="content-post">
-<h2 class="center"><?=$this->data->getPostTitle()?></h2>
-<span><?=$this->data->getPostContent()?></span>
+<link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/article.css?v=2")?>">
+
+<?php $firstPost = $this->data[0];?>
+<section class="Jumbotron">
+   <div class="container">
+      <div class="ui mobile reversed stackable grid">
+         <div class="ten wide column contents-block">
+            <h1 class="headline"><a href="/bai-viet/<?=$firstPost->getId(),'/',$firstPost->getPostSlug()?>.html"><?=$firstPost->getPostTitle()?></a></h1>
+            <div class="excerpt">
+               <p><?= $firstPost->getPostSubContent()?> […]</p>
+            </div>
+            <div class="meta"><span class="timeago"><span><?=$firstPost->getPostUpdateTime()?></span></span></div>
+         </div>
+         <div class="six wide column contents-figure"><a href="/bai-viet/<?=$firstPost->getId(),'/',$firstPost->getPostSlug()?>.html"><img class="featured-img" src="<?php echo $this->baseUrl($firstPost->getPostImage())?>"></a></div>
+      </div>
+   </div>
+</section>
+<div class="recent-articles">
+   <div class="container">
+      <div class="ui stackable three column grid">
+        <?php for($i = 1, $len = count($this->data); $i < $len; $i++) {?>
+        <?php $post = $this->data[$i]?>
+         <div class="column recent-articles-box">
+            <a href="/bai-viet/<?=$post->getId(),'/',$post->getPostSlug()?>.html">
+               <img class="featured-img" src="<?php echo $this->baseUrl($post->getPostImage())?>">
+               <h2 class="headline"><?=$post->getPostTitle()?></h2>
+            </a>
+            <div class="recent-article-excerpt excerpt">
+               <p><?= $post->getPostSubContent()?> […]</p>
+            </div>
+            <div class="meta">
+               <span class="timeago"><span><?=$post->getPostUpdateTime()?></span></span>
+            </div>
+         </div>
+         <?php }?>
+      </div>
+   </div>
 </div>
+<nav class="pagination-wrapper">
+   <ul class="pagination">
+      <li class="disabled"><a>1</a></li>
+      <li class=""><a href="/sg/en/blog?page=2">2</a></li>
+      <li class=""><a href="/sg/en/blog?page=3">3</a></li>
+      <li class="disabled"><a>...</a></li>
+      <li class=""><a href="/sg/en/blog?page=8">8</a></li>
+   </ul>
+</nav>

@@ -256,7 +256,7 @@ jQuery(document).ready(function( $ ) {
                 $('#booking-location-error').hide();
                 bookingSummary.discount = data.discount;
                 if (data.discount > 0) {
-                    $('#booking-discount').html('Có ' + data.amount + ' máy lạnh được đặt trong cùng khu vực, giảm thêm ' + data.discount + '%');
+                    $('#booking-discount').html('Có ' + data.amount + ' máy lạnh được đặt trong cùng khu vực, giảm thêm ' + data.discount + '% phí dịch vụ.');
                 }
                 bookingSummary.services = dataBooking;
                 bookingSummary.tools = dataTool;

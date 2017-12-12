@@ -16,6 +16,7 @@ class Application_Model_Post extends Application_Model_BaseModel_BaseModel
     protected $_postCreateBy;
     protected $_postImage;
     protected $_postType;
+    protected $_postSubContent;
  
     public function setId($text)
     {
@@ -47,7 +48,7 @@ class Application_Model_Post extends Application_Model_BaseModel_BaseModel
  
     public function getPostSlug()
     {
-        return $this->_postSlug;
+        return !$this->_postSlug ? $this->slugify($this->_postTitle) : $this->_postSlug;
     }
  
     public function setPostContent($text)
@@ -114,6 +115,17 @@ class Application_Model_Post extends Application_Model_BaseModel_BaseModel
     public function getPostType()
     {
         return $this->_postType;
+    }
+ 
+    public function setPostSubContent($text)
+    {
+        $this->_postSubContent = (string) $text;
+        return $this;
+    }
+ 
+    public function getPostSubContent()
+    {
+        return $this->_postSubContent;
     }
  
 }

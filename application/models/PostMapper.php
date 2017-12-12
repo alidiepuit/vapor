@@ -26,6 +26,7 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
             'post_create_by'        => $obj->getPostCreateBy(),
             'post_image'            => $obj->getPostImage(),
             'post_type'             => $obj->getPostType(),
+            'post_sub_content'      => $obj->getPostSubContent(),
         );
  
         if (null === ($id = $obj->getPostId())) {
@@ -68,6 +69,54 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
             $row = $this->getDbTable()->fetchRow($select);
             $row = $row ? $row->toArray() : Null;
             $res = new Application_Model_Post($row);
+            $res->setPostUpdateTime($row['updated_at']);
+            return $res;
+        } catch (Exception $e) {
+            pr($e);
+        }
+        return Null;
+    }
+
+    public function getPostById($id)
+    {
+        try {
+            $select = $this->getDbTable()->select()
+                    ->from('frontend_posts')
+                    ->where('id = ?', (int)$id)
+                    ->where('deleted_at IS NULL');
+
+            $row = $this->getDbTable()->fetchRow($select);
+            $row = $row ? $row->toArray() : Null;
+            $res = new Application_Model_Post($row);
+            $res->setPostUpdateTime($row['updated_at']);
+            return $res;
+        } catch (Exception $e) {
+            pr($e);
+        }
+        return Null;
+    }
+
+    public function getListArticle($offset, $limit)
+    {
+        try {
+            $select = $this->getDbTable()->select()
+                    ->from('frontend_posts')
+                    ->where('deleted_at IS NULL')
+                    ->where('post_type = ?', Application_Model_Post::POST_TYPE_ARTICLE)
+                    ->limitPage($offset, $limit)
+                    ->order(array('updated_at DESC'));
+
+            $rows = $this->getDbTable()->fetchAll($select);
+            $rows = $rows ? $rows->toArray() : Null;
+            $res = array();
+            foreach($rows as $row) {
+                // pr($row);
+                $post = new Application_Model_Post($row);
+                $post->setPostUpdateTime($row['updated_at']);
+                // pr($post->setPostUpdateTime($row['updated_at']));
+                $res[] = $post;
+            }
+            
             return $res;
         } catch (Exception $e) {
             pr($e);
