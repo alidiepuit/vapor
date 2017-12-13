@@ -2093,7 +2093,7 @@ screen and (min-width: 48em) {
 .component-services .services-grid .service-container {
     background-color: #fff;
     max-width: 574px;
-    padding: 24px 35px;
+    padding: 24px 10px;
     position: relative;
     text-align: center;
     z-index: 100
@@ -2121,7 +2121,7 @@ screen and (min-width: 48em) {
         -ms-flex: 1 0 auto;
         flex: 1 0 auto;
         margin: -30px auto 0;
-        padding: 20px 40px;
+        padding: 20px 10px;
         width: 80%
     }
 }
@@ -2135,7 +2135,7 @@ screen and (min-width: 64em) {
     font-family: Brown, sans-serif;
     font-weight: 700;
     color: #fc4945;
-    font-size: 1.25rem;
+    font-size: 1.0rem;
     letter-spacing: .1em;
     line-height: 1;
     margin-bottom: 10px;
