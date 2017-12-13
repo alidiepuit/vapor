@@ -280,7 +280,7 @@
           <h4 class="modal-title" id="">Điều khoản sử dụng</h4>
         </div>
         <div class="modal-body">
-          <?=$this->term[1]->getPostContent()?>
+          <?=isset($this->term[1]) ? $this->term[1]->getPostContent() : ''?>
         </div>
         <div class="modal-footer">
           
@@ -296,7 +296,7 @@
           <h4 class="modal-title" id="">Quyền riêng tư</h4>
         </div>
         <div class="modal-body">
-          <?=$this->term[0]->getPostContent()?>
+          <?=isset($this->term[0]) ? $this->term[0]->getPostContent() : ''?>
         </div>
         <div class="modal-footer">
           
