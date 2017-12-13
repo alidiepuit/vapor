@@ -9,7 +9,10 @@
             <div class="excerpt">
                <p><?= $firstPost->getPostSubContent()?> […]</p>
             </div>
-            <div class="meta"><span class="timeago"><span><?=$firstPost->getPostUpdateTime()?></span></span></div>
+            <div class="meta"><span class="timeago">
+               <span>
+                  <time class="timeago" datetime="<?=$this->timeAgo($firstPost->getPostUpdateTime())?>"></time>
+               </span></span></div>
          </div>
          <div class="six wide column contents-figure"><a href="/bai-viet/<?=$firstPost->getId(),'/',$firstPost->getPostSlug()?>.html"><img class="featured-img" src="<?php echo $this->baseUrl($firstPost->getPostImage())?>"></a></div>
       </div>
@@ -29,19 +32,13 @@
                <p><?= $post->getPostSubContent()?> […]</p>
             </div>
             <div class="meta">
-               <span class="timeago"><span><?=$post->getPostUpdateTime()?></span></span>
+               <span class="timeago"><span>
+                  <time class="timeago" datetime="<?=$this->timeAgo($post->getPostUpdateTime())?>"></time>
+                  </span></span>
             </div>
          </div>
          <?php }?>
       </div>
    </div>
 </div>
-<nav class="pagination-wrapper">
-   <ul class="pagination">
-      <li class="disabled"><a>1</a></li>
-      <li class=""><a href="/sg/en/blog?page=2">2</a></li>
-      <li class=""><a href="/sg/en/blog?page=3">3</a></li>
-      <li class="disabled"><a>...</a></li>
-      <li class=""><a href="/sg/en/blog?page=8">8</a></li>
-   </ul>
-</nav>
+<?php echo $this->paginationControl($this->paginator, 'Sliding', 'partials/controls.phtml'); ?>

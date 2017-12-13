@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <link rel="profile" href="http://gmpg.org/xfn/11">
+
+  <meta name="google-signin-client_id" content="<?= Zend_Registry::get('configs')->google->clientID?>">
+  <meta property="fb:app_id" content="<?= Zend_Registry::get('configs')->facebook->appId?>"/>
+  <!-- Styles -->
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/animate.min.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/bootstrap-dropdownhover.min.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/glamsquad.css");?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/custom.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/article.css?v=2")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/font-awesome.min.css")?>">
+  <link rel="stylesheet" href="<?php echo $this->baseUrl("/static/css/jquery.loading.min.css")?>">
+  
+  <?php //echo $this->partial('partials/seo.phtml')?>
+  <?php echo $this->headMeta() ?>
+</head>
+<body class="">
+  <?= $this->partial('partials/social.phtml');?>
+  <div class="site-container">
+    <?php echo $this->partial('partials/topmenu.phtml')?>
+    <main class="site-main">
+
+    <?php echo $this->layout()->content?>
+
+    </main>
+    <?php echo $this->partial('partials/footer.phtml')?>
+  </div>
+  
+
+  <?= $this->partial("partials/js.phtml")?>
+  <script src="<?php echo $this->baseUrl("/static/js/article.js?v=2")?>"></script>
+  <script src="<?php echo $this->baseUrl("/static/js/jquery.timeago.js?v=1")?>"></script>
+  
+</body></html>

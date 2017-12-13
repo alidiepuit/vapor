@@ -100,7 +100,6 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
     {
         try {
             $select = $this->getDbTable()->select()
-                    ->from('frontend_posts')
                     ->where('deleted_at IS NULL')
                     ->where('post_type = ?', Application_Model_Post::POST_TYPE_ARTICLE)
                     ->limitPage($offset, $limit)
@@ -118,6 +117,21 @@ class Application_Model_PostMapper extends Application_Model_BaseModel_BaseMappe
             }
             
             return $res;
+        } catch (Exception $e) {
+            pr($e);
+        }
+        return Null;
+    }
+
+    public function getQueryListAllArticle()
+    {
+        try {
+            $select = $this->getDbTable()->select()
+                    ->from('frontend_posts', array('total' => new Zend_Db_Expr('COUNT(id)')))
+                    ->where('deleted_at IS NULL')
+                    ->where('post_type = ?', Application_Model_Post::POST_TYPE_ARTICLE);
+            
+            return $select;
         } catch (Exception $e) {
             pr($e);
         }

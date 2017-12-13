@@ -15,8 +15,19 @@ class PostController extends Zend_Controller_Action
       $limit = 10;
 
       $data = Application_Model_PostMapper::getInstance()->getListArticle($offset, $limit);
-      // pr($data);
+      $allDataQueryStatement = Application_Model_PostMapper::getInstance()->getQueryListAllArticle();
+      // pr($totalItem);
       $this->view->data = $data;
+
+      Zend_View_Helper_PaginationControl::setDefaultViewPartial('controls.phtml');
+
+      $adapter = new Zend_Paginator_Adapter_DbSelect($allDataQueryStatement);
+      $paginator = new Zend_Paginator($adapter);
+      // pr(get_class_methods($paginator));
+      $paginator->setItemCountPerPage($limit);
+      $paginator->setCurrentPageNumber($offset);
+      $paginator->setPagerange(3);
+      $this->view->paginator = $paginator;
     }
 
     public function detailAction()
@@ -38,10 +49,14 @@ class PostController extends Zend_Controller_Action
         }
       }
       $this->view->data = $data;
-      
-      $this->view->headMeta()->setName('og:title', $data->getPostTitle());
-      $this->view->headMeta()->setName('og:type', 'article');
-      $this->view->headMeta()->setName('og:description', $data->getPostSubContent());
+
+      $this->view->doctype('XHTML1_RDFA');
+      $this->view->headMeta()->setProperty('og:title', $data->getPostTitle());
+      $this->view->headMeta()->setProperty('og:type', 'article');
+      $this->view->headMeta()->setProperty('og:description', $data->getPostSubContent());
+      $this->view->headMeta()->setProperty('og:image', $this->view->baseUrl() . $data->getPostImage());
+      $this->view->headMeta()->setProperty('og:url', $this->view->baseUrl() . '/bai-viet/' . $data->getId() . '/' . $data->getPostSlug() . '.html');
+      $this->view->headMeta()->setProperty('og:site_name', 'vapor');
 
       $this->view->headMeta()->appendName('title', $data->getPostTitle());
       $this->view->headMeta()->appendName('description', $data->getPostSubContent());
