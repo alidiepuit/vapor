@@ -44,6 +44,7 @@ class Application_Model_UserMapper
             'user_phone'        => $user->getUserPhone(),
             'user_address'      => $user->getUserAddress(),
             'user_display_name' => $user->getUserDisplayName(),
+            'user_number_order' => $user->getUserNumberOrder(),
         );
  
         $user->setUpdatedAt(time());
@@ -74,5 +75,12 @@ class Application_Model_UserMapper
         }
         $user = new Application_Model_User($row);
         return $user;
+    }
+
+    public function increaseNumberOrderUser($user)
+    {
+        $number = $user->getUserNumberOrder();
+        $user->setUserNumberOrder($number+1);
+        $this->save($user);
     }
 }

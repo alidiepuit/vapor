@@ -35,12 +35,22 @@ var setCurrentIndex = function(idx) {
   Cookies.set('booking-current-index', idx);
 }
 
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
 var bookingSummary = {};
 var dataTool = {};
+var countTypeService = new Array();
 
 var initSummary = function() {
     dataBooking = new Array();
     dataTool = new Array();
+    countTypeService = new Array();
     $('.note-service').hide();
     $('input.service-detail').each(function(i, v) {
         var count = parseInt(v.value);
@@ -49,6 +59,11 @@ var initSummary = function() {
             var serviceId = $(v).data('service-id') || 0;
             var serviceSlug = $(v).data('service-slug') || '';
             if (serviceSlug) {
+                if (!countTypeService[serviceSlug]) {
+                    countTypeService[serviceSlug] = 1;
+                } else {
+                    countTypeService[serviceSlug]++;
+                }
                 $('#note-'+serviceSlug).show();
             }
             dataBooking.push({
@@ -112,6 +127,8 @@ jQuery(document).ready(function( $ ) {
                         var li = $('<li/>').html('<span class="order-service ng-binding">' + val.serviceTitle + '</span><span class="order-price ng-binding">' + val.serviceTotalCost + '</span>');
                         $(li).insertBefore($('.order-summary .order-services li:last'));
                     });
+
+                    $('#datetimepicker').data("DateTimePicker").minDate(FIRST_ORDER ? getNextHourBooking() : moment().add(1, 'hour'));
                 } else {
                     $('.order-summary').hide();
                 }
@@ -166,9 +183,18 @@ jQuery(document).ready(function( $ ) {
         increaseCurrentIndex();
     });
 
+    var getNextHourBooking = function() {
+        total = Object.size(countTypeService);
+        var tomorrow = new Date(moment().add('days', 1).format('YYYY-MM-DD\T07:30:00'));
+        var today = moment().add(1, 'hour');
+        return total == 1 && countTypeService["sua-chua-khan-cap"] ? tomorrow : today;
+    }
+
     jQuery('#datetimepicker').datetimepicker({
-        minDate: moment().add(1, 'hour'),
+        // useCurrent: false,
+        // minDate: FIRST_ORDER ? getNextHourBooking() : moment().add(1, 'hour')
     });
+    
 
     $('.order-summary li.edit').click(function() {
         $(".booking-flow.steps").steps("previous");

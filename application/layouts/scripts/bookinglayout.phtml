@@ -23,6 +23,7 @@
   <script>
     <?php $user = $this->authen();?>
     var USER_ID = '<?=$user ? $user->getId() : ''?>';
+    var FIRST_ORDER = <?=$user && $user->isFirstOrder() ? 'true' : 'false'?>;
   </script>
 </head>
 <body class="">

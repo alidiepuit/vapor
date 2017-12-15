@@ -292,6 +292,9 @@ class BookServicesController extends Zend_Controller_Action
         $groupOrder->setGrouporderDetail(implode("<br/>",$listOrder));
         Application_Model_GroupOrderMapper::getInstance()->save($groupOrder);
 
+        //Update number order of user
+        Application_Model_UserMapper::getInstance()->increaseNumberOrderUser($user);
+
         echo json_encode(array( 
             'error' => '',
             'success' => true,

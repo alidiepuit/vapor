@@ -47831,6 +47831,8 @@ section.section.how_it_works h1 {
     line-height: 1.3em;
     color: #3B3A3B;
     font-size: 1.2em;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 .recent-articles-box h2.headline:hover {
     color: #000
@@ -48009,7 +48011,7 @@ section.section.how_it_works h1 {
 .Jumbotron h1.headline {
     font-size: 1.5em;
     font-family: inherit;
-    font-weight: normal
+    font-weight: bold;
 }
 .Jumbotron h1.headline a,
 .Jumbotron h1.headline p {
@@ -48128,6 +48130,7 @@ section.section.how_it_works h1 {
 .blog-content .blog-wrapper article h2 {
     font-family: inherit;
     font-size: 28px;
+    font-weight: bold;
 }
 .blog-content .blog-wrapper article p {
     font-size: 1.3em;

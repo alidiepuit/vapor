@@ -11,6 +11,7 @@ class Application_Model_User
     protected $_active;
     protected $_id;
     protected $_password;
+    protected $_numberOrder;
  
     public function __construct(array $options = null)
     {
@@ -157,4 +158,19 @@ class Application_Model_User
         return $this->_password;
     }
  
+    public function setUserNumberOrder($text)
+    {
+        $this->_numberOrder = (int) $text;
+        return $this;
+    }
+ 
+    public function getUserNumberOrder()
+    {
+        return (int)$this->_numberOrder;
+    }
+
+    public function isFirstOrder()
+    {
+        return $this->getUserNumberOrder() == 0;
+    }
 }
