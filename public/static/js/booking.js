@@ -187,7 +187,7 @@ jQuery(document).ready(function( $ ) {
         total = Object.size(countTypeService);
         var tomorrow = new Date(moment().add('days', 1).format('YYYY-MM-DD\T07:30:00'));
         var today = moment().add(1, 'hour');
-        return total == 1 && countTypeService["sua-chua-khan-cap"] ? tomorrow : today;
+        return total == 1 && countTypeService["sua-chua-khan-cap"] ? today : tomorrow;
     }
 
     jQuery('#datetimepicker').datetimepicker({

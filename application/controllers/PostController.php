@@ -55,7 +55,7 @@ class PostController extends Zend_Controller_Action
       $this->view->headMeta()->setProperty('og:type', 'article');
       $this->view->headMeta()->setProperty('og:description', $data->getPostSubContent());
       $this->view->headMeta()->setProperty('og:image', $this->view->baseUrl() . $data->getPostImage());
-      $this->view->headMeta()->setProperty('og:url', $this->view->baseUrl() . '/bai-viet/' . $data->getId() . '/' . $data->getPostSlug() . '.html');
+      $this->view->headMeta()->setProperty('og:url', $this->view->baseUrl() . '/blog/' . $data->getId() . '/' . $data->getPostSlug() . '.html');
       $this->view->headMeta()->setProperty('og:site_name', 'vapor');
 
       $this->view->headMeta()->appendName('title', $data->getPostTitle());

@@ -50,8 +50,7 @@ class Application_Model_MenuMapper extends Application_Model_BaseModel_BaseMappe
                 ))
                 ->joinLeft(
                         array('child' => 'frontend_menu_items'),
-                        'child.menu_parent_id = parent.id',
-                        array()
+                        'child.menu_parent_id = parent.id AND child.deleted_at is NULL'
                     )
                 ->order('parent_id ASC')
                 ->where('parent.menu_position = ? AND parent.menu_parent_id = parent.id', (int)$position)

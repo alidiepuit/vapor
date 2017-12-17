@@ -6,7 +6,7 @@
          <article>
             <span class="published"><span><time class="timeago" datetime="<?=$this->timeAgo($this->data->getPostUpdateTime())?>"></time></span></span>
             <div id="servisheroSharingButtons" class="clickable src-app-components-SharingButton-SharingButton-module-sharings">
-             <button data-url="<?php echo $this->baseUrl('/bai-viet/'.$this->data->getId().'/'.$this->data->getPostSlug())?>.html" data-name="servishero_facebook" class="clickable src-app-components-SharingButton-SharingButton-module-link facebook-sharing-button">
+             <button data-url="<?php echo $this->baseUrl('/blog/'.$this->data->getId().'/'.$this->data->getPostSlug())?>.html" data-name="servishero_facebook" class="clickable src-app-components-SharingButton-SharingButton-module-link facebook-sharing-button">
                 <div class="src-app-components-SharingButton-SharingButton-module-sharingItem src-app-components-SharingButton-SharingButton-module-facebook">
                    <div class="src-app-components-SharingButton-SharingButton-module-item">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" classname="src-app-components-SharingButton-SharingButton-module-icon" viewBox="0 0 24 24">
@@ -17,7 +17,7 @@
                    </div>
                 </div>
              </button>
-             <button data-url="https://twitter.com/intent/tweet/?text=<?=$this->data->getPostTitle()?>&amp;url=<?php echo $this->baseUrl('/bai-viet/'.$this->data->getId().'/'.$this->data->getPostSlug())?>.html" data-name="servishero_twitter" class="clickable src-app-components-SharingButton-SharingButton-module-link twitter-sharing-button">
+             <button data-url="https://twitter.com/intent/tweet/?text=<?=$this->data->getPostTitle()?>&amp;url=<?php echo $this->baseUrl('/blog/'.$this->data->getId().'/'.$this->data->getPostSlug())?>.html" data-name="servishero_twitter" class="clickable src-app-components-SharingButton-SharingButton-module-link twitter-sharing-button">
                 <div class="src-app-components-SharingButton-SharingButton-module-sharingItem src-app-components-SharingButton-SharingButton-module-twitter">
                    <div class="src-app-components-SharingButton-SharingButton-module-item">
                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" classname="src-app-components-SharingButton-SharingButton-module-icon" viewBox="0 0 24 24">

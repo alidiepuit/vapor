@@ -5,7 +5,7 @@
    <div class="container">
       <div class="ui mobile reversed stackable grid">
          <div class="ten wide column contents-block">
-            <h1 class="headline"><a href="/bai-viet/<?=$firstPost->getId(),'/',$firstPost->getPostSlug()?>.html"><?=$firstPost->getPostTitle()?></a></h1>
+            <h1 class="headline"><a href="/blog/<?=$firstPost->getId(),'/',$firstPost->getPostSlug()?>.html"><?=$firstPost->getPostTitle()?></a></h1>
             <div class="excerpt">
                <p><?= $firstPost->getPostSubContent()?> […]</p>
             </div>
@@ -14,7 +14,7 @@
                   <time class="timeago" datetime="<?=$this->timeAgo($firstPost->getPostUpdateTime())?>"></time>
                </span></span></div>
          </div>
-         <div class="six wide column contents-figure"><a href="/bai-viet/<?=$firstPost->getId(),'/',$firstPost->getPostSlug()?>.html"><img class="featured-img" src="<?php echo $this->baseUrl($firstPost->getPostImage())?>"></a></div>
+         <div class="six wide column contents-figure"><a href="/blog/<?=$firstPost->getId(),'/',$firstPost->getPostSlug()?>.html"><img class="featured-img" src="<?php echo $this->baseUrl($firstPost->getPostImage())?>"></a></div>
       </div>
    </div>
 </section>
@@ -24,7 +24,7 @@
         <?php for($i = 1, $len = count($this->data); $i < $len; $i++) {?>
         <?php $post = $this->data[$i]?>
          <div class="column recent-articles-box">
-            <a href="/bai-viet/<?=$post->getId(),'/',$post->getPostSlug()?>.html">
+            <a href="/blog/<?=$post->getId(),'/',$post->getPostSlug()?>.html">
                <img class="featured-img" src="<?php echo $this->baseUrl($post->getPostImage())?>">
                <h2 class="headline"><?=$post->getPostTitle()?></h2>
             </a>
